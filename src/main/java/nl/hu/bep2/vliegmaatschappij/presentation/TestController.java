@@ -12,7 +12,7 @@ public class TestController {
 	public TestController(Main main) {
 		this.main=main;
 	}
-	@GetMapping("/")
+	@GetMapping()
 	public String test() {
 		return "Test van spring! response van spring resource: "+main.returnTrue();
 	}
