@@ -14,5 +14,9 @@ jobs:
     - name: Run API Tests
       uses: anthonyvscode/newman-action@v1
       with:
-        collection: bep2-project.postman_collection.json
+        apiKey: ${{ secrets.postmanApiKey }}
+        collections: 229781-b28f3f2a-70c1-4500-a1d6-9b9835e5d24a
         reporters: cli
+
+    - name: Output summary to console
+      run: echo ${{ steps.run-api-tests.outputs.summary }}
