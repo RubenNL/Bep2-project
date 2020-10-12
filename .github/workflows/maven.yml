@@ -31,5 +31,6 @@ jobs:
       with:
         postgresql user: vliegDbUser
         postgresql password: vliegDbPass
+        postgresql db: vliegmaatschappij
     - name: Build with Maven
       run: mvn -B package --file pom.xml
