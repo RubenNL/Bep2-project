@@ -1,0 +1,22 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: postman + Java CI with Maven
+
+on: deployment_status
+
+jobs:
+  postman:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run API Tests
+      uses: anthonyvscode/newman-action@v1
+      with:
+        apiKey: ${{ secrets.postmanApiKey }}
+        collection: 229781-b28f3f2a-70c1-4500-a1d6-9b9835e5d24a
+        reporters: cli
+
+    - name: Output summary to console
+      run: echo ${{ steps.run-api-tests.outputs.summary }}
