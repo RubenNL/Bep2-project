@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>13</java.version>
-		<jdbc.url>jdbc:postgresql://127.0.0.1:5432/bep2-huland-casino</jdbc.url><!-- hier geplaatst om profiles makkelijker te maken -->
+		<jdbc.url>jdbc:postgresql://127.0.0.1:5432/vliegmaatschappij</jdbc.url><!-- hier geplaatst om profiles makkelijker te maken -->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -98,5 +98,18 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>ruben</id>
+			<properties>
+				<jdbc.url>jdbc:postgresql://192.168.99.1:5432/vliegmaatschappij</jdbc.url>
+			</properties>
+		</profile>
+	</profiles>
 </project>
