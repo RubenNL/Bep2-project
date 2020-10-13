@@ -6,7 +6,6 @@ import javax.persistence.Transient;
 
 @Entity
 public class Vliegveld {
-
     @Id
     private String code;
     private String naam;
