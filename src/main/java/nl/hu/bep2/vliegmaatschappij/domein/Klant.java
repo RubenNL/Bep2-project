@@ -5,13 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class User extends Persoon {
+public class Klant extends Persoon {
     @Id
     @GeneratedValue
     private int id;
     private Role role;
 
-    public User(String voornaam, String achernaam, int leeftijd, String email, int telefoon, String nationaliteit, Role role) {
+    public Klant(String voornaam, String achernaam, int leeftijd, String email, int telefoon, String nationaliteit, Role role) {
         super(voornaam, achernaam, leeftijd, email, telefoon, nationaliteit);
         this.role = role;
     }
