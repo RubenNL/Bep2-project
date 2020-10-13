@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 //Temp class for testing.
 @Transactional
 @Service
-public class Main {
+public class TestClass {
 	public boolean returnTrue() {
 		return true;
 	}
