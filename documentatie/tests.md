@@ -8,5 +8,5 @@ Als er een nieuwe commit is naar master EN als er een pull request naar master i
 
 **Alleen** bij een update van master wordt dit uitgevoerd:
 
-* terwijl de tests nog bezig zijn, wordt ook gelijk op heroku deployed. status: [![Heroku](https://heroku-badge.herokuapp.com/?app=bed-project)]
+* terwijl de tests nog bezig zijn, wordt ook gelijk op heroku deployed. status: [![Heroku](https://heroku-badge.herokuapp.com/?app=bep2)]
 * Als heroku klaar is, gaat postman aan de slag. dit gebeurt ook met github. status: ![postman](https://github.com/huict/prbed-2021-v2b-v/workflows/postman/badge.svg)
