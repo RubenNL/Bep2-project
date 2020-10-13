@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class MainTest {
+class TestClassTest {
 	@Autowired
-	private Main main;
+	private TestClass testClass;
 	@Test
 	void testReturnTrue() {
-		assertTrue(main.returnTrue());
+		assertTrue(testClass.returnTrue());
 	}
 }
