@@ -1,0 +1,21 @@
+package nl.hu.bep2.vliegmaatschappij.application;
+
+import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
+import nl.hu.bep2.vliegmaatschappij.domein.Plane;
+import nl.hu.bep2.vliegmaatschappij.exceptions.PlaneNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PlaneService {
+	private final SpringPlaneRepository planeRepository;
+
+	public PlaneService(SpringPlaneRepository planeRepository) {
+		this.planeRepository = planeRepository;
+	}
+
+	public Plane showPlane(String planeid) throws PlaneNotFoundException {
+		Plane plane = planeRepository.findBycode(planeid)
+				.orElseThrow(() -> new PlaneNotFoundException("Plane with id: " + planeid + " not found."));
+		return plane;
+	}
+}
