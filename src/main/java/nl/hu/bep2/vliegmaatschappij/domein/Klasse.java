@@ -1,9 +1,14 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Klasse {
+    @Id
+    @GeneratedValue
+    private int id;
     private String naam;
     private int maxStoelen;
     private int stoelen;
@@ -14,12 +19,12 @@ public class Klasse {
         this.stoelen = stoelen;
     }
 
-    public String getNaam() {
-        return naam;
+    public int getId() {
+        return id;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public String getNaam() {
+        return naam;
     }
 
     public int getMaxStoelen() {

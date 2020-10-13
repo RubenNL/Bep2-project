@@ -1,9 +1,14 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Prijs {
+    @Id
+    @GeneratedValue
+    private int id;
     private double prijs;
 
     public Prijs(Vliegtuigtype type, Klasse klasse, Vluchtroute route) {
@@ -19,7 +24,7 @@ public class Prijs {
         return prijs;
     }
 
-    public void setPrijs(double prijs) {
-        this.prijs = prijs;
+    public int getId() {
+        return id;
     }
 }
