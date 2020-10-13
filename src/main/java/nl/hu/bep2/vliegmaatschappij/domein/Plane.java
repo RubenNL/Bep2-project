@@ -5,13 +5,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Vliegtuig {
+public class Plane {
 	@Id
 	private String code;
 	@ManyToOne
-	private Vliegtuigtype type;
+	private Planetype type;
 
-	public Vliegtuig(){}
+	public Plane(){}
 
 	public String getCode() {
 		return code;
@@ -21,11 +21,11 @@ public class Vliegtuig {
 		this.code = code;
 	}
 
-	public Vliegtuigtype getType() {
+	public Planetype getType() {
 		return type;
 	}
 
-	public void setType(Vliegtuigtype type) {
+	public void setType(Planetype type) {
 		this.type = type;
 	}
 }

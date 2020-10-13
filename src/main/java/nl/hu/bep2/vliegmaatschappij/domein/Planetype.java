@@ -4,23 +4,22 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Vliegtuigtype {
+public class Planetype {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
-	private String naam;
+	private String name;
 	@Transient
-	private List<Klasse> klassen;
+	private List<TravelClass> travelclasses;
 
 	@OneToMany
-	private List<Vliegtuig> vliegtuigen;
+	private List<Plane> planes;
 
-	public Vliegtuigtype() {
+	public Planetype() {
 	}
 
-	public Vliegtuigtype(String naam) {
-		this.naam = naam;
+	public Planetype(String naam) {
+		this.name = naam;
 	}
-
 
 }
