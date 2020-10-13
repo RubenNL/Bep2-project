@@ -111,6 +111,12 @@
 				<jdbc.url>jdbc:postgresql://192.168.99.1:5432/vliegmaatschappij</jdbc.url>
 			</properties>
 		</profile>
+		<profile>
+			<id>marlon</id>
+			<properties>
+				<jdbc.url>jdbc:postgresql://136.244.108.222:5432/vliegmaatschappij</jdbc.url>
+			</properties>
+		</profile>
 	</profiles>
 	<build>
 		<plugins>
