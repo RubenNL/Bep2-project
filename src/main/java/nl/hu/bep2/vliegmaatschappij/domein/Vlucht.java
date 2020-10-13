@@ -12,52 +12,52 @@ import java.util.List;
 @Entity
 public class Vlucht {
 
-    @Id
-    @GeneratedValue
-    private int id;
-    private LocalDate vertrektijd;
-    private LocalDate aankomsttijd;
+	@Id
+	@GeneratedValue
+	private int id;
+	private LocalDate vertrektijd;
+	private LocalDate aankomsttijd;
 
-    @Transient
-    private List<Boeking> boekingList;
+	@Transient
+	private List<Boeking> boekingList;
 
-    public Vlucht(int id, LocalDate vertrektijd, LocalDate aankomsttijd) {
-        this.id = id;
-        this.vertrektijd = vertrektijd;
-        this.aankomsttijd = aankomsttijd;
-    }
+	public Vlucht(int id, LocalDate vertrektijd, LocalDate aankomsttijd) {
+		this.id = id;
+		this.vertrektijd = vertrektijd;
+		this.aankomsttijd = aankomsttijd;
+	}
 
-    public Vlucht() {}
+	public Vlucht() {}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public LocalDate getVertrektijd() {
-        return vertrektijd;
-    }
+	public LocalDate getVertrektijd() {
+		return vertrektijd;
+	}
 
-    public void setVertrektijd(LocalDate vertrektijd) {
-        this.vertrektijd = vertrektijd;
-    }
+	public void setVertrektijd(LocalDate vertrektijd) {
+		this.vertrektijd = vertrektijd;
+	}
 
-    public LocalDate getAankomsttijd() {
-        return aankomsttijd;
-    }
+	public LocalDate getAankomsttijd() {
+		return aankomsttijd;
+	}
 
-    public void setAankomsttijd(LocalDate aankomsttijd) {
-        this.aankomsttijd = aankomsttijd;
-    }
+	public void setAankomsttijd(LocalDate aankomsttijd) {
+		this.aankomsttijd = aankomsttijd;
+	}
 
-    public List<Boeking> getBoekingList() {
-        return boekingList;
-    }
+	public List<Boeking> getBoekingList() {
+		return boekingList;
+	}
 
-    public void setBoekingList(List<Boeking> boekingList) {
-        this.boekingList = boekingList;
-    }
+	public void setBoekingList(List<Boeking> boekingList) {
+		this.boekingList = boekingList;
+	}
 }
