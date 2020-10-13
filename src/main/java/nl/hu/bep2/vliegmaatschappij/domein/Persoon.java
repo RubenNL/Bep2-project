@@ -1,5 +1,8 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Persoon {
     protected String voornaam;
     protected String achernaam;
