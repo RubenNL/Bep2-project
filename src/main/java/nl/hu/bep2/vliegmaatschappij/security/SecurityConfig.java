@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().authorizeRequests()
 				.antMatchers(HttpMethod.POST, REGISTER_PATH).permitAll()
+				.antMatchers(HttpMethod.DELETE, REGISTER_PATH+"/*").permitAll() //delete user by username TODO weghalen
 				.antMatchers(HttpMethod.POST, LOGIN_PATH).permitAll()
 				.antMatchers(HttpMethod.GET,"/*.html").permitAll()
 				.antMatchers(HttpMethod.GET,"/*.css").permitAll()
