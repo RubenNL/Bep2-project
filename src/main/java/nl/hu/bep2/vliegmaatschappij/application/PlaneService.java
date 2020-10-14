@@ -18,4 +18,10 @@ public class PlaneService {
 				.orElseThrow(() -> new PlaneNotFoundException("Plane with id: " + planeid + " not found."));
 		return plane;
 	}
+
+	public Plane createPlane(String code){
+		Plane plane = new Plane(code);
+		planeRepository.save(plane);
+		return plane;
+	}
 }

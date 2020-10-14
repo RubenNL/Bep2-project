@@ -25,7 +25,7 @@ public class Airport {
 		this.lng = lng;
 		this.city = city;
 		this.balls = balls;
-		this.flightRoute = flightRoute;
+		this.flightRoute =  flightRoute;
 	}
 
 	public Airport() {
