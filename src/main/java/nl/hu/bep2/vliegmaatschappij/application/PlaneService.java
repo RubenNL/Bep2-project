@@ -14,8 +14,7 @@ public class PlaneService {
 	}
 
 	public Plane showPlane(String planeid) throws PlaneNotFoundException {
-		Plane plane = planeRepository.findBycode(planeid)
+		return planeRepository.findById(planeid)
 				.orElseThrow(() -> new PlaneNotFoundException("Plane with id: " + planeid + " not found."));
-		return plane;
 	}
 }

@@ -5,6 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface SpringPlaneRepository extends JpaRepository<Plane, Plane> {
-	Optional<Plane> findBycode(String id);
+public interface SpringPlaneRepository extends JpaRepository<Plane, String> {
 }
