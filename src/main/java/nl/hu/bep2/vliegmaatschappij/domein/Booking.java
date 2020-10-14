@@ -1,7 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
 
-import nl.hu.bep2.vliegmaatschappij.security.User;
+import nl.hu.bep2.vliegmaatschappij.security.data.User;
 
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
