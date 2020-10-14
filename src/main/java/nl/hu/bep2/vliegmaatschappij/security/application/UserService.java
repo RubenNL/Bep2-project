@@ -33,7 +33,9 @@ public class UserService implements UserDetailsService {
 
 		this.userRepository.save(user);
 	}
-
+	public void delete(long id) {
+		this.userRepository.deleteById(id);
+	}
 	@Override
 	public User loadUserByUsername(String username) {
 		return this.userRepository.findByUsername(username)

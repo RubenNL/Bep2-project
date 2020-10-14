@@ -3,10 +3,9 @@ package nl.hu.bep2.vliegmaatschappij.security.presentation.controller;
 import nl.hu.bep2.vliegmaatschappij.security.application.UserService;
 import nl.hu.bep2.vliegmaatschappij.security.presentation.dto.Registration;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/register")
@@ -25,5 +24,10 @@ public class RegistrationController {
 				registration.firstName,
 				registration.lastName
 		);
+	}
+	//TODO verwijderen voor opleveren.
+	@DeleteMapping("/{id}")
+	public void register(@Validated @PathParam("id") int id) {
+		this.userService.delete(id);
 	}
 }
