@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface SpringTravelClassRepository extends JpaRepository<TravelClass, Integer> {
-    @Override
-    List<TravelClass> findAll();
+	Optional<TravelClass> findById(Integer id);
 }
