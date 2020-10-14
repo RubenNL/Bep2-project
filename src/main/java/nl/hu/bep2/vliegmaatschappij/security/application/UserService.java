@@ -37,6 +37,7 @@ public class UserService implements UserDetailsService {
 	public void delete(long id) {
 		this.userRepository.deleteById(id);
 	}
+
 	public void delete(String username) {
 		this.userRepository.delete(loadUserByUsername(username));
 	}
