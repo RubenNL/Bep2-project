@@ -2,9 +2,8 @@ package nl.hu.bep2.vliegmaatschappij.application;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.TravelClass;
+import nl.hu.bep2.vliegmaatschappij.exceptions.TravelClassNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TravelClassService {
@@ -14,7 +13,9 @@ public class TravelClassService {
         this.travelClassRepository = travelClassRepository;
     }
 
-    public List<TravelClass> getAll() {
-        return travelClassRepository.findAll();
+    public TravelClass getById(int id) {
+        TravelClass travelClass = travelClassRepository.findById(id)
+                .orElseThrow(() -> new TravelClassNotFoundException("TravelClass with id: " + id + " not found."));
+        return travelClass;
     }
 }
