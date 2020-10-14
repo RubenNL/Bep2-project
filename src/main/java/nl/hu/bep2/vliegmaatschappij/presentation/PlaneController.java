@@ -25,7 +25,7 @@ public class PlaneController {
 	@PostMapping("/built")
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public PlaneDTO builtPlane(@RequestBody PlaneDTO planeDTO){
-		Plane plane = service.createPlane(planeDTO.getCode());
+		Plane plane = service.createPlane(planeDTO.code);
 		return new PlaneDTO(plane);
 	}
 }

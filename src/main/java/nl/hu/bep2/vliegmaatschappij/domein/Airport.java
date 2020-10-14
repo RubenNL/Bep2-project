@@ -13,18 +13,16 @@ public class Airport {
 	private double lat;
 	private double lng;
 	private String city;
-	private String balls;
 	
 	@Transient //TODO mapping! 
 	private Flightroute flightRoute;
 
-	public Airport(String code, String name, double lat, double lng, String city, String balls, Flightroute flightRoute) {
+	public Airport(String code, String name, double lat, double lng, String city, Flightroute flightRoute) {
 		this.code = code;
 		this.name = name;
 		this.lat = lat;
 		this.lng = lng;
 		this.city = city;
-		this.balls = balls;
 		this.flightRoute =  flightRoute;
 	}
 
@@ -70,13 +68,5 @@ public class Airport {
 
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public String getballs() {
-		return balls;
-	}
-
-	public void setballs(String balls) {
-		this.balls = balls;
 	}
 }
