@@ -27,7 +27,9 @@ public class RegistrationController {
 	}
 	//TODO verwijderen voor opleveren.
 	@DeleteMapping("/{username}")
-	public void register(@Validated @PathParam("username") String username) {
-		this.userService.delete(username);
+	public void register(@PathVariable("username") String username) {
+		try {
+			this.userService.delete(username);
+		} catch(Exception e) {}
 	}
 }
