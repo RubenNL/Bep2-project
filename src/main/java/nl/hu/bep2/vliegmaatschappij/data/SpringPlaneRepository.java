@@ -5,7 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface SpringVliegtuigRepository extends JpaRepository<Plane, Plane> {
-	@Override
-	Optional<Plane> findById(Plane plane);
+public interface SpringPlaneRepository extends JpaRepository<Plane, String> {
 }
