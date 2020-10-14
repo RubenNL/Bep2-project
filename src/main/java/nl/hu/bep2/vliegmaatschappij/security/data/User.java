@@ -19,6 +19,7 @@ import java.util.List;
  * as login/registration model for Spring.
  */
 @Entity
+@Table(name="users")
 public class User implements UserDetails {
 
 	@Id
