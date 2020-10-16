@@ -5,6 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class User implements UserDetails {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private boolean isEmployee = false;
 
 	public User(){}
 	public User(String username, String password, String firstName, String lastName) {
@@ -81,8 +83,16 @@ public class User implements UserDetails {
 		return true;
 	}
 
+	public void setEmployee(boolean isEmployee) {
+		this.isEmployee=isEmployee;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+		List<SimpleGrantedAuthority> authorities=new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		System.out.println(isEmployee);
+		if(isEmployee) authorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
+		return authorities;
 	}
 }
