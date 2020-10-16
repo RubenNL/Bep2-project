@@ -5,6 +5,10 @@ import nl.hu.bep2.vliegmaatschappij.domein.TravelClass;
 import nl.hu.bep2.vliegmaatschappij.presentation.dto.TravelClassDTO;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/travelclass")
