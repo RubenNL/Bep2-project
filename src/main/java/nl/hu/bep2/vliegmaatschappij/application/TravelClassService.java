@@ -2,7 +2,6 @@ package nl.hu.bep2.vliegmaatschappij.application;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.TravelClass;
-import nl.hu.bep2.vliegmaatschappij.exceptions.FlightNotFoundException;
 import nl.hu.bep2.vliegmaatschappij.exceptions.TravelClassNotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.dto.TravelClassDTO;
 import org.springframework.stereotype.Service;
