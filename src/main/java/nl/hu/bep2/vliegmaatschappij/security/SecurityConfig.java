@@ -36,24 +36,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET,"/*.css").permitAll()
 				.antMatchers(HttpMethod.GET,"/*.js").permitAll()
 				.antMatchers(HttpMethod.GET,"/").permitAll()
-				.antMatchers(HttpMethod.GET,"/api-docs/**").permitAll()
+				.antMatchers(HttpMethod.GET,"/v3/**").permitAll()
+				.antMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
-                .addFilterBefore(
-                        new JwtAuthenticationFilter(
-                                LOGIN_PATH,
-                                this.jwtSecret,
-                                this.jwtExpirationInMs,
-                                this.authenticationManager()
-                        ),
-                        UsernamePasswordAuthenticationFilter.class
-                )
-                .addFilter(new JwtAuthorizationFilter(this.jwtSecret, this.authenticationManager()))
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				.addFilterBefore(
+						new JwtAuthenticationFilter(
+								LOGIN_PATH,
+								this.jwtSecret,
+								this.jwtExpirationInMs,
+								this.authenticationManager()
+						),
+						UsernamePasswordAuthenticationFilter.class
+				)
+				.addFilter(new JwtAuthorizationFilter(this.jwtSecret, this.authenticationManager()))
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+		return new BCryptPasswordEncoder();
+	}
 }
