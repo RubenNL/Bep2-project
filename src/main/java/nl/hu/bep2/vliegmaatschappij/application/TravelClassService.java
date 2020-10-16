@@ -18,4 +18,9 @@ public class TravelClassService {
                 .orElseThrow(() -> new TravelClassNotFoundException("TravelClass with id: " + id + " not found."));
         return travelClass;
     }
+
+    public TravelClass newTravelClass(TravelClass travelClass){
+        System.out.println(travelClass);
+        return travelClass;
+    }
 }
