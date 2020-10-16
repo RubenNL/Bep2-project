@@ -17,6 +17,7 @@ jobs:
         apiKey: ${{ secrets.postmanApiKey }}
         collection: 229781-3aba0364-e806-49b3-93b4-ba9c1877aedd
         reporters: cli
+        folder: done
 
     - name: Output summary to console
       run: echo ${{ steps.run-api-tests.outputs.summary }}
