@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable().authorizeRequests()
 				.antMatchers(HttpMethod.POST, REGISTER_PATH).permitAll()
 				.antMatchers(HttpMethod.DELETE, REGISTER_PATH+"/*").permitAll() //delete user by username TODO weghalen
+				.antMatchers(HttpMethod.DELETE, "/employee/setEmployee").permitAll() //setEmployee TODO weghalen
 				.antMatchers(HttpMethod.POST, LOGIN_PATH).permitAll()
 				.antMatchers(HttpMethod.GET,"/*.html").permitAll()
 				.antMatchers(HttpMethod.GET,"/*.css").permitAll()

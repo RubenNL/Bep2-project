@@ -46,4 +46,10 @@ public class UserService implements UserDetailsService {
 		return this.userRepository.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException(username));
 	}
+
+	public void setEmployee(String username, boolean employee) {
+		User user=loadUserByUsername(username);
+		user.setEmployee(employee);
+		this.userRepository.save(user);
+	}
 }
