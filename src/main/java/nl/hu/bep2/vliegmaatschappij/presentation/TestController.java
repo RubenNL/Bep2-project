@@ -18,7 +18,6 @@ public class TestController {
 	@GetMapping
 	@RolesAllowed("EMPLOYEE")
 	public String test(Authentication authentication) {
-		System.out.println(authentication);
 		return "Test van spring! response van spring resource: "+ testClass.returnTrue();
 	}
 }

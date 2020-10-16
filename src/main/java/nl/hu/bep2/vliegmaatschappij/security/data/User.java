@@ -91,7 +91,6 @@ public class User implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authorities=new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-		System.out.println(isEmployee);
 		if(isEmployee) authorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
 		return authorities;
 	}
