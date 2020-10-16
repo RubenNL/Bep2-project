@@ -23,9 +23,16 @@ public class TravelClassController {
 	}
 
 	@PostMapping("/new")
-	public TravelClassDTO newTravelClass(@Validated @RequestBody TravelClass travelclass){
+	public TravelClassDTO newTravelClass(@Validated @RequestBody TravelClassDTO travelclass){
 		TravelClass newTravelClass = service.newTravelClass(travelclass);
 		TravelClassDTO travelDTO = new TravelClassDTO(newTravelClass);
 		return travelDTO;
 	}
+
+//	@PostMapping("/update/{id}")
+//	public TravelClassDTO updateTravelClass(@PathVariable int id){
+//		TravelClass newTravelClass = service.updateTravelClass(id);
+//		TravelClassDTO travelDTO = new TravelClassDTO(newTravelClass);
+//		return travelDTO;
+//	}
 }
