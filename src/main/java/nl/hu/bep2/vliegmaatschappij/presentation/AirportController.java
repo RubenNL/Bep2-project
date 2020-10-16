@@ -29,6 +29,7 @@ public class AirportController {
                 airport.getFlightRoute()
         );
     }
+
     //@RolesAllowed("admin")
     @GetMapping("/{code}")
     public AirportDTO showAirport(@PathVariable String code) throws AirportNotFoundException {
@@ -36,14 +37,21 @@ public class AirportController {
         return new AirportDTO(airport);
     }
 
-
+    @PostMapping("/{code}")
+    public void updateAirport(@Validated @RequestBody Airport airport){
+        this.service.createAirport(
+                airport.getCode(),
+                airport.getName(),
+                airport.getLat(),
+                airport.getLng(),
+                airport.getPlace(),
+                airport.getCountry(),
+                airport.getFlightRoute()
+        );
+    }
 
     @DeleteMapping("/{code}")
     public void deleteAirport(@PathVariable String code) throws AirportNotFoundException {
         this.service.delete(code);
     }
-
-
-
-
 }

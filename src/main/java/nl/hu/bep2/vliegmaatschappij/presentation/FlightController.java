@@ -1,13 +1,13 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
 import nl.hu.bep2.vliegmaatschappij.application.FlightService;
+import nl.hu.bep2.vliegmaatschappij.domein.Airport;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
+import nl.hu.bep2.vliegmaatschappij.exceptions.AirportNotFoundException;
 import nl.hu.bep2.vliegmaatschappij.exceptions.FlightNotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.dto.FlightDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/flight")
@@ -18,9 +18,34 @@ public class FlightController {
         this.service = service;
     }
 
+    @PostMapping
+    public void createFlight(@Validated @RequestBody Flight flight) {
+        this.service.createFlight(
+                flight.getId(),
+                flight.getdepartureTime(),
+                flight.getarrivalTime()
+        );
+    }
+
     @GetMapping("/{id}")
     public FlightDTO showFlight(@PathVariable int id) throws FlightNotFoundException {
         Flight flight = service.showFlight(id);
         return new FlightDTO(flight);
     }
+
+    @PostMapping("/{id}")
+    public void updateFlight(@Validated @RequestBody Flight flight){
+        this.service.createFlight(
+                flight.getId(),
+                flight.getdepartureTime(),
+                flight.getarrivalTime()
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteFlight(@PathVariable int id) throws AirportNotFoundException {
+        this.service.delete(id);
+    }
+
+
 }
