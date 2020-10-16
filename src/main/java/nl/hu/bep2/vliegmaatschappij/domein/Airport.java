@@ -12,18 +12,20 @@ public class Airport {
 	private String name;
 	private double lat;
 	private double lng;
-	private String city;
+	private String place;
+	private String country;
 	
 	@Transient //TODO mapping! 
 	private Flightroute flightRoute;
 
-	public Airport(String code, String name, double lat, double lng, String city, Flightroute flightRoute) {
+	public Airport(String code, String name, double lat, double lng, String place, String country, Flightroute flightRoute) {
 		this.code = code;
 		this.name = name;
 		this.lat = lat;
 		this.lng = lng;
-		this.city = city;
-		this.flightRoute =  flightRoute;
+		this.place = place;
+		this.country = country;
+		this.flightRoute = flightRoute;
 	}
 
 	public Airport() {
@@ -62,11 +64,27 @@ public class Airport {
 		this.lng = lng;
 	}
 
-	public String getCity() {
-		return city;
+	public String getPlace() {
+		return place;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Flightroute getFlightRoute() {
+		return flightRoute;
+	}
+
+	public void setFlightRoute(Flightroute flightRoute) {
+		this.flightRoute = flightRoute;
 	}
 }
