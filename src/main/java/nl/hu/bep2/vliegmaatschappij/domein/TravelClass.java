@@ -3,24 +3,32 @@ package nl.hu.bep2.vliegmaatschappij.domein;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 public class TravelClass {
 	@Id
 	@GeneratedValue
 	private int id;
+	@NotNull
 	private String name;
+	@NotNull
+	@Positive
 	private int maxSeats;
-	private int seats;
+	@PositiveOrZero
+	private int availableSeats;
 
 	public TravelClass() {
 
 	}
 
-	public TravelClass(String name, int maxSeats, int seats) {
+	public TravelClass(String name, int maxSeats, int availableSeats) {
 		this.name = name;
 		this.maxSeats = maxSeats;
-		this.seats = seats;
+		this.availableSeats = availableSeats;
 	}
 
 
@@ -40,11 +48,21 @@ public class TravelClass {
 		this.maxSeats = maxStoelen;
 	}
 
-	public int getSeats() {
-		return seats;
+	public int getAvailableSeats() {
+		return availableSeats;
 	}
 
-	public void setSeats(int stoelen) {
-		this.seats = stoelen;
+	public void setAvailableSeats(int stoelen) {
+		this.availableSeats = stoelen;
+	}
+
+	@Override
+	public String toString() {
+		return "TravelClass{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", maxSeats=" + maxSeats +
+				", availableSeats=" + availableSeats +
+				'}';
 	}
 }
