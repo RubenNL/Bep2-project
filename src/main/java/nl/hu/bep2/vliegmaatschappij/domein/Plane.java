@@ -11,7 +11,11 @@ public class Plane {
 	@ManyToOne
 	private Planetype type;
 
-	public Plane(){}
+	public Plane(String code){}
+
+	public Plane() {
+
+	}
 
 	public String getCode() {
 		return code;

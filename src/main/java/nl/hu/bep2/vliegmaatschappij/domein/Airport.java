@@ -18,7 +18,7 @@ public class Airport {
 	@Transient //TODO mapping! 
 	private Flightroute flightRoute;
 
-	public Airport(String code, String name, double lat, double lng, String place, String country, Flightroute flightRoute) {
+	public Airport(String code, String name, double lat, double lng, String city, Flightroute flightRoute) {
 		this.code = code;
 		this.name = name;
 		this.lat = lat;

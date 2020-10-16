@@ -4,10 +4,8 @@ import nl.hu.bep2.vliegmaatschappij.application.PlaneService;
 import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.exceptions.PlaneNotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.dto.PlaneDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/plane")
@@ -21,6 +19,13 @@ public class PlaneController {
 	@GetMapping("/{code}")
 	public PlaneDTO showPlane(@PathVariable String code) throws PlaneNotFoundException {
 		Plane plane = service.showPlane(code);
+		return new PlaneDTO(plane);
+	}
+
+	@PostMapping("/built")
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public PlaneDTO builtPlane(@RequestBody PlaneDTO planeDTO){
+		Plane plane = service.createPlane(planeDTO.code);
 		return new PlaneDTO(plane);
 	}
 }
