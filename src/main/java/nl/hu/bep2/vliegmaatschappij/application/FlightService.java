@@ -12,24 +12,24 @@ import java.time.LocalDateTime;
 
 @Service
 public class FlightService {
-    private final SpringFlightRepository flightService;
+	private final SpringFlightRepository flightService;
 
-    public FlightService(SpringFlightRepository flightService) {
-        this.flightService = flightService;
-    }
+	public FlightService(SpringFlightRepository flightService) {
+		this.flightService = flightService;
+	}
 
 
-    public Flight showFlight(int flightCode) throws FlightNotFoundException {
-        return flightService.findById(flightCode)
-                .orElseThrow(() -> new FlightNotFoundException("Airport with the code: " + flightCode + " not found."));
-    }
+	public Flight showFlight(int flightCode) throws FlightNotFoundException {
+		return flightService.findById(flightCode)
+				.orElseThrow(() -> new FlightNotFoundException("Airport with the code: " + flightCode + " not found."));
+	}
 
-    public Flight createFlight(LocalDateTime departureTime, LocalDateTime arrivalTime) {
-        Flight flight = new Flight(departureTime,arrivalTime);
-        return this.flightService.save(flight);
-    }
+	public Flight createFlight(LocalDateTime departureTime, LocalDateTime arrivalTime) {
+		Flight flight = new Flight(departureTime,arrivalTime);
+		return this.flightService.save(flight);
+	}
 
-    public void delete(int code) {
-        this.flightService.deleteById(code);
-    }
+	public void delete(int code) {
+		this.flightService.deleteById(code);
+	}
 }

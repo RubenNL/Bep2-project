@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/flight")
 public class FlightController {
-    private final FlightService service;
+	private final FlightService service;
 
-    public FlightController(FlightService service) {
-        this.service = service;
-    }
+	public FlightController(FlightService service) {
+		this.service = service;
+	}
 
-    @PostMapping
-    public int createFlight(@Validated @RequestBody FlightDTO flight) {
-        return this.service.createFlight(
-                flight.departureTime,
-                flight.arrivalTime
-        ).getId();
-    }
+	@PostMapping
+	public int createFlight(@Validated @RequestBody FlightDTO flight) {
+		return this.service.createFlight(
+				flight.departureTime,
+				flight.arrivalTime
+		).getId();
+	}
 
-    @GetMapping("/{id}")
-    public FlightDTO showFlight(@PathVariable int id) throws FlightNotFoundException {
-        Flight flight = service.showFlight(id);
-        return new FlightDTO(flight);
-    }
+	@GetMapping("/{id}")
+	public FlightDTO showFlight(@PathVariable int id) throws FlightNotFoundException {
+		Flight flight = service.showFlight(id);
+		return new FlightDTO(flight);
+	}
 
     /*@PostMapping("/{id}")
     public void updateFlight(@Validated @RequestBody Flight flight){
@@ -41,10 +41,10 @@ public class FlightController {
         );
     }*/
 
-    @DeleteMapping("/{id}")
-    public void deleteFlight(@PathVariable int id) {
-        this.service.delete(id);
-    }
+	@DeleteMapping("/{id}")
+	public void deleteFlight(@PathVariable int id) {
+		this.service.delete(id);
+	}
 
 
 }

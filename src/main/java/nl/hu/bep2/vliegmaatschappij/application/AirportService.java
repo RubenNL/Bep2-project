@@ -8,26 +8,26 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AirportService {
-    private final SpringAirportRepository airportService;
+	private final SpringAirportRepository airportService;
 
-    public AirportService(SpringAirportRepository airportService) {
-        this.airportService = airportService;
-    }
+	public AirportService(SpringAirportRepository airportService) {
+		this.airportService = airportService;
+	}
 
 
-    public Airport showAirport(String airportCode) throws AirportNotFoundException {
-        return airportService.findById(airportCode)
-                .orElseThrow(() -> new AirportNotFoundException("Airport with the code: " + airportCode + " not found."));
-    }
+	public Airport showAirport(String airportCode) throws AirportNotFoundException {
+		return airportService.findById(airportCode)
+				.orElseThrow(() -> new AirportNotFoundException("Airport with the code: " + airportCode + " not found."));
+	}
 
-    public void createAirport(String code, String name, double lat, double lng, String place, String country, Flightroute flightRoute) {
+	public void createAirport(String code, String name, double lat, double lng, String place, String country, Flightroute flightRoute) {
 
-        Airport airport = new Airport(code,name,lat,lng,place,country, flightRoute);
+		Airport airport = new Airport(code,name,lat,lng,place,country, flightRoute);
 
-        this.airportService.save(airport);
-    }
+		this.airportService.save(airport);
+	}
 
-    public void delete(String code) {
-        this.airportService.deleteById(code);
-    }
+	public void delete(String code) {
+		this.airportService.deleteById(code);
+	}
 }

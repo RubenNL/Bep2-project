@@ -11,47 +11,47 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/airport")
 public class AirportController {
-    private final AirportService service;
+	private final AirportService service;
 
-    public AirportController(AirportService service) {
-        this.service = service;
-    }
+	public AirportController(AirportService service) {
+		this.service = service;
+	}
 
-    @PostMapping
-    public void createAirport(@Validated @RequestBody Airport airport) {
-        this.service.createAirport(
-                airport.getCode(),
-                airport.getName(),
-                airport.getLat(),
-                airport.getLng(),
-                airport.getPlace(),
-                airport.getCountry(),
-                airport.getFlightRoute()
-        );
-    }
+	@PostMapping
+	public void createAirport(@Validated @RequestBody Airport airport) {
+		this.service.createAirport(
+				airport.getCode(),
+				airport.getName(),
+				airport.getLat(),
+				airport.getLng(),
+				airport.getPlace(),
+				airport.getCountry(),
+				airport.getFlightRoute()
+		);
+	}
 
-    //@RolesAllowed("admin")
-    @GetMapping("/{code}")
-    public AirportDTO showAirport(@PathVariable String code) throws AirportNotFoundException {
-        Airport airport = service.showAirport(code);
-        return new AirportDTO(airport);
-    }
+	//@RolesAllowed("admin")
+	@GetMapping("/{code}")
+	public AirportDTO showAirport(@PathVariable String code) throws AirportNotFoundException {
+		Airport airport = service.showAirport(code);
+		return new AirportDTO(airport);
+	}
 
-    @PostMapping("/{code}")
-    public void updateAirport(@Validated @RequestBody Airport airport){
-        this.service.createAirport(
-                airport.getCode(),
-                airport.getName(),
-                airport.getLat(),
-                airport.getLng(),
-                airport.getPlace(),
-                airport.getCountry(),
-                airport.getFlightRoute()
-        );
-    }
+	@PostMapping("/{code}")
+	public void updateAirport(@Validated @RequestBody Airport airport){
+		this.service.createAirport(
+				airport.getCode(),
+				airport.getName(),
+				airport.getLat(),
+				airport.getLng(),
+				airport.getPlace(),
+				airport.getCountry(),
+				airport.getFlightRoute()
+		);
+	}
 
-    @DeleteMapping("/{code}")
-    public void deleteAirport(@PathVariable String code) throws AirportNotFoundException {
-        this.service.delete(code);
-    }
+	@DeleteMapping("/{code}")
+	public void deleteAirport(@PathVariable String code) throws AirportNotFoundException {
+		this.service.delete(code);
+	}
 }
