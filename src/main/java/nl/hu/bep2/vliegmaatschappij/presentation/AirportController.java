@@ -1,57 +1,80 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
-import nl.hu.bep2.vliegmaatschappij.application.AirportService;
+import nl.hu.bep2.vliegmaatschappij.data.SpringAirportRepository;
+import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Airport;
+import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.exceptions.AirportNotFoundException;
-import nl.hu.bep2.vliegmaatschappij.presentation.dto.AirportDTO;
-import nl.hu.bep2.vliegmaatschappij.security.presentation.dto.Registration;
-import org.springframework.validation.annotation.Validated;
+import nl.hu.bep2.vliegmaatschappij.exceptions.FlightNotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.assembler.AirportModelAssembler;
+import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/airport")
 public class AirportController {
-	private final AirportService service;
+	private final SpringAirportRepository repository;
+	private final AirportModelAssembler assembler;
 
-	public AirportController(AirportService service) {
-		this.service = service;
+	public AirportController(SpringAirportRepository repository, AirportModelAssembler assembler) {
+		this.repository = repository;
+		this.assembler = assembler;
 	}
 
 	@PostMapping
-	public void createAirport(@Validated @RequestBody Airport airport) {
-		this.service.createAirport(
-				airport.getCode(),
-				airport.getName(),
-				airport.getLat(),
-				airport.getLng(),
-				airport.getPlace(),
-				airport.getCountry(),
-				airport.getFlightRoute()
-		);
+	ResponseEntity<?> newAirport(@RequestBody Airport airport) {
+		EntityModel<Airport> entityModel = assembler.toModel(repository.save(airport));
+		return ResponseEntity
+				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+				.body(entityModel);
 	}
-
-	//@RolesAllowed("admin")
 	@GetMapping("/{code}")
-	public AirportDTO showAirport(@PathVariable String code) throws AirportNotFoundException {
-		Airport airport = service.showAirport(code);
-		return new AirportDTO(airport);
+	public EntityModel<Airport> one(@PathVariable String code) throws AirportNotFoundException {
+		Airport airport = repository.findById(code)
+				.orElseThrow(() -> new AirportNotFoundException("airport not found"));
+		return assembler.toModel(airport);
 	}
 
-	@PostMapping("/{code}")
-	public void updateAirport(@Validated @RequestBody Airport airport){
-		this.service.createAirport(
-				airport.getCode(),
-				airport.getName(),
-				airport.getLat(),
-				airport.getLng(),
-				airport.getPlace(),
-				airport.getCountry(),
-				airport.getFlightRoute()
-		);
+	@GetMapping("/all")
+	public CollectionModel<EntityModel<Airport>> all() {
+		List<EntityModel<Airport>> airports = repository.findAll().stream()
+				.map(assembler::toModel)
+				.collect(Collectors.toList());
+		return CollectionModel.of(airports, linkTo(methodOn(AirportController.class).all()).withSelfRel());
+	}
+	@PutMapping("/{code}")
+	ResponseEntity<?> replaceAirport(@RequestBody Airport newAirport, @PathVariable String code) {
+		Airport updatedAirport = repository.findById(code)
+				.map(airport -> {
+					airport.setName(newAirport.getName());
+					airport.setLat(newAirport.getLat());
+					airport.setLng(newAirport.getLng());
+					airport.setCountry(newAirport.getCountry());
+					airport.setPlace(newAirport.getPlace());
+					return repository.save(airport);
+				})
+				.orElseGet(() -> {
+					newAirport.setCode(code);
+					return repository.save(newAirport);
+				});
+		EntityModel<Airport> entityModel = assembler.toModel(updatedAirport);
+		return ResponseEntity
+				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+				.body(entityModel);
 	}
 
 	@DeleteMapping("/{code}")
-	public void deleteAirport(@PathVariable String code) throws AirportNotFoundException {
-		this.service.delete(code);
+	public void deleteFlight(@PathVariable String code) {
+		repository.deleteById(code);
 	}
 }
