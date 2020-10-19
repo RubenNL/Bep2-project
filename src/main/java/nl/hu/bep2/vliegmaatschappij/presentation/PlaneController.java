@@ -1,31 +1,56 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
-import nl.hu.bep2.vliegmaatschappij.application.PlaneService;
+import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.exceptions.PlaneNotFoundException;
-import nl.hu.bep2.vliegmaatschappij.presentation.dto.PlaneDTO;
-import org.springframework.http.MediaType;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/plane")
 public class PlaneController {
-	private final PlaneService service;
-
-	public PlaneController(PlaneService service) {
-		this.service = service;
+	private final SpringPlaneRepository repository;
+	private final PlaneModelAssembler assembler;
+	//TODO Q: is service nog nodig
+	//TODO Update stmt moet nog gemaakt worden.
+	public PlaneController(SpringPlaneRepository repository, PlaneModelAssembler assembler) {
+		this.repository = repository;
+		this.assembler = assembler;
 	}
 
 	@GetMapping("/{code}")
-	public PlaneDTO showPlane(@PathVariable String code) throws PlaneNotFoundException {
-		Plane plane = service.showPlane(code);
-		return new PlaneDTO(plane);
+	public EntityModel<Plane> one(@PathVariable String code) throws PlaneNotFoundException {
+		Plane plane = repository.findById(code)
+				.orElseThrow(() -> new PlaneNotFoundException("Plane not found"));
+		return assembler.toModel(plane);
 	}
 
-	@PostMapping("/built")
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public PlaneDTO builtPlane(@RequestBody PlaneDTO planeDTO){
-		Plane plane = service.createPlane(planeDTO.code);
-		return new PlaneDTO(plane);
+	@GetMapping("/all")
+	public CollectionModel<EntityModel<Plane>> all() throws PlaneNotFoundException {
+		List<EntityModel<Plane>> planes = repository.findAll().stream()
+				.map(assembler::toModel)
+				.collect(Collectors.toList());
+		return CollectionModel.of(planes, linkTo(methodOn(PlaneController.class).all()).withSelfRel());
+	}
+
+	@PostMapping("/create") //TODO Why with/without the link?
+	public ResponseEntity<?> newPlane(@RequestBody Plane plane){
+		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
+		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+				.body(entityModel);
+	}
+
+	@DeleteMapping("/{code}")
+	public void deletePlane(@PathVariable String code){
+		repository.deleteById(code);
 	}
 }
