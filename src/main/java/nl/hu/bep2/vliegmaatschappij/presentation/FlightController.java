@@ -19,12 +19,11 @@ public class FlightController {
     }
 
     @PostMapping
-    public void createFlight(@Validated @RequestBody Flight flight) {
-        this.service.createFlight(
-                flight.getId(),
-                flight.getdepartureTime(),
-                flight.getarrivalTime()
-        );
+    public int createFlight(@Validated @RequestBody FlightDTO flight) {
+        return this.service.createFlight(
+                flight.departureTime,
+                flight.arrivalTime
+        ).getId();
     }
 
     @GetMapping("/{id}")
@@ -33,17 +32,17 @@ public class FlightController {
         return new FlightDTO(flight);
     }
 
-    @PostMapping("/{id}")
+    /*@PostMapping("/{id}")
     public void updateFlight(@Validated @RequestBody Flight flight){
         this.service.createFlight(
                 flight.getId(),
                 flight.getdepartureTime(),
                 flight.getarrivalTime()
         );
-    }
+    }*/
 
     @DeleteMapping("/{id}")
-    public void deleteFlight(@PathVariable int id) throws AirportNotFoundException {
+    public void deleteFlight(@PathVariable int id) {
         this.service.delete(id);
     }
 
