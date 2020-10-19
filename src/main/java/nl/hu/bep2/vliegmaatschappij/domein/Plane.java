@@ -11,7 +11,9 @@ public class Plane {
 	@ManyToOne
 	private Planetype type;
 
-	public Plane(String code){}
+	public Plane(String code){
+		this.code = code;
+	}
 
 	public Plane() {
 
