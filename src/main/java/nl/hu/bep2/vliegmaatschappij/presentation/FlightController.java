@@ -40,10 +40,10 @@ public class FlightController {
 	}
 	@GetMapping("/all")
 	CollectionModel<EntityModel<Flight>> all() {
-		List<EntityModel<Flight>> employees = repository.findAll().stream()
+		List<EntityModel<Flight>> flights = repository.findAll().stream()
 				.map(assembler::toModel)
 				.collect(Collectors.toList());
-		return CollectionModel.of(employees, linkTo(methodOn(FlightController.class).all()).withSelfRel());
+		return CollectionModel.of(flights, linkTo(methodOn(FlightController.class).all()).withSelfRel());
 	}
 	@PutMapping("/{id}")
 	ResponseEntity<?> replaceFlight(@RequestBody Flight newFlight, @PathVariable int id) {
