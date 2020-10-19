@@ -36,7 +36,6 @@ public class FlightController {
     EntityModel<Flight> one(@PathVariable int id) {
         Flight flight = repository.findById(id)
                 .orElseThrow(() -> new FlightNotFoundException("flight not found"));
-
         return assembler.toModel(flight);
     }
     @GetMapping("/all")
@@ -47,7 +46,7 @@ public class FlightController {
         return CollectionModel.of(employees, linkTo(methodOn(FlightController.class).all()).withSelfRel());
     }
     @PutMapping("/{id}")
-    ResponseEntity<?> replaceEmployee(@RequestBody Flight newFlight, @PathVariable int id) {
+    ResponseEntity<?> replaceFlight(@RequestBody Flight newFlight, @PathVariable int id) {
         Flight updatedFlight = repository.findById(id)
                 .map(flight -> {
                     flight.setarrivalTime(newFlight.getarrivalTime());
