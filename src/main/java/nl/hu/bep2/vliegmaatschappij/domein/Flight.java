@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -13,14 +14,13 @@ public class Flight {
 	@Id
 	@GeneratedValue
 	private int id;
-	private LocalDate departureTime;
-	private LocalDate arrivalTime;
+	private LocalDateTime departureTime;
+	private LocalDateTime arrivalTime;
 
 	@Transient
 	private List<Booking> bookingList;
 
-	public Flight(int id, LocalDate departureTime, LocalDate arrivalTime) {
-		this.id = id;
+	public Flight(LocalDateTime departureTime, LocalDateTime arrivalTime) {
 		this.departureTime = departureTime;
 		this.arrivalTime = arrivalTime;
 	}
@@ -35,19 +35,19 @@ public class Flight {
 		this.id = id;
 	}
 
-	public LocalDate getdepartureTime() {
+	public LocalDateTime getdepartureTime() {
 		return departureTime;
 	}
 
-	public void setdepartureTime(LocalDate departureTime) {
+	public void setdepartureTime(LocalDateTime departureTime) {
 		this.departureTime = departureTime;
 	}
 
-	public LocalDate getarrivalTime() {
+	public LocalDateTime getarrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setarrivalTime(LocalDate arrivalTime) {
+	public void setarrivalTime(LocalDateTime arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 

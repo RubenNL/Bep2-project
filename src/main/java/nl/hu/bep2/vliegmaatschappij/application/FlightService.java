@@ -8,6 +8,7 @@ import nl.hu.bep2.vliegmaatschappij.exceptions.FlightNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class FlightService {
@@ -23,11 +24,9 @@ public class FlightService {
                 .orElseThrow(() -> new FlightNotFoundException("Airport with the code: " + flightCode + " not found."));
     }
 
-    public void createFlight(int id, LocalDate departureTime, LocalDate arrivalTime) {
-
-        Flight flight = new Flight(id,departureTime,arrivalTime);
-
-        this.flightService.save(flight);
+    public Flight createFlight(LocalDateTime departureTime, LocalDateTime arrivalTime) {
+        Flight flight = new Flight(departureTime,arrivalTime);
+        return this.flightService.save(flight);
     }
 
     public void delete(int code) {
