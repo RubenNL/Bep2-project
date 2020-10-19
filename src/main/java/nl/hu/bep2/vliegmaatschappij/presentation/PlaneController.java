@@ -20,6 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class PlaneController {
 	private final SpringPlaneRepository repository;
 	private final PlaneModelAssembler assembler;
+
 	//TODO Q: is service nog nodig
 	//TODO Update stmt moet nog gemaakt worden.
 	public PlaneController(SpringPlaneRepository repository, PlaneModelAssembler assembler) {
@@ -46,6 +47,24 @@ public class PlaneController {
 	public ResponseEntity<?> newPlane(@RequestBody Plane plane){
 		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
 		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+				.body(entityModel);
+	}
+
+	@PutMapping("/{code}")
+	ResponseEntity<?> replaceFlight(@RequestBody Plane newPlane, @PathVariable String code) {
+		Plane updatedPlane = repository.findById(code)
+				.map(plane -> {
+					plane.setCode(newPlane.getCode());
+					plane.setType(newPlane.getType());
+					return repository.save(plane);
+				})
+				.orElseGet(() -> {
+					newPlane.setCode(code);
+					return repository.save(newPlane);
+				});
+		EntityModel<Plane> entityModel = assembler.toModel(updatedPlane);
+		return ResponseEntity
+				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
 	}
 
