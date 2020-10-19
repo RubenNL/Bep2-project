@@ -1,1 +1,1 @@
-web: java -cp "target/dependency/*" $JAVA_OPTS webapp.runner.launch.Main  --port $PORT target/*.war
+web: java -Dsecurity.jwt.secret=${SECURITY_JWT} -cp "target/dependency/*" $JAVA_OPTS webapp.runner.launch.Main --port $PORT target/*.war
