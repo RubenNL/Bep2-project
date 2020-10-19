@@ -1,7 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.domein.TravelClass;
 import nl.hu.bep2.vliegmaatschappij.exceptions.TravelClassNotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.TravelClassAssembler;
