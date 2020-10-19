@@ -28,6 +28,14 @@ public class TravelClassController {
 		this.assembler = assembler;
 	}
 
+	@PostMapping
+	public ResponseEntity<?> newTravelClass(@RequestBody TravelClass travelclass) {
+		EntityModel<TravelClass> entityModel = assembler.toModel(travelClassRepo.save(travelclass));
+		return ResponseEntity
+				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+				.body(entityModel);
+	}
+
 	@GetMapping("/{id}")
 	public EntityModel<TravelClass> one(@PathVariable int id) {
 		TravelClass travelClass = travelClassRepo.findById(id)
