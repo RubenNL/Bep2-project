@@ -2,7 +2,8 @@ package nl.hu.bep2.vliegmaatschappij.presentation;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Plane;
-import nl.hu.bep2.vliegmaatschappij.exceptions.PlaneNotFoundException;
+import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.assembler.PlaneModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -27,14 +28,14 @@ public class PlaneController {
 	}
 
 	@GetMapping("/{code}")
-	public EntityModel<Plane> one(@PathVariable String code) throws PlaneNotFoundException {
+	public EntityModel<Plane> one(@PathVariable String code) throws NotFoundException {
 		Plane plane = repository.findById(code)
-				.orElseThrow(() -> new PlaneNotFoundException("Plane not found"));
+				.orElseThrow(() -> new NotFoundException("Plane not found"));
 		return assembler.toModel(plane);
 	}
 
 	@GetMapping("/all")
-	public CollectionModel<EntityModel<Plane>> all() throws PlaneNotFoundException {
+	public CollectionModel<EntityModel<Plane>> all() throws NotFoundException {
 		List<EntityModel<Plane>> planes = repository.findAll().stream()
 				.map(assembler::toModel)
 				.collect(Collectors.toList());

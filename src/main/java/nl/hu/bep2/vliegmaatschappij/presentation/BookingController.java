@@ -2,7 +2,7 @@ package nl.hu.bep2.vliegmaatschappij.presentation;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringBookingRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Booking;
-import nl.hu.bep2.vliegmaatschappij.exceptions.BookingNotFoundException;
+import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.BookingModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -38,7 +38,7 @@ public class BookingController {
     @PostMapping("/{id}")
     public EntityModel<Booking> one(@PathVariable int id){
         Booking booking = repository.findById(id)
-                .orElseThrow(() -> new BookingNotFoundException("Booking not found"));
+                .orElseThrow(() -> new NotFoundException("Booking not found"));
         return assembler.toModel(booking);
     }
 

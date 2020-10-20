@@ -3,7 +3,7 @@ package nl.hu.bep2.vliegmaatschappij.presentation;//package nl.hu.bep2.vliegmaat
 import nl.hu.bep2.vliegmaatschappij.data.SpringPlanetypeRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Planetype;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
-import nl.hu.bep2.vliegmaatschappij.presentation.PlanetypeModelAssembler;
+import nl.hu.bep2.vliegmaatschappij.presentation.assembler.PlanetypeModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -14,9 +14,6 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-
-import java.util.List;
-import java.util.stream.Collectors;
 //TODO Tests maken in postman!
 @RestController
 @RequestMapping("/planetype")
