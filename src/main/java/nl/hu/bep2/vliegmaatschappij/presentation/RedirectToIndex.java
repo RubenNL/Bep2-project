@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RedirectToIndex {
 	@RequestMapping("")
 	public String homePage() {
-		return "index.html";
+		return "swagger-ui.html";
 	}
 }
