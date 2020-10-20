@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Flightroute {
+public class FlightRoute {
 	@Id
 	@GeneratedValue
 	private int id;
@@ -15,7 +15,7 @@ public class Flightroute {
 	@OneToOne
 	Airport destination;
 
-	public Flightroute() {
+	public FlightRoute() {
 	}
 
 	public int getId() {
