@@ -2,8 +2,8 @@ package nl.hu.bep2.vliegmaatschappij.domein;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Airport {
@@ -14,23 +14,22 @@ public class Airport {
 	private double lng;
 	private String place;
 	private String country;
-	
-	@Transient //TODO mapping! 
-	private Flightroute flightRoute;
 
-	public Airport(String code, String name, double lat, double lng, String place, String country, Flightroute flightRoute) {
+	@OneToMany
+	private List<Flightroute> flightRoutes;
+
+	public Airport(String code, String name, double lat, double lng, String place, String country, List<Flightroute> flightRoutes) {
 		this.code = code;
 		this.name = name;
 		this.lat = lat;
 		this.lng = lng;
 		this.place = place;
 		this.country = country;
-		this.flightRoute = flightRoute;
+		this.flightRoutes = flightRoutes;
 	}
 
 	public Airport() {
 	}
-
 
 	public String getCode() {
 		return code;
@@ -80,11 +79,11 @@ public class Airport {
 		this.country = country;
 	}
 
-	public Flightroute getFlightRoute() {
-		return flightRoute;
+	public List<Flightroute> getFlightRoutes() {
+		return flightRoutes;
 	}
 
-	public void setFlightRoute(Flightroute flightRoute) {
-		this.flightRoute = flightRoute;
+	public void setFlightRoutes(List<Flightroute> flightRoutes) {
+		this.flightRoutes = flightRoutes;
 	}
 }

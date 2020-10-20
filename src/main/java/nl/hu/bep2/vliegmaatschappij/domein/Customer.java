@@ -9,8 +9,7 @@ public class Customer extends Person {
     @Id
     @GeneratedValue
     private int id;
-//    @OneToMany
-	@Transient
+    @OneToMany
     List<Booking> bookings = new ArrayList<>();
 	
 	public Customer() {
@@ -21,11 +20,9 @@ public class Customer extends Person {
 		super(firstName, lastName, age, email, phone, nationality);
 	}
 
-
 	public List<Booking> getBookings(){
 		return bookings;
 	}
-
 
 	public void addBooking(Booking booking){
 		bookings.add(booking);

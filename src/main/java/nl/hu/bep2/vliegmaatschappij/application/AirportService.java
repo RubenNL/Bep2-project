@@ -6,6 +6,8 @@ import nl.hu.bep2.vliegmaatschappij.domein.Flightroute;
 import nl.hu.bep2.vliegmaatschappij.exceptions.AirportNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AirportService {
 	private final SpringAirportRepository airportService;
@@ -20,9 +22,9 @@ public class AirportService {
 				.orElseThrow(() -> new AirportNotFoundException("Airport with the code: " + airportCode + " not found."));
 	}
 
-	public void createAirport(String code, String name, double lat, double lng, String place, String country, Flightroute flightRoute) {
+	public void createAirport(String code, String name, double lat, double lng, String place, String country, List<Flightroute> flightRoutes) {
 
-		Airport airport = new Airport(code,name,lat,lng,place,country, flightRoute);
+		Airport airport = new Airport(code,name,lat,lng,place,country, flightRoutes);
 
 		this.airportService.save(airport);
 	}
