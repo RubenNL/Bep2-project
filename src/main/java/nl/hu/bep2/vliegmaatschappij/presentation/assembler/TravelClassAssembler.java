@@ -16,6 +16,6 @@ public class TravelClassAssembler implements RepresentationModelAssembler<Travel
 	public EntityModel<TravelClass> toModel(TravelClass travelClass) {
 		return EntityModel.of(travelClass,
 				WebMvcLinkBuilder.linkTo(methodOn(TravelClassController.class).one(travelClass.getId())).withSelfRel(),
-				linkTo(methodOn(TravelClassController.class).all()).withRel("travel classes"));
+				linkTo(methodOn(TravelClassController.class).all()).withRel("travelClasses"));
 	}
 }
