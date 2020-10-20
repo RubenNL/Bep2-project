@@ -9,9 +9,8 @@ public class Planetype {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@Transient
+	@OneToMany
 	private List<TravelClass> travelclasses;
-
 	@OneToMany
 	private List<Plane> planes;
 

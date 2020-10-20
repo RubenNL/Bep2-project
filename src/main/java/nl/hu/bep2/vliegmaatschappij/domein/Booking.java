@@ -1,8 +1,5 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
-
-import nl.hu.bep2.vliegmaatschappij.security.data.User;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,8 +10,8 @@ public class Booking {
 	private int id;
 	@ManyToMany
 	private List<Person> persons;
-	@Transient // TODO Uitzoeken hoe het zit met users/customers.
-	private User user;
+	@OneToOne
+	private Customer customer;
 	@OneToOne
 	private Price price;
 
@@ -42,12 +39,12 @@ public class Booking {
 		this.persons = persons;
 	}
 
-	public User getUser() {
-		return user;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Price getPrice() {
