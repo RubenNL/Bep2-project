@@ -32,10 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.DELETE, REGISTER_PATH+"/*").permitAll() //delete user by username TODO weghalen
 				.antMatchers(HttpMethod.DELETE, "/employee/setEmployee").permitAll() //setEmployee TODO weghalen
 				.antMatchers(HttpMethod.POST, LOGIN_PATH).permitAll()
-				.antMatchers(HttpMethod.GET,"/*.html").permitAll()
-				.antMatchers(HttpMethod.GET,"/*.css").permitAll()
-				.antMatchers(HttpMethod.GET,"/*.js").permitAll()
 				.antMatchers(HttpMethod.GET,"/").permitAll()
+				.antMatchers(HttpMethod.GET,"/swagger-ui.html").permitAll()
 				.antMatchers(HttpMethod.GET,"/v3/**").permitAll()
 				.antMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
 				.anyRequest().authenticated()
