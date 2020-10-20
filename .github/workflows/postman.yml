@@ -21,3 +21,17 @@ jobs:
 
     - name: Output summary to console
       run: echo ${{ steps.run-api-tests.outputs.summary }}
+
+  postman-first:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run API Tests
+      uses: anthonyvscode/newman-action@v1
+      with:
+        collection: postman-tests/collection1.postman_collection.json
+        reporters: cli
+
+    - name: Output summary to console
+      run: echo ${{ steps.run-api-tests.outputs.summary }}
