@@ -1,9 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +14,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @JsonIgnoreProperties(ignoreUnknown=true)
+@Getter
+@Setter
 public class Flight {
 	@Id
 	@GeneratedValue
@@ -29,37 +29,5 @@ public class Flight {
 	public Flight(LocalDateTime departureTime, LocalDateTime arrivalTime) {
 		this.departureTime = departureTime;
 		this.arrivalTime = arrivalTime;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public LocalDateTime getdepartureTime() {
-		return departureTime;
-	}
-
-	public void setdepartureTime(LocalDateTime departureTime) {
-		this.departureTime = departureTime;
-	}
-
-	public LocalDateTime getarrivalTime() {
-		return arrivalTime;
-	}
-
-	public void setarrivalTime(LocalDateTime arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
-
-	public List<Booking> getBookingList() {
-		return bookingList;
-	}
-
-	public void setBookingList(List<Booking> bookingList) {
-		this.bookingList = bookingList;
 	}
 }

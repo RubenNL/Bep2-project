@@ -50,8 +50,8 @@ public class FlightController {
 	ResponseEntity<?> replaceFlight(@RequestBody Flight newFlight, @PathVariable int id) {
 		Flight updatedFlight = repository.findById(id)
 				.map(flight -> {
-					flight.setarrivalTime(newFlight.getarrivalTime());
-					flight.setdepartureTime(newFlight.getdepartureTime());
+					flight.setArrivalTime(newFlight.getArrivalTime());
+					flight.setDepartureTime(newFlight.getDepartureTime());
 					return repository.save(flight);
 				})
 				.orElseGet(() -> {
