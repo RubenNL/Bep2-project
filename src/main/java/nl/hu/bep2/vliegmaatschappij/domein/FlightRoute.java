@@ -1,11 +1,18 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class FlightRoute {
 	@Id
 	@GeneratedValue
@@ -14,31 +21,4 @@ public class FlightRoute {
 	Airport departure;
 	@OneToOne
 	Airport destination;
-
-	public FlightRoute() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Airport getDeparture() {
-		return departure;
-	}
-
-	public void setDeparture(Airport departure) {
-		this.departure = departure;
-	}
-
-	public Airport getDestination() {
-		return destination;
-	}
-
-	public void setDestination(Airport destination) {
-		this.destination = destination;
-	}
 }
