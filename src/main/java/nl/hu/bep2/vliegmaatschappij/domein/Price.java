@@ -17,12 +17,16 @@ public class Price {
 	@GeneratedValue
 	private int id;
 	private double price;
+  
+	public Price() {
 
-	public Price(TravelClass travelClass, Flightroute route) {
+	}
+
+	public Price(TravelClass travelClass, FlightRoute route) {
 		this.price = calculatePrice(travelClass, route);
 	}
 
-	public double calculatePrice(TravelClass travelClass, Flightroute route) {
+	public double calculatePrice(TravelClass travelClass, FlightRoute route) {
 		// TODO create function
 		return 0.0;
 	}
