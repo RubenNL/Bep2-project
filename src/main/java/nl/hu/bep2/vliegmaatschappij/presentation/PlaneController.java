@@ -21,8 +21,6 @@ public class PlaneController {
 	private final SpringPlaneRepository repository;
 	private final PlaneModelAssembler assembler;
 
-	//TODO Q: is service nog nodig
-	//TODO Update stmt moet nog gemaakt worden.
 	public PlaneController(SpringPlaneRepository repository, PlaneModelAssembler assembler) {
 		this.repository = repository;
 		this.assembler = assembler;

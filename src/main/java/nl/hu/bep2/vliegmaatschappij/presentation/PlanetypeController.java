@@ -1,74 +1,76 @@
-package nl.hu.bep2.vliegmaatschappij.presentation;
+package nl.hu.bep2.vliegmaatschappij.presentation;//package nl.hu.bep2.vliegmaatschappij.presentation;
 
-import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Plane;
-import nl.hu.bep2.vliegmaatschappij.exceptions.PlaneNotFoundException;
+import nl.hu.bep2.vliegmaatschappij.data.SpringPlanetypeRepository;
+import nl.hu.bep2.vliegmaatschappij.domein.Planetype;
+import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.PlanetypeModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@RestController
-@RequestMapping("/plane")
-public class PlaneController {
-	private final SpringPlaneRepository repository;
-	private final PlaneModelAssembler assembler;
 
-	//TODO Update stmt moet nog gemaakt worden.
-	public PlaneController(SpringPlaneRepository repository, PlaneModelAssembler assembler) {
+import java.util.List;
+import java.util.stream.Collectors;
+//TODO Tests maken in postman!
+@RestController
+@RequestMapping("/planetype")
+public class PlanetypeController {
+	private final SpringPlanetypeRepository repository;
+	private final PlanetypeModelAssembler assembler;
+
+	public PlanetypeController(SpringPlanetypeRepository repository, PlanetypeModelAssembler assembler) {
 		this.repository = repository;
 		this.assembler = assembler;
 	}
 
-	@GetMapping("/{code}")
-	public EntityModel<Plane> one(@PathVariable String code) throws PlaneNotFoundException {
-		Plane plane = repository.findById(code)
-				.orElseThrow(() -> new PlaneNotFoundException("Plane not found"));
-		return assembler.toModel(plane);
+	@GetMapping("/{id}")
+	public EntityModel<Planetype> one(@PathVariable int id) throws NotFoundException {
+		 Planetype planetype = repository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Plane not found"));
+		return assembler.toModel(planetype);
 	}
 
 	@GetMapping("/all")
-	public CollectionModel<EntityModel<Plane>> all() throws PlaneNotFoundException {
-		List<EntityModel<Plane>> planes = repository.findAll().stream()
+	public CollectionModel<EntityModel<Planetype>> all() throws NotFoundException {
+		List<EntityModel<Planetype>> planetypes = repository.findAll().stream()
 				.map(assembler::toModel)
 				.collect(Collectors.toList());
-		return CollectionModel.of(planes, linkTo(methodOn(PlaneController.class).all()).withSelfRel());
+		return CollectionModel.of(planetypes, linkTo(methodOn(PlanetypeController.class).all()).withSelfRel());
 	}
 
-	@PostMapping("/create") //TODO Why with/without the link?
-	public ResponseEntity<?> newPlane(@RequestBody Plane plane){
-		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
+	@PostMapping("/create")
+	public ResponseEntity<?> newPlane(@RequestBody Planetype planetype){
+		EntityModel<Planetype> entityModel = assembler.toModel(repository.save(planetype));
 		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
 	}
 
-	@PutMapping("/{code}")
-	ResponseEntity<?> replaceFlight(@RequestBody Plane newPlane, @PathVariable String code) {
-		Plane updatedPlane = repository.findById(code)
-				.map(plane -> {
-					plane.setCode(newPlane.getCode());
-					plane.setType(newPlane.getType());
-					return repository.save(plane);
+	@PutMapping("/{id}")
+	ResponseEntity<?> replaceFlight(@RequestBody Planetype newPlanetype, @PathVariable int id) {
+		Planetype updatedPlanetype = repository.findById(id)
+				.map(planetype -> {
+					planetype.setId(newPlanetype.getId());
+					planetype.setName(newPlanetype.getName());
+					return repository.save(planetype);
 				})
 				.orElseGet(() -> {
-					newPlane.setCode(code);
-					return repository.save(newPlane);
+					newPlanetype.setId(id);
+					return repository.save(newPlanetype);
 				});
-		EntityModel<Plane> entityModel = assembler.toModel(updatedPlane);
+		EntityModel<Planetype> entityModel = assembler.toModel(updatedPlanetype);
 		return ResponseEntity
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
 	}
 
-	@DeleteMapping("/{code}")
-	public void deletePlane(@PathVariable String code){
-		repository.deleteById(code);
+	@DeleteMapping("/{id}")
+	public void deletePlane(@PathVariable int id){
+		repository.deleteById(id);
 	}
 }
