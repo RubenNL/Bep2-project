@@ -16,9 +16,9 @@ public class Airport {
 	private String country;
 
 	@OneToMany
-	private List<Flightroute> flightRoutes;
+	private List<FlightRoute> flightRoutes;
 
-	public Airport(String code, String name, double lat, double lng, String place, String country, List<Flightroute> flightRoutes) {
+	public Airport(String code, String name, double lat, double lng, String place, String country, List<FlightRoute> flightRoutes) {
 		this.code = code;
 		this.name = name;
 		this.lat = lat;
@@ -79,11 +79,11 @@ public class Airport {
 		this.country = country;
 	}
 
-	public List<Flightroute> getFlightRoutes() {
+	public List<FlightRoute> getFlightRoutes() {
 		return flightRoutes;
 	}
 
-	public void setFlightRoutes(List<Flightroute> flightRoutes) {
+	public void setFlightRoutes(List<FlightRoute> flightRoutes) {
 		this.flightRoutes = flightRoutes;
 	}
 }
