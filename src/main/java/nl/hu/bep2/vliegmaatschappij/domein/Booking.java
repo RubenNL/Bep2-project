@@ -6,6 +6,7 @@ import nl.hu.bep2.vliegmaatschappij.security.data.User;
 import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Booking {
 	@Id
 	@GeneratedValue
