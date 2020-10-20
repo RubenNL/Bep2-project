@@ -1,9 +1,16 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
+@JsonIgnoreProperties(ignoreUnknown=true)
+@Getter
+@Setter
 public class Planetype {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
