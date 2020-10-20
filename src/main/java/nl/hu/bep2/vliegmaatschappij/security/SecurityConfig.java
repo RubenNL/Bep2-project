@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.DELETE, "/employee/setEmployee").permitAll() //setEmployee TODO weghalen
 				.antMatchers(HttpMethod.POST, LOGIN_PATH).permitAll()
 				.antMatchers(HttpMethod.GET,"/").permitAll()
+				.antMatchers(HttpMethod.GET,"/index.html").permitAll()
 				.antMatchers(HttpMethod.GET,"/swagger-ui.html").permitAll()
 				.antMatchers(HttpMethod.GET,"/v3/**").permitAll()
 				.antMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()

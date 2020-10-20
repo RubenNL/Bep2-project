@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class RedirectToSwagger {
+public class RedirectToIndex {
 	@RequestMapping("")
 	public String swagger() {
-		return "redirect:/swagger-ui.html";
+		return "index.html";
 	}
 }
