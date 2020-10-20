@@ -31,29 +31,36 @@ public class TravelClass {
 		this.availableSeats = availableSeats;
 	}
 
-
 	public int getId() {
 		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getMaxSeats() {
 		return maxSeats;
 	}
 
-	public void setMaxSeats(int maxStoelen) {
-		this.maxSeats = maxStoelen;
+	public void setMaxSeats(int maxSeats) {
+		this.maxSeats = maxSeats;
 	}
 
 	public int getAvailableSeats() {
 		return availableSeats;
 	}
 
-	public void setAvailableSeats(int stoelen) {
-		this.availableSeats = stoelen;
+	public void setAvailableSeats(int availableSeats) {
+		this.availableSeats = availableSeats;
 	}
 
 	@Override

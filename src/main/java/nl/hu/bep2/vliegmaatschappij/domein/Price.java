@@ -15,11 +15,11 @@ public class Price {
 
 	}
 
-	public Price(Planetype type, TravelClass travelClass, Flightroute route) {
-		this.price = calculatePrice(type, travelClass, route);
+	public Price(TravelClass travelClass, Flightroute route) {
+		this.price = calculatePrice(travelClass, route);
 	}
 
-	public double calculatePrice(Planetype type, TravelClass travelClass, Flightroute route) {
+	public double calculatePrice(TravelClass travelClass, Flightroute route) {
 		// TODO create function
 		return 0.0;
 	}
