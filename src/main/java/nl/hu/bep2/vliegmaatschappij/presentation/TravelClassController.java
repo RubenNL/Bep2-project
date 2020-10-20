@@ -2,7 +2,7 @@ package nl.hu.bep2.vliegmaatschappij.presentation;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.TravelClass;
-import nl.hu.bep2.vliegmaatschappij.exceptions.TravelClassNotFoundException;
+import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.TravelClassAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -38,7 +38,7 @@ public class TravelClassController {
 	@GetMapping("/{id}")
 	public EntityModel<TravelClass> one(@PathVariable int id) {
 		TravelClass travelClass = travelClassRepo.findById(id)
-				.orElseThrow(() -> new TravelClassNotFoundException("Travel Class not found"));
+				.orElseThrow(() -> new NotFoundException("Travel Class not found"));
 		return assembler.toModel(travelClass);
 	}
 

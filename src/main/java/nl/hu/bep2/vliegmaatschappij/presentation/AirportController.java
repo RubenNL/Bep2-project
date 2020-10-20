@@ -1,13 +1,9 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringAirportRepository;
-import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Airport;
-import nl.hu.bep2.vliegmaatschappij.domein.Flight;
-import nl.hu.bep2.vliegmaatschappij.exceptions.AirportNotFoundException;
-import nl.hu.bep2.vliegmaatschappij.exceptions.FlightNotFoundException;
+import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.AirportModelAssembler;
-import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -39,9 +35,9 @@ public class AirportController {
 				.body(entityModel);
 	}
 	@GetMapping("/{code}")
-	public EntityModel<Airport> one(@PathVariable String code) throws AirportNotFoundException {
+	public EntityModel<Airport> one(@PathVariable String code) throws NotFoundException {
 		Airport airport = repository.findById(code)
-				.orElseThrow(() -> new AirportNotFoundException("airport not found"));
+				.orElseThrow(() -> new NotFoundException("Airport not found"));
 		return assembler.toModel(airport);
 	}
 

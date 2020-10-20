@@ -8,24 +8,24 @@ import java.util.List;
 
 @Entity
 @Data
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
 public class Planetype {
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private int id;
-	private String name;
-	@OneToMany
-	private List<TravelClass> travelclasses;
-	@OneToMany
-	private List<Plane> planes;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    @OneToMany
+    private List<TravelClass> travelclasses;
+    @OneToMany
+    private List<Plane> planes;
 
-	public Planetype() {
-	}
+    public Planetype() {
+    }
 
-	public Planetype(String naam) {
-		this.name = naam;
-	}
+    public Planetype(String naam) {
+        this.name = naam;
+    }
 
 }

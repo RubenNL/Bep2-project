@@ -2,7 +2,8 @@ package nl.hu.bep2.vliegmaatschappij.presentation;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
-import nl.hu.bep2.vliegmaatschappij.exceptions.FlightNotFoundException;
+
+import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -36,7 +37,7 @@ public class FlightController {
 	@GetMapping("/{id}")
 	public EntityModel<Flight> one(@PathVariable int id) {
 		Flight flight = repository.findById(id)
-				.orElseThrow(() -> new FlightNotFoundException("flight not found"));
+				.orElseThrow(() -> new NotFoundException("flight not found"));
 		return assembler.toModel(flight);
 	}
 	@GetMapping("/all")
