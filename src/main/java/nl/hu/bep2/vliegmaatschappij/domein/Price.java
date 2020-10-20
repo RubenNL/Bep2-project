@@ -17,10 +17,6 @@ public class Price {
 	@GeneratedValue
 	private int id;
 	private double price;
-  
-	public Price() {
-
-	}
 
 	public Price(TravelClass travelClass, FlightRoute route) {
 		this.price = calculatePrice(travelClass, route);
