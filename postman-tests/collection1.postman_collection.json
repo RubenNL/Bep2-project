@@ -1,0 +1,938 @@
+{
+	"info": {
+		"_postman_id": "3aba0364-e806-49b3-93b4-ba9c1877aedd",
+		"name": "bep2-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "done",
+			"item": [
+				{
+					"name": "deleteAdminUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "11335034-ec8d-41de-bb2b-0278262ba17e",
+								"exec": [
+									"//Deze request mag falen, als de admin user niet bestaat. daarom geen tests."
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/register/admin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4bfeb74c-5c19-409c-90a0-5a715e2b8aff",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\",\n    \"firstName\": \"Ad\",\n    \"lastName\": \"Min\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login as Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dfb3085b-8b1c-426e-9798-005da9258321",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"if (pm.response.code === 200) {",
+									"    const authHeader = pm.response.headers.get(\"Authorization\");",
+									"    const token = authHeader.substring(7);",
+									"    pm.collectionVariables.set(\"authToken\", token);",
+									"}",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/test\",",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"zou niet ingelogd moeten zijn als employee\",()=>pm.expect(response.code).to.be.equals(403))",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f3306b4-0648-4375-a632-43d719f74f4c",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"employee\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/employee/setEmployee",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"employee",
+								"setEmployee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login as Employee",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9e26cf26-3acb-417a-9b28-a31fa0a07f2a",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"if (pm.response.code === 200) {",
+									"    const authHeader = pm.response.headers.get(\"Authorization\");",
+									"    const token = authHeader.substring(7);",
+									"    pm.collectionVariables.set(\"authToken\", token);",
+									"}",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/test\",",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"zou ingelogd moeten zijn als employee\",()=>pm.expect(response.code).to.be.equals(200))",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Flight",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f634fe1c-28d0-4d1c-aac8-a36c02b4a0ec",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.collectionVariables.set(\"flightId\", pm.response.json().id);",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/flight/\"+pm.collectionVariables.get(\"flightId\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"GetFlight zou 200 moeten geven.\",()=>pm.expect(response.code).to.be.equals(200))",
+									"    pm.test(\"Flight is correct opgeslagen.\",()=>{",
+									"        var responseData=response.json();",
+									"        var requestData=JSON.parse(request.data);",
+									"        pm.expect(responseData.departureTime).to.be.equals(requestData.departureTime);",
+									"        pm.expect(responseData.arrivalTime).to.be.equals(requestData.arrivalTime);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrivalTime\":\"2020-10-19T03:05:00\",\n    \"departureTime\":\"2020-10-19T06:30:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/flight",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"flight"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Flight",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "459ded44-ea76-4ff5-bb41-996fffaa9815",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/flight/\"+pm.collectionVariables.get(\"flightId\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"GetFlight zou 200 moeten geven.\",()=>pm.expect(response.code).to.be.equals(200))",
+									"    pm.test(\"Flight is geupdated.\",()=>{",
+									"        var responseData=response.json();",
+									"        var requestData=JSON.parse(request.data);",
+									"        pm.expect(responseData.departureTime).to.be.equals(requestData.departureTime);",
+									"        pm.expect(responseData.arrivalTime).to.be.equals(requestData.arrivalTime);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"arrivalTime\":\"2000-10-19T03:05:00\",\n    \"departureTime\":\"2000-10-19T06:30:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/flight/{{flightId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"flight",
+								"{{flightId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Flight",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7248d88e-6146-4fa5-ace9-3c0333046a48",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/flight/\"+pm.collectionVariables.get(\"flightId\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"Flight zou nu weg moeten zijn.\",()=>pm.expect(response.code).to.be.equals(404)) ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/flight/{{flightId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"flight",
+								"{{flightId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Plane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00fb58ef-4c1c-46a7-bbb1-c4e00b0ff216",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.collectionVariables.set(\"planeID\", pm.response.json().code);",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/plane/\"+pm.collectionVariables.get(\"planeID\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"getPlane zou 200 moeten geven\",()=>pm.expect(response.code).to.be.equals(200))",
+									"    pm.test(\"Plane is correct opgeslagen\",()=>{",
+									"        var responseData=response.json();",
+									"        var requestData=JSON.parse(request.data);",
+									"        pm.expect(responseData.code).to.be.equals(requestData.code);",
+									"        pm.expect(responseData.type).to.be.equals(requestData.type);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\":\"Boeing747\",\n    \"type\":null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/plane/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"plane",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Plane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f8e28c4e-6f2c-4ada-8669-9683ede8369e",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/plane/\"+pm.collectionVariables.get(\"planeID\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"getPlane zou 200 moeten geven.\",()=>pm.expect(response.code).to.be.equals(200))",
+									"    pm.test(\"Plane is geupdated.\",()=>{",
+									"        var responseData=response.json();",
+									"        var requestData=JSON.parse(request.data);",
+									"        pm.expect(responseData.code).to.be.equals(requestData.code);",
+									"        pm.expect(responseData.type).to.be.equals(requestData.type);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\":\"Boeing747\",\n    \"type\":null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/plane/{{planeID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"plane",
+								"{{planeID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Plane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3a542913-2c79-43dc-80f4-a1f357dd9316",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/plane/\"+pm.collectionVariables.get(\"planeID\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"Plane zou nu weg moeten zijn\",()=>pm.expect(response.code).to.be.equals(404)) ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/plane/{{planeID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"plane",
+								"{{planeID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Airport",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7ea5cca5-4255-42c4-8a96-93cfa264645e",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.collectionVariables.set(\"airportCode\", pm.response.json().code);",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/airport/\"+pm.collectionVariables.get(\"airportCode\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"Airport is correct opgeslagen\",()=>{",
+									"        var responseData=response.json();",
+									"        var requestData=JSON.parse(request.data);",
+									"        pm.expect(responseData.code).to.be.equals(requestData.code);",
+									"        pm.expect(responseData.name).to.be.equals(requestData.name);",
+									"        pm.expect(responseData.lat).to.be.equals(requestData.lat);",
+									"        pm.expect(responseData.lng).to.be.equals(requestData.lng);",
+									"        pm.expect(responseData.place).to.be.equals(requestData.place);",
+									"        pm.expect(responseData.country).to.be.equals(requestData.country);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\":\"AMS\",\n    \"name\":\"Schiphol\",\n    \"lat\":30.49,\n    \"lng\":40.28,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/airport",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"airport"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Airport",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ecb26c0a-3f6e-4007-a661-44abe3217dcc",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/airport/\"+pm.collectionVariables.get(\"airportCode\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"getAirport zou 200 moeten geven\",()=>pm.expect(response.code).to.be.equals(200))",
+									"    pm.test(\"airport is geupdated\",()=>{",
+									"        var responseData=response.json();",
+									"        var requestData=JSON.parse(request.data);",
+									"        pm.expect(responseData.code).to.be.equals(requestData.code);",
+									"        pm.expect(responseData.name).to.be.equals(requestData.name);",
+									"        pm.expect(responseData.lat).to.be.equals(requestData.lat);",
+									"        pm.expect(responseData.lng).to.be.equals(requestData.lng);",
+									"        pm.expect(responseData.country).to.be.equals(requestData.country);",
+									"        pm.expect(responseData.place).to.be.equals(requestData.place);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\":\"AMS\",\n    \"name\":\"Schiphol\",\n    \"lat\":35.74857,\n    \"lng\":83.98690,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/airport/{{airportCode}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"airport",
+								"{{airportCode}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Airport",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "77c45a83-1407-4c2b-9ac6-9a6747f644c4",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/airport/\"+pm.collectionVariables.get(\"airportCode\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"Airport zou nu weg moeten zijn\",()=>pm.expect(response.code).to.be.equals(404)) ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/airport/{{airportCode}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"airport",
+								"{{airportCode}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create TravelClass",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "35fc99e5-63e0-48ca-b945-280749d108ec",
+								"exec": [
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.collectionVariables.set(\"travelclassId\", pm.response.json().id);",
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get(\"url\")+\"/travelclass/\"+pm.collectionVariables.get(\"travelclassId\"),",
+									"    method:\"GET\",",
+									"    header: {",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
+									"    }",
+									"},(err,response)=>{",
+									"    pm.test(\"getTravelClass zou 200 moeten geven\",()=>pm.expect(response.code).to.be.equals(200))",
+									"    pm.test(\"TravelClass is correct opgeslagen\",()=>{",
+									"        var responseData=response.json();",
+									"        var requestData=JSON.parse(request.data);",
+									"        pm.expect(responseData.name).to.be.equals(requestData.name);",
+									"        pm.expect(responseData.maxSeats).to.be.equals(requestData.maxSeats);",
+									"        pm.expect(responseData.availableSeats).to.be.equals(requestData.availableSeats);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Economy\",\r\n    \"maxSeats\":30,\r\n    \"availableSeats\":30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/travelclass",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"travelclass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update TravelClass",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aad03768-1dc1-467d-8cb6-45678a425ce9",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"pm.sendRequest({\r",
+									"    url: pm.collectionVariables.get(\"url\")+\"/travelclass/\"+pm.collectionVariables.get(\"travelclassId\"),\r",
+									"    method:\"GET\",\r",
+									"    header: {\r",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")\r",
+									"    }\r",
+									"},(err,response)=>{\r",
+									"    pm.test(\"getTravelClass zou 200 moeten geven\",()=>pm.expect(response.code).to.be.equals(200))\r",
+									"    pm.test(\"TravelClass is geupdated\",()=>{\r",
+									"        var responseData=response.json();\r",
+									"        var requestData=JSON.parse(request.data);\r",
+									"        pm.expect(responseData.name).to.be.equals(requestData.name);\r",
+									"        pm.expect(responseData.maxSeats).to.be.equals(requestData.maxSeats);\r",
+									"        pm.expect(responseData.availableSeats).to.be.equals(requestData.availableSeats);\r",
+									"    })\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"First Class\",\r\n    \"maxSeats\":5,\r\n    \"availableSeats\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/travelclass/{{travelclassId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"travelclass",
+								"{{travelclassId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete TravelClass",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "87c2d931-0f37-4429-b0d6-8fbbe30a088d",
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.sendRequest({\r",
+									"    url: pm.collectionVariables.get(\"url\")+\"/travelclass/\"+pm.collectionVariables.get(\"travelclassId\"),\r",
+									"    method:\"GET\",\r",
+									"    header: {\r",
+									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")\r",
+									"    }\r",
+									"},(err,response)=>{\r",
+									"    pm.test(\"TravelClass zou nu weg moeten zijn\",()=>pm.expect(response.code).to.be.equals(404)) \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/travelclass/{{travelclassId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"travelclass",
+								"{{travelclassId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "81dc64ca-877d-4509-8386-f97870bec837",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4a272efd-9404-47e3-9009-4803f7ef362f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c374f4e4-ae75-4b7e-96b2-96c7bac175ea",
+			"key": "url",
+			"value": "https://bep2.herokuapp.com"
+		},
+		{
+			"id": "1d5457c3-6c86-40fe-b2d8-155e376b54cb",
+			"key": "authToken",
+			"value": ""
+		},
+		{
+			"id": "3f71f1e8-1e6f-4de7-a64a-1049610985e7",
+			"key": "flightId",
+			"value": ""
+		},
+		{
+			"id": "4445c3ca-d940-4a51-bb40-0c5c84840510",
+			"key": "planeID",
+			"value": ""
+		},
+		{
+			"id": "1dde7d2d-cb7d-45bf-bc06-7b78030f774b",
+			"key": "airportCode",
+			"value": ""
+		},
+		{
+			"id": "09c7b8b7-e549-451e-8aa9-b87ec0733711",
+			"key": "travelclassId",
+			"value": ""
+		},
+		{
+			"id": "2d6b2003-84eb-4087-8fb2-7a01969c4ca7",
+			"key": "bookingId",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
