@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -17,8 +14,8 @@ public class FlightRoute {
 	@Id
 	@GeneratedValue
 	private int id;
-	@OneToOne
-	Airport departure;
-	@OneToOne
-	Airport destination;
+	@ManyToOne
+	private Airport departure;
+	@ManyToOne
+	private Airport destination;
 }
