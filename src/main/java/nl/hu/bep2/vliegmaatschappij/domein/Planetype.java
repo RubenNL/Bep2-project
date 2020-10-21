@@ -9,6 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Planetype {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
