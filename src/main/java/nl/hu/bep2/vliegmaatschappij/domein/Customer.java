@@ -1,10 +1,17 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Customer extends Person {
     @Id
     @GeneratedValue
@@ -12,18 +19,6 @@ public class Customer extends Person {
     @OneToMany
     List<Booking> bookings = new ArrayList<>();
 	
-	public Customer() {
-		super();
-	}
-
-	public Customer(String firstName, String lastName, int age, String email, int phone, String nationality) {
-		super(firstName, lastName, age, email, phone, nationality);
-	}
-
-	public List<Booking> getBookings(){
-		return bookings;
-	}
-
 	public void addBooking(Booking booking){
 		bookings.add(booking);
 	}
