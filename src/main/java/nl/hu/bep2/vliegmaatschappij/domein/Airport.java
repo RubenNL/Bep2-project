@@ -24,6 +24,8 @@ public class Airport {
 	private String place;
 	private String country;
 
-	@OneToMany
-	private List<FlightRoute> flightRoutes;
+	@OneToMany(mappedBy="departure")
+	private List<FlightRoute> departures;
+	@OneToMany(mappedBy="destination")
+	private List<FlightRoute> arrivals;
 }
