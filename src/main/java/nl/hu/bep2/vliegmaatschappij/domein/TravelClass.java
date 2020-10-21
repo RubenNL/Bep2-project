@@ -3,12 +3,12 @@ package nl.hu.bep2.vliegmaatschappij.domein;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -16,6 +16,7 @@ import javax.validation.constraints.PositiveOrZero;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class TravelClass {
 	@Id
 	@GeneratedValue
@@ -27,14 +28,4 @@ public class TravelClass {
 	private int maxSeats;
 	@PositiveOrZero
 	private int availableSeats;
-	
-	@Override
-	public String toString() {
-		return "TravelClass{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", maxSeats=" + maxSeats +
-				", availableSeats=" + availableSeats +
-				'}';
-	}
 }
