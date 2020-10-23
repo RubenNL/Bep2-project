@@ -27,18 +27,11 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Setup PostgreSQL
-      uses: Harmon758/postgresql-action@v1.0.0
+      uses: uses: danielweller-swp/postgresql-action@v2
       with:
         postgresql user: vliegDbUser
         postgresql password: vliegDbPass
+        postgresql init scripts: 'dummydata.sql'
         postgresql db: vliegmaatschappij
-    - uses: n1ru4l/psql-import-action@1.0
-      with:
-        POSTGRES_HOST: "localhost"
-        POSTGRES_USER: "vliegDbUser"
-        POSTGRES_PASSWORD: "vliegDbPass"
-        POSTGRES_PORT: "5432"
-        POSTGRES_DATABASE: "vliegmaatschappij"
-        DATABASE_DUMP_PATH: "dummydata.sql"
     - name: Build with Maven
       run: mvn -B package --file pom.xml
