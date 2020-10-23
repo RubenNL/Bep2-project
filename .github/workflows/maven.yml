@@ -27,7 +27,7 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Setup PostgreSQL
-      uses: uses: danielweller-swp/postgresql-action@v2
+      uses: danielweller-swp/postgresql-action@v2
       with:
         postgresql user: vliegDbUser
         postgresql password: vliegDbPass
