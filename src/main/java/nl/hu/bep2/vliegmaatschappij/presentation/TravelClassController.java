@@ -1,6 +1,12 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassRepository;
+import nl.hu.bep2.vliegmaatschappij.domein.Planetype;
 import nl.hu.bep2.vliegmaatschappij.domein.TravelClass;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.TravelClassAssembler;
@@ -27,6 +33,15 @@ public class TravelClassController {
 		this.assembler = assembler;
 	}
 
+	@Operation(summary = "Create a TravelClass")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "TravelClass created",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = TravelClass.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Travelclass couldn't be created",
+					content = @Content) })
 	@PostMapping
 	public ResponseEntity<?> newTravelClass(@RequestBody TravelClass travelclass) {
 		EntityModel<TravelClass> entityModel = assembler.toModel(travelClassRepo.save(travelclass));
@@ -35,6 +50,15 @@ public class TravelClassController {
 				.body(entityModel);
 	}
 
+	@Operation(summary = "Get a TravelClass by its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "TravelClass found",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = TravelClass.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "TravelClass couldn't be found",
+					content = @Content) })
 	@GetMapping("/{id}")
 	public EntityModel<TravelClass> one(@PathVariable int id) {
 		TravelClass travelClass = travelClassRepo.findById(id)
@@ -42,6 +66,15 @@ public class TravelClassController {
 		return assembler.toModel(travelClass);
 	}
 
+	@Operation(summary = "Get all TravelClasses")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "TravelClasses found",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = TravelClass.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid Information supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "TravelClasses couldn't be found",
+					content = @Content) })
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<TravelClass>> all() {
 		List<EntityModel<TravelClass>> travelclasses = travelClassRepo.findAll().stream()
@@ -50,6 +83,15 @@ public class TravelClassController {
 		return CollectionModel.of(travelclasses, linkTo(methodOn(TravelClassController.class).all()).withSelfRel());
 	}
 
+	@Operation(summary = "Replace a TravelClass by its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "TravelClass Replaced",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Planetype.class)) }),
+			@ApiResponse(responseCode = "400", description = "TravelClass ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "TravelClass couldn't be Replaced",
+					content = @Content) })
 	@PutMapping("/{id}")
 	public ResponseEntity<?> replaceTravelClass(@RequestBody TravelClass newTravelClass, @PathVariable int id) {
 		TravelClass updatedTravelClass = travelClassRepo.findById(id)
@@ -69,6 +111,15 @@ public class TravelClassController {
 				.body(entityModel);
 	}
 
+	@Operation(summary = "Delete a TravelClass by its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "TravelClass Deleted",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = TravelClass.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "TravelClass couldn't be Deleted",
+					content = @Content) })
 	@DeleteMapping("/{id}")
 	public void deleteTravelClass(@PathVariable int id) {
 		travelClassRepo.deleteById(id);
