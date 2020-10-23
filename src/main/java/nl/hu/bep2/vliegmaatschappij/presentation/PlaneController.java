@@ -1,6 +1,12 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
+import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.PlaneModelAssembler;
@@ -28,6 +34,15 @@ public class PlaneController {
 		this.assembler = assembler;
 	}
 
+	@Operation(summary = "Get a plane by its code")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Plane found",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Plane.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid code supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Plane has disappeared",
+					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{code}")
 	public EntityModel<Plane> one(@PathVariable String code) throws NotFoundException {
@@ -36,6 +51,15 @@ public class PlaneController {
 		return assembler.toModel(plane);
 	}
 
+	@Operation(summary = "Get all planes")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Planes found",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Plane.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid information supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Planes couldn't be found, how did we lose such big objects?",
+					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Plane>> all() throws NotFoundException {
@@ -45,6 +69,15 @@ public class PlaneController {
 		return CollectionModel.of(planes, linkTo(methodOn(PlaneController.class).all()).withSelfRel());
 	}
 
+	@Operation(summary = "Create a Plane")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Plane has been build",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Plane.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid information supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Plane couldn't be build",
+					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@PostMapping("/create") //TODO Why with/without the link?
 	public ResponseEntity<?> newPlane(@RequestBody Plane plane){
@@ -53,9 +86,18 @@ public class PlaneController {
 				.body(entityModel);
 	}
 
+	@Operation(summary = "Replace a Plane by its code")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Plane has been replaced",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Plane.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid code supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Plane couldn't be replaced",
+					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{code}")
-	ResponseEntity<?> replaceFlight(@RequestBody Plane newPlane, @PathVariable String code) {
+	ResponseEntity<?> replacePlane(@RequestBody Plane newPlane, @PathVariable String code) {
 		Plane updatedPlane = repository.findById(code)
 				.map(plane -> {
 					plane.setCode(newPlane.getCode());
@@ -72,6 +114,15 @@ public class PlaneController {
 				.body(entityModel);
 	}
 
+	@Operation(summary = "Delete a plane by its code")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Plane has been destroyed",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Plane.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid code supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Plane couldn't be deleted",
+					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{code}")
 	public void deletePlane(@PathVariable String code){
