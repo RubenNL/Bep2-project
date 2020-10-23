@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,4 +19,6 @@ public class FlightRoute {
 	private Airport departure;
 	@ManyToOne
 	private Airport destination;
+	@OneToMany
+	private List<Flight> flights;
 }
