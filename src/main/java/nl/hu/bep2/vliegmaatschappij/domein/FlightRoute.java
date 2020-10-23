@@ -15,9 +15,9 @@ public class FlightRoute {
 	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Airport departure;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Airport destination;
 	@OneToMany
 	private List<Flight> flights;

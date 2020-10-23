@@ -16,9 +16,10 @@ public class Flight {
 	@Id
 	@GeneratedValue
 	private int id;
+	//todo Constraint arrival mag niet voor departure zijn!!
 	private LocalDateTime departureTime;
 	private LocalDateTime arrivalTime;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private FlightRoute route;
 	@ManyToMany
 	private List<Booking> bookingList;
@@ -26,10 +27,19 @@ public class Flight {
 	private void checkDates() {
 		if(departureTime.isAfter(arrivalTime)) throw new DateException("Invalid dates!");
 	}
-	@OneToMany(mappedBy="flight")
+	@OneToMany(mappedBy="flight", cascade = CascadeType.ALL)
 	private List<TravelClassFlight> travelClassFlightList;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Plane plane;
+
+	public Flight(LocalDateTime departureTime, LocalDateTime arrivalTime, FlightRoute route, List<TravelClassFlight> travelClassFlightList, Plane plane) {
+		this.departureTime = departureTime;
+		this.arrivalTime = arrivalTime;
+		this.route = route;
+		this.travelClassFlightList = travelClassFlightList;
+		this.plane = plane;
+	}
+
 	public int getAvailableSeats() {
 		int count=0;
 		for(TravelClassFlight travelClassFlight:travelClassFlightList) count+= travelClassFlight.getAvailableSeats();

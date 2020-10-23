@@ -20,4 +20,7 @@ public class Planetype {
     @OneToMany(mappedBy="type")
     private List<Plane> planes;
 
+    public Planetype(String name) {
+        this.name = name;
+    }
 }
