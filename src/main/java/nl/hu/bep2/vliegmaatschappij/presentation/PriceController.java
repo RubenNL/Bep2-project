@@ -10,6 +10,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class PriceController {
 		this.assembler = assembler;
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping
 	public ResponseEntity<?> newPrice(@RequestBody Price price) {
 		EntityModel<Price> entityModel = assembler.toModel(priceRepository.save(price));
@@ -38,10 +40,11 @@ public class PriceController {
 	@GetMapping("/{id}")
 	public EntityModel<Price> one(@PathVariable int id) {
 		Price price = priceRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException("Travel Class not found"));
+				.orElseThrow(() -> new NotFoundException("Price not found"));
 		return assembler.toModel(price);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Price>> all() {
 		List<EntityModel<Price>> prices = priceRepository.findAll().stream()
@@ -50,6 +53,7 @@ public class PriceController {
 		return CollectionModel.of(prices, linkTo(methodOn(PriceController.class).all()).withSelfRel());
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
 	public ResponseEntity<?> replacePrice(@RequestBody Price newPrice, @PathVariable int id) {
 		Price updatedPrice = priceRepository.findById(id)
@@ -67,6 +71,7 @@ public class PriceController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{id}")
 	public void deletePrice(@PathVariable int id) {
 		priceRepository.deleteById(id);

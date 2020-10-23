@@ -11,6 +11,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,8 @@ public class FlightController {
 		this.repository = repository;
 		this.assembler = assembler;
 	}
+
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping
 	ResponseEntity<?> newFlight(@RequestBody Flight flight) {
 		EntityModel<Flight> entityModel = assembler.toModel(repository.save(flight));
@@ -34,12 +37,16 @@ public class FlightController {
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
 	}
+
+
 	@GetMapping("/{id}")
 	public EntityModel<Flight> one(@PathVariable int id) {
 		Flight flight = repository.findById(id)
 				.orElseThrow(() -> new NotFoundException("flight not found"));
 		return assembler.toModel(flight);
 	}
+
+
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Flight>> all() {
 		List<EntityModel<Flight>> flights = repository.findAll().stream()
@@ -47,6 +54,8 @@ public class FlightController {
 				.collect(Collectors.toList());
 		return CollectionModel.of(flights, linkTo(methodOn(FlightController.class).all()).withSelfRel());
 	}
+
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
 	ResponseEntity<?> replaceFlight(@RequestBody Flight newFlight, @PathVariable int id) {
 		Flight updatedFlight = repository.findById(id)
@@ -65,6 +74,7 @@ public class FlightController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{id}")
 	public void deleteFlight(@PathVariable int id) {
 		repository.deleteById(id);

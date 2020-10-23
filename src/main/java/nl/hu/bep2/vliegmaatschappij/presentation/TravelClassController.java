@@ -10,6 +10,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class TravelClassController {
 		this.assembler = assembler;
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping
 	public ResponseEntity<?> newTravelClass(@RequestBody TravelClass travelclass) {
 		EntityModel<TravelClass> entityModel = assembler.toModel(travelClassRepo.save(travelclass));
@@ -35,6 +37,7 @@ public class TravelClassController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{id}")
 	public EntityModel<TravelClass> one(@PathVariable int id) {
 		TravelClass travelClass = travelClassRepo.findById(id)
@@ -42,6 +45,7 @@ public class TravelClassController {
 		return assembler.toModel(travelClass);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<TravelClass>> all() {
 		List<EntityModel<TravelClass>> travelclasses = travelClassRepo.findAll().stream()
@@ -50,6 +54,7 @@ public class TravelClassController {
 		return CollectionModel.of(travelclasses, linkTo(methodOn(TravelClassController.class).all()).withSelfRel());
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
 	public ResponseEntity<?> replaceTravelClass(@RequestBody TravelClass newTravelClass, @PathVariable int id) {
 		TravelClass updatedTravelClass = travelClassRepo.findById(id)
@@ -69,6 +74,7 @@ public class TravelClassController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{id}")
 	public void deleteTravelClass(@PathVariable int id) {
 		travelClassRepo.deleteById(id);

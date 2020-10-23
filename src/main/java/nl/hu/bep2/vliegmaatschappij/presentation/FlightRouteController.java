@@ -10,6 +10,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class FlightRouteController {
 		this.assembler = assembler;
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping
 	public ResponseEntity<?> newFlightRoute(@RequestBody FlightRoute flightRoute) {
 		EntityModel<FlightRoute> entityModel = assembler.toModel(flightRouteRepo.save(flightRoute));
@@ -35,6 +37,7 @@ public class FlightRouteController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{id}")
 	public EntityModel<FlightRoute> one(@PathVariable int id) {
 		FlightRoute flightRoute = flightRouteRepo.findById(id)
@@ -42,6 +45,7 @@ public class FlightRouteController {
 		return assembler.toModel(flightRoute);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<FlightRoute>> all() {
 		List<EntityModel<FlightRoute>> flightroutes = flightRouteRepo.findAll().stream()
@@ -50,6 +54,7 @@ public class FlightRouteController {
 		return CollectionModel.of(flightroutes, linkTo(methodOn(FlightRouteController.class).all()).withSelfRel());
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
 	public ResponseEntity<?> replaceFlightRoute(@RequestBody FlightRoute newFlightRoute, @PathVariable int id) {
 		FlightRoute updatedFlightRoute = flightRouteRepo.findById(id)
@@ -68,6 +73,7 @@ public class FlightRouteController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{id}")
 	public void deleteFlightRoute(@PathVariable int id) {
 		flightRouteRepo.deleteById(id);

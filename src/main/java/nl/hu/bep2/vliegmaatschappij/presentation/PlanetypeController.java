@@ -9,6 +9,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -26,6 +28,7 @@ public class PlanetypeController {
 		this.assembler = assembler;
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{id}")
 	public EntityModel<Planetype> one(@PathVariable int id) throws NotFoundException {
 		 Planetype planetype = repository.findById(id)
@@ -33,6 +36,7 @@ public class PlanetypeController {
 		return assembler.toModel(planetype);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Planetype>> all() throws NotFoundException {
 		List<EntityModel<Planetype>> planetypes = repository.findAll().stream()
@@ -41,6 +45,7 @@ public class PlanetypeController {
 		return CollectionModel.of(planetypes, linkTo(methodOn(PlanetypeController.class).all()).withSelfRel());
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping("/create")
 	public ResponseEntity<?> newPlane(@RequestBody Planetype planetype){
 		EntityModel<Planetype> entityModel = assembler.toModel(repository.save(planetype));
@@ -48,6 +53,7 @@ public class PlanetypeController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
 	ResponseEntity<?> replaceFlight(@RequestBody Planetype newPlanetype, @PathVariable int id) {
 		Planetype updatedPlanetype = repository.findById(id)
@@ -66,6 +72,7 @@ public class PlanetypeController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{id}")
 	public void deletePlane(@PathVariable int id){
 		repository.deleteById(id);

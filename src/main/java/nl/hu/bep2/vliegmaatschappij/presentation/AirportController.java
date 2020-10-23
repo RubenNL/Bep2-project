@@ -10,6 +10,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class AirportController {
 		this.assembler = assembler;
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping
 	ResponseEntity<?> newAirport(@RequestBody Airport airport) {
 		EntityModel<Airport> entityModel = assembler.toModel(repository.save(airport));
@@ -34,6 +36,8 @@ public class AirportController {
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
 	}
+
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{code}")
 	public EntityModel<Airport> one(@PathVariable String code) throws NotFoundException {
 		Airport airport = repository.findById(code)
@@ -41,6 +45,7 @@ public class AirportController {
 		return assembler.toModel(airport);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Airport>> all() {
 		List<EntityModel<Airport>> airports = repository.findAll().stream()
@@ -48,6 +53,8 @@ public class AirportController {
 				.collect(Collectors.toList());
 		return CollectionModel.of(airports, linkTo(methodOn(AirportController.class).all()).withSelfRel());
 	}
+
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{code}")
 	ResponseEntity<?> replaceAirport(@RequestBody Airport newAirport, @PathVariable String code) {
 		Airport updatedAirport = repository.findById(code)
@@ -69,6 +76,7 @@ public class AirportController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{code}")
 	public void deleteFlight(@PathVariable String code) {
 		repository.deleteById(code);

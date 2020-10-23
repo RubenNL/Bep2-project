@@ -10,6 +10,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class PlaneController {
 		this.assembler = assembler;
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{code}")
 	public EntityModel<Plane> one(@PathVariable String code) throws NotFoundException {
 		Plane plane = repository.findById(code)
@@ -34,6 +36,7 @@ public class PlaneController {
 		return assembler.toModel(plane);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Plane>> all() throws NotFoundException {
 		List<EntityModel<Plane>> planes = repository.findAll().stream()
@@ -42,6 +45,7 @@ public class PlaneController {
 		return CollectionModel.of(planes, linkTo(methodOn(PlaneController.class).all()).withSelfRel());
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping("/create") //TODO Why with/without the link?
 	public ResponseEntity<?> newPlane(@RequestBody Plane plane){
 		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
@@ -49,6 +53,7 @@ public class PlaneController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{code}")
 	ResponseEntity<?> replaceFlight(@RequestBody Plane newPlane, @PathVariable String code) {
 		Plane updatedPlane = repository.findById(code)
@@ -67,6 +72,7 @@ public class PlaneController {
 				.body(entityModel);
 	}
 
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{code}")
 	public void deletePlane(@PathVariable String code){
 		repository.deleteById(code);

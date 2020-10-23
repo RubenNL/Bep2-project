@@ -10,6 +10,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class BookingController {
         this.assembler = assembler;
     }
 
+    @RolesAllowed("EMPLOYEE")
     @PostMapping
     ResponseEntity<?> newBooking(@RequestBody Booking booking) {
         EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
@@ -42,6 +44,7 @@ public class BookingController {
         return assembler.toModel(booking);
     }
 
+    @RolesAllowed("EMPLOYEE")
     @GetMapping("/all")
     public CollectionModel<EntityModel<Booking>> all(){
         List<EntityModel<Booking>> bookings = repository.findAll().stream()
@@ -50,6 +53,7 @@ public class BookingController {
         return CollectionModel.of(bookings, linkTo(methodOn(BookingController.class).all()).withSelfRel());
     }
 
+    @RolesAllowed("EMPLOYEE")
     @PutMapping("/{id}")
     ResponseEntity<?> replaceBooking(@RequestBody Booking newBooking, @PathVariable int id){
         Booking updatedBooking = repository.findById(id)
@@ -68,6 +72,7 @@ public class BookingController {
                 .body(entityModel);
     }
 
+    @RolesAllowed("EMPLOYEE")
     @DeleteMapping("/{id}")
     public void deleteBooking(@PathVariable int id) {
         repository.deleteById(id);
