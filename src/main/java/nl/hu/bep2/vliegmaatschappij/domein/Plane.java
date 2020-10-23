@@ -8,6 +8,8 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,4 +21,6 @@ public class Plane {
 	private String code;
 	@ManyToOne
 	private Planetype type;
+	@OneToMany(mappedBy="plane")
+	private List<Flight> flights;
 }

@@ -26,4 +26,6 @@ public class Flight {
 	private void checkDates() {
 		if(departureTime.isAfter(arrivalTime)) throw new DateException("Invalid dates!");
 	}
+	@ManyToOne
+	private Plane plane;
 }
