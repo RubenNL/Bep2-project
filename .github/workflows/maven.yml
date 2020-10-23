@@ -32,7 +32,7 @@ jobs:
         postgresql user: vliegDbUser
         postgresql password: vliegDbPass
         postgresql db: vliegmaatschappij
-    - uses: n1ru4l/psql-action@v1
+    - uses: n1ru4l/psql-import-action@v1
       with:
         POSTGRES_HOST: "localhost"
         POSTGRES_USER: "vliegDbUser"
