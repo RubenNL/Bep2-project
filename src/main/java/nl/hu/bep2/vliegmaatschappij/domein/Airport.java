@@ -1,5 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -23,7 +24,9 @@ public class Airport {
 	private String country;
 
 	@OneToMany(mappedBy="departure")
+	@JsonIgnore
 	private List<FlightRoute> departures;
 	@OneToMany(mappedBy="destination")
+	@JsonIgnore
 	private List<FlightRoute> arrivals;
 }
