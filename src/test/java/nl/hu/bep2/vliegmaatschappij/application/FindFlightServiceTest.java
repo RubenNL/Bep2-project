@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,6 +46,6 @@ class FindFlightServiceTest {
 		Flight flight2 = new Flight(dateTime, LocalDateTime.now(), route2, new ArrayList<>() ,plane);
 		repository.save(flight2);
 
-		assertEquals(Arrays.asList(flight1), service.FindFlights("aaa", "bbb", dateTime.toLocalDate()));
+		assertEquals(Collections.singletonList(flight2), service.FindFlights("aaa", "bbb", dateTime.toLocalDate()));
 	}
 }
