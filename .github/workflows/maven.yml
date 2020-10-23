@@ -27,10 +27,11 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Setup PostgreSQL
-      uses: Harmon758/postgresql-action@v1.0.0
+      uses: danielweller-swp/postgresql-action@v2
       with:
         postgresql user: vliegDbUser
         postgresql password: vliegDbPass
+        postgresql init scripts: 'dummydata'
         postgresql db: vliegmaatschappij
     - name: Build with Maven
       run: mvn -B package --file pom.xml
