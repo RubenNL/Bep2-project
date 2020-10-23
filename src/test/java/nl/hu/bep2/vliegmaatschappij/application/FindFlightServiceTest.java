@@ -38,14 +38,19 @@ class FindFlightServiceTest {
 		route.setDestination(dest);
 		route.setDeparture(depart);
 		FlightRoute route2 = new FlightRoute();
-		Flight flight1 = new Flight(dateTime, LocalDateTime.now(), route, new ArrayList<>() ,plane);
+		Flight flight1 = new Flight(dateTime, dateTime.plusHours(1), route, new ArrayList<>() ,plane);
 		flight1=repository.getOne(repository.save(flight1).getId());
 		plane=flight1.getPlane();
 		route2.setDestination(depart);
 		route2.setDeparture(dest);
-		Flight flight2 = new Flight(dateTime, LocalDateTime.now(), route2, new ArrayList<>() ,plane);
+		type = new Planetype("Boing7472");
+		plane = new Plane("01013", type);
+		Flight flight2 = new Flight(dateTime, dateTime.plusHours(1), route2, new ArrayList<>() ,plane);
 		repository.save(flight2);
 
+		Flight flight3 = new Flight(dateTime.minusDays(1), dateTime.minusDays(1).plusHours(1), route2, new ArrayList<>() ,plane);
+		repository.save(flight3);
 		assertEquals(Collections.singletonList(flight2), service.FindFlights("aaa", "bbb", dateTime.toLocalDate()));
+
 	}
 }
