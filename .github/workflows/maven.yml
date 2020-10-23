@@ -32,5 +32,13 @@ jobs:
         postgresql user: vliegDbUser
         postgresql password: vliegDbPass
         postgresql db: vliegmaatschappij
+    - uses: n1ru4l/psql-action@v1
+      with:
+        POSTGRES_HOST: "localhost"
+        POSTGRES_USER: "vliegDbUser"
+        POSTGRES_PASSWORD: "vliegDbPass"
+        POSTGRES_PORT: "5432"
+        POSTGRES_DATABASE: "vliegmaatschappij"
+        DATABASE_DUMP_PATH: "dummydata.sql"
     - name: Build with Maven
       run: mvn -B package --file pom.xml
