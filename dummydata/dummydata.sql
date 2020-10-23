@@ -1,1 +1,0 @@
-SELECT 1123123123123; --doesn't fail
