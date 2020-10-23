@@ -16,6 +16,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,7 @@ public class FlightRouteController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "FlightRoute couldn't be created",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping
 	public ResponseEntity<?> newFlightRoute(@RequestBody FlightRoute flightRoute) {
 		EntityModel<FlightRoute> entityModel = assembler.toModel(flightRouteRepo.save(flightRoute));
@@ -59,6 +61,7 @@ public class FlightRouteController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flightroute couldn't be found",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{id}")
 	public EntityModel<FlightRoute> one(@PathVariable int id) {
 		FlightRoute flightRoute = flightRouteRepo.findById(id)
@@ -75,6 +78,7 @@ public class FlightRouteController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flightroutes couldn't be found",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<FlightRoute>> all() {
 		List<EntityModel<FlightRoute>> flightroutes = flightRouteRepo.findAll().stream()
@@ -92,6 +96,7 @@ public class FlightRouteController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flightroute couldn't be replaced",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
 	public ResponseEntity<?> replaceFlightRoute(@RequestBody FlightRoute newFlightRoute, @PathVariable int id) {
 		FlightRoute updatedFlightRoute = flightRouteRepo.findById(id)
@@ -119,6 +124,7 @@ public class FlightRouteController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flightroute couldn't be deleted",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{id}")
 	public void deleteFlightRoute(@PathVariable int id) {
 		flightRouteRepo.deleteById(id);

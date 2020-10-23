@@ -16,6 +16,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,7 @@ public class PlaneController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Plane has disappeared",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{code}")
 	public EntityModel<Plane> one(@PathVariable String code) throws NotFoundException {
 		Plane plane = repository.findById(code)
@@ -58,6 +60,7 @@ public class PlaneController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Planes couldn't be found, how did we lose such big objects?",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Plane>> all() throws NotFoundException {
 		List<EntityModel<Plane>> planes = repository.findAll().stream()
@@ -75,6 +78,7 @@ public class PlaneController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Plane couldn't be build",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping("/create") //TODO Why with/without the link?
 	public ResponseEntity<?> newPlane(@RequestBody Plane plane){
 		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
@@ -91,6 +95,7 @@ public class PlaneController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Plane couldn't be replaced",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{code}")
 	ResponseEntity<?> replacePlane(@RequestBody Plane newPlane, @PathVariable String code) {
 		Plane updatedPlane = repository.findById(code)
@@ -118,6 +123,7 @@ public class PlaneController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Plane couldn't be deleted",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{code}")
 	public void deletePlane(@PathVariable String code){
 		repository.deleteById(code);

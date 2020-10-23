@@ -17,6 +17,7 @@ import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,8 @@ public class FlightController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flight couldn't be created",
 					content = @Content) })
+
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping
 	ResponseEntity<?> newFlight(@RequestBody Flight flight) {
 		EntityModel<Flight> entityModel = assembler.toModel(repository.save(flight));
@@ -59,6 +62,8 @@ public class FlightController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flight has disappeared",
 					content = @Content) })
+
+
 	@GetMapping("/{id}")
 	public EntityModel<Flight> one(@PathVariable int id) {
 		Flight flight = repository.findById(id)
@@ -74,6 +79,8 @@ public class FlightController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flights weren't found!",
 					content = @Content) })
+
+
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Flight>> all() {
 		List<EntityModel<Flight>> flights = repository.findAll().stream()
@@ -91,6 +98,8 @@ public class FlightController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flight couldn't be replaced",
 					content = @Content) })
+
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
 	ResponseEntity<?> replaceFlight(@RequestBody Flight newFlight, @PathVariable int id) {
 		Flight updatedFlight = repository.findById(id)
@@ -118,6 +127,7 @@ public class FlightController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Flight couldn't be deleted",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{id}")
 	public void deleteFlight(@PathVariable int id) {
 		repository.deleteById(id);

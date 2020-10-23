@@ -15,6 +15,8 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -41,6 +43,7 @@ public class PlanetypeController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "planeType couldn't be found",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/{id}")
 	public EntityModel<Planetype> one(@PathVariable int id) throws NotFoundException {
 		 Planetype planetype = repository.findById(id)
@@ -57,6 +60,7 @@ public class PlanetypeController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Planetypes couldn't be found",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Planetype>> all() throws NotFoundException {
 		List<EntityModel<Planetype>> planetypes = repository.findAll().stream()
@@ -74,6 +78,7 @@ public class PlanetypeController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Planetype couldn't be created",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@PostMapping("/create")
 	public ResponseEntity<?> newPlane(@RequestBody Planetype planetype){
 		EntityModel<Planetype> entityModel = assembler.toModel(repository.save(planetype));
@@ -91,6 +96,7 @@ public class PlanetypeController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Planetype couldn't be replaced",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
 	ResponseEntity<?> replacePlanetype(@RequestBody Planetype newPlanetype, @PathVariable int id) {
 		Planetype updatedPlanetype = repository.findById(id)
@@ -118,6 +124,7 @@ public class PlanetypeController {
 					content = @Content),
 			@ApiResponse(responseCode = "404", description = "Planetype has disappeared",
 					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{id}")
 	public void deletePlane(@PathVariable int id){
 		repository.deleteById(id);

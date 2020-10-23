@@ -1,5 +1,8 @@
 package nl.hu.bep2.vliegmaatschappij.security.data;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +23,7 @@ import java.util.List;
  * as login/registration model for Spring.
  */
 @Entity
+@NoArgsConstructor
 @Table(name="users")
 public class User implements UserDetails {
 
@@ -34,7 +38,6 @@ public class User implements UserDetails {
 	private String lastName;
 	private boolean isEmployee = false;
 
-	public User(){}
 	public User(String username, String password, String firstName, String lastName) {
 		this.username = username;
 		this.password = password;
