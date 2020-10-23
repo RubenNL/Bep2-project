@@ -1,1 +1,1 @@
-aaaaasiofasiodfjasdfia #dit crasht hopelijk 
+SELECT 1123123123123; --doesn't fail
