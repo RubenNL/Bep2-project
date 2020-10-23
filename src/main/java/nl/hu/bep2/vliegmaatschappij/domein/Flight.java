@@ -26,6 +26,13 @@ public class Flight {
 	private void checkDates() {
 		if(departureTime.isAfter(arrivalTime)) throw new DateException("Invalid dates!");
 	}
+	@OneToMany(mappedBy="flight")
+	private List<TravelClassFlight> travelClassFlightList;
 	@ManyToOne
 	private Plane plane;
+	public int getAvailableSeats() {
+		int count=0;
+		for(TravelClassFlight travelClassFlight:travelClassFlightList) count+= travelClassFlight.getAvailableSeats();
+		return count;
+	}
 }

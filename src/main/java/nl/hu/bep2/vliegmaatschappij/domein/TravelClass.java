@@ -8,9 +8,11 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -26,6 +28,6 @@ public class TravelClass {
 	@NotNull
 	@Positive
 	private int maxSeats;
-	@PositiveOrZero
-	private int availableSeats;
+	@OneToMany(mappedBy="travelClass")
+	private List<TravelClassFlight> travelClassFlightList;
 }
