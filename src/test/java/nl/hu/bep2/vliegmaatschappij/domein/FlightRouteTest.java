@@ -16,6 +16,14 @@ class FlightRouteTest {
 		route.setDestination(dest);
 		route.setDeparture(depart);
 		assertEquals(route.getDistance(),43);
-
+	}
+	@Test
+	void longDistanceTest() {
+		Airport dest = new Airport("aaa", "aaa", 52.304775, 4.758313, "Netherlands", "Schiphol",new ArrayList<>(),new ArrayList<>());
+		Airport depart = new Airport("ccc", "ccc", -31.943630, 115.966773, "Australia", "Perth",new ArrayList<>(),new ArrayList<>());
+		FlightRoute route=new FlightRoute();
+		route.setDestination(dest);
+		route.setDeparture(depart);
+		assertEquals(route.getDistance(),14158);
 	}
 }
