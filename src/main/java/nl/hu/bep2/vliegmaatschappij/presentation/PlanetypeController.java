@@ -2,8 +2,10 @@ package nl.hu.bep2.vliegmaatschappij.presentation;//package nl.hu.bep2.vliegmaat
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringPlanetypeRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Planetype;
+import nl.hu.bep2.vliegmaatschappij.exceptions.DuplicateException;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.PlanetypeModelAssembler;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -42,11 +44,11 @@ public class PlanetypeController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<?> newPlane(@RequestBody Planetype planetype){
-		EntityModel<Planetype> entityModel = assembler.toModel(repository.save(planetype));
-		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
-				.body(entityModel);
-	}
+	public ResponseEntity<?> newPlane(@RequestBody Planetype planetype) throws DuplicateException {
+			EntityModel<Planetype> entityModel = assembler.toModel(repository.save(planetype));
+			return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+					.body(entityModel);
+		}
 
 	@PutMapping("/{id}")
 	ResponseEntity<?> replaceFlight(@RequestBody Planetype newPlanetype, @PathVariable int id) {
