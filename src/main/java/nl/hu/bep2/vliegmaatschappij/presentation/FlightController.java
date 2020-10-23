@@ -1,6 +1,12 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRepository;
+import nl.hu.bep2.vliegmaatschappij.domein.Airport;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
@@ -27,6 +33,16 @@ public class FlightController {
 		this.repository = repository;
 		this.assembler = assembler;
 	}
+
+	@Operation(summary = "Create a new flight")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "A new flight is ready for departure",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Flight.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid information supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Flight couldn't be created",
+					content = @Content) })
 	@PostMapping
 	ResponseEntity<?> newFlight(@RequestBody Flight flight) {
 		EntityModel<Flight> entityModel = assembler.toModel(repository.save(flight));
@@ -34,12 +50,30 @@ public class FlightController {
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
 	}
+	@Operation(summary = "Get a flight by its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Flight found",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Flight.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Flight has disappeared",
+					content = @Content) })
 	@GetMapping("/{id}")
 	public EntityModel<Flight> one(@PathVariable int id) {
 		Flight flight = repository.findById(id)
 				.orElseThrow(() -> new NotFoundException("flight not found"));
 		return assembler.toModel(flight);
 	}
+	@Operation(summary = "Get all flights")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "All flights found",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Flight.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid information supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Flights weren't found!",
+					content = @Content) })
 	@GetMapping("/all")
 	public CollectionModel<EntityModel<Flight>> all() {
 		List<EntityModel<Flight>> flights = repository.findAll().stream()
@@ -47,6 +81,16 @@ public class FlightController {
 				.collect(Collectors.toList());
 		return CollectionModel.of(flights, linkTo(methodOn(FlightController.class).all()).withSelfRel());
 	}
+
+	@Operation(summary = "replace a flight by its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Flight has been replaced",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Flight.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Flight couldn't be replaced",
+					content = @Content) })
 	@PutMapping("/{id}")
 	ResponseEntity<?> replaceFlight(@RequestBody Flight newFlight, @PathVariable int id) {
 		Flight updatedFlight = repository.findById(id)
@@ -65,6 +109,15 @@ public class FlightController {
 				.body(entityModel);
 	}
 
+	@Operation(summary = "Delete a flight by its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Flight has been deleted",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Flight.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Flight couldn't be deleted",
+					content = @Content) })
 	@DeleteMapping("/{id}")
 	public void deleteFlight(@PathVariable int id) {
 		repository.deleteById(id);
