@@ -20,6 +20,6 @@ public class FindFlightService {
 
 	//TODO filteren op klasse.
 	public List<Flight> FindFlights(String departCode, String arivalCode, LocalDate departDate){
-		return flightRepository.findByFlight(departCode, arivalCode, departDate);
+		return flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
 	}
 }
