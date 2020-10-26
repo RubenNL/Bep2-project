@@ -1,6 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
 import lombok.*;
+import nl.hu.bep2.vliegmaatschappij.exceptions.DateException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,4 +22,8 @@ public class Flight {
 	private FlightRoute route;
 	@ManyToMany
 	private List<Booking> bookingList;
+	@PrePersist
+	private void checkDates() {
+		if(departureTime.isAfter(arrivalTime)) throw new DateException("Invalid dates!");
+	}
 }
