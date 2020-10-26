@@ -79,7 +79,7 @@ public class PlanetypeController {
 			@ApiResponse(responseCode = "404", description = "Planetype couldn't be created",
 					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
-	@PostMapping("/create")
+	@PostMapping
 	public ResponseEntity<?> newPlane(@RequestBody Planetype planetype){
 		EntityModel<Planetype> entityModel = assembler.toModel(repository.save(planetype));
 		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
