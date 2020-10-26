@@ -12,12 +12,15 @@ import java.util.List;
 @ToString
 public class Planetype {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
     private String name;
     @OneToMany
     private List<TravelClass> travelclasses;
-    @OneToMany
+    @OneToMany(mappedBy="type")
     private List<Plane> planes;
 
+    public Planetype(String name) {
+        this.name = name;
+    }
 }

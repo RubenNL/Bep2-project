@@ -20,11 +20,11 @@ public class Price {
 	private int id;
 	private double price;
 
-	public Price(TravelClass travelClass, FlightRoute route) {
-		this.price = calculatePrice(travelClass, route);
+	public Price(TravelClassFlight travelClassFlight) {
+		this.price = calculatePrice(travelClassFlight);
 	}
 
-	public double calculatePrice(TravelClass travelClass, FlightRoute route) {
+	public double calculatePrice(TravelClassFlight travelClassFlight) {
 		// TODO create function
 		return 0.0;
 	}
