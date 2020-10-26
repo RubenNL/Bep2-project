@@ -4,7 +4,7 @@ function planes() {
 	const results = [];
 	fs.createReadStream('planes.csv','utf16LE')
 	.pipe(csv())
-	.on('data', (data) => {if(data.Manufacturer.includes('Boeing') || data.Manufacturer.includes('Airbus')) results.push(data)})
+	.on('data', (data) => {if((data.Manufacturer.includes('Boeing') || data.Manufacturer.includes('Airbus')) && data.Group=="Large aeroplane") results.push(data)})
 	.on('end', () => {
 		var modelItems=[...new Set(results.map(line=>line.Model.split("'").join('')))]
 		var models='INSERT INTO planetype (id, name) VALUES '+modelItems.map((type,id)=>'('+id+", '"+type+"')")+';';
