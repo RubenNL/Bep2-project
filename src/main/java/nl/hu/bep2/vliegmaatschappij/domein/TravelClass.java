@@ -1,14 +1,22 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class TravelClass {
 	@Id
 	@GeneratedValue
@@ -20,56 +28,4 @@ public class TravelClass {
 	private int maxSeats;
 	@PositiveOrZero
 	private int availableSeats;
-
-	public TravelClass() {
-
-	}
-
-	public TravelClass(String name, int maxSeats, int availableSeats) {
-		this.name = name;
-		this.maxSeats = maxSeats;
-		this.availableSeats = availableSeats;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getMaxSeats() {
-		return maxSeats;
-	}
-
-	public void setMaxSeats(int maxSeats) {
-		this.maxSeats = maxSeats;
-	}
-
-	public int getAvailableSeats() {
-		return availableSeats;
-	}
-
-	public void setAvailableSeats(int availableSeats) {
-		this.availableSeats = availableSeats;
-	}
-
-	@Override
-	public String toString() {
-		return "TravelClass{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", maxSeats=" + maxSeats +
-				", availableSeats=" + availableSeats +
-				'}';
-	}
 }

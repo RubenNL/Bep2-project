@@ -276,7 +276,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"arrivalTime\":\"2020-10-19T03:05:00\",\n    \"departureTime\":\"2020-10-19T06:30:00\"\n}",
+							"raw": "{\n    \"departureTime\":\"2020-10-19T03:05:00\",\n    \"arrivalTime\":\"2020-10-19T06:30:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -331,7 +331,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"arrivalTime\":\"2000-10-19T03:05:00\",\n    \"departureTime\":\"2000-10-19T06:30:00\"\n}",
+							"raw": "{\n    \"departureTime\":\"2000-10-19T03:05:00\",\n    \"arrivalTime\":\"2000-10-19T06:30:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
