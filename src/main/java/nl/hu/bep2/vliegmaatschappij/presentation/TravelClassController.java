@@ -103,7 +103,6 @@ public class TravelClassController {
 				.map(travelclass -> {
 					travelclass.setName(newTravelClass.getName());
 					travelclass.setMaxSeats(newTravelClass.getMaxSeats());
-					travelclass.setAvailableSeats(newTravelClass.getAvailableSeats());
 					return travelClassRepo.save(travelclass);
 				})
 				.orElseGet(() -> {

@@ -23,4 +23,6 @@ public class Booking {
 	private Customer customer;
 	@OneToOne
 	private Price price;
+	@ManyToMany
+	private List<TravelClassFlight> travelClassFlightList;
 }

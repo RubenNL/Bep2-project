@@ -5,9 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -17,6 +16,13 @@ import javax.persistence.ManyToOne;
 public class Plane {
 	@Id
 	private String code;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Planetype type;
+	@OneToMany(mappedBy="plane")
+	private List<Flight> flights;
+
+	public Plane(String code, Planetype type) {
+		this.code = code;
+		this.type = type;
+	}
 }

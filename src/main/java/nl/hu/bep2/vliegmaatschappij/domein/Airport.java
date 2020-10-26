@@ -1,9 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class Airport {
 	@Id
 	private String code;
@@ -25,7 +24,9 @@ public class Airport {
 	private String country;
 
 	@OneToMany(mappedBy="departure")
+	@JsonIgnore
 	private List<FlightRoute> departures;
 	@OneToMany(mappedBy="destination")
+	@JsonIgnore
 	private List<FlightRoute> arrivals;
 }
