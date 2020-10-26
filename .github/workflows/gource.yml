@@ -26,7 +26,7 @@ jobs:
           gource_title: 'V2B-5'
           gource_dir_depth: 5
           gource_seconds_per_day: 3
-          gource_resolution: '1440p'
+          gource_resolution: '1080p'
       - name: Deploy to pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
