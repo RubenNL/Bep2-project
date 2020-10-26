@@ -1,29 +1,40 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import nl.hu.bep2.vliegmaatschappij.data.SpringAirportRepository;
+import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Transactional
 class FlightRouteTest {
+	@Autowired
+	private SpringAirportRepository repository;
 	@Test
 	void distanceTest() {
-		Airport dest = new Airport("aaa", "aaa", 52.304775, 4.758313, "Netherlands", "Schiphol",new ArrayList<>(),new ArrayList<>());
-		Airport depart = new Airport("bbb", "bbb", 51.958973, 4.445763, "Netherlands", "Rotterdam",new ArrayList<>(),new ArrayList<>());
+		Airport dest = repository.getOne("AMS");
+		Airport depart = repository.getOne("BRU");
 		FlightRoute route=new FlightRoute();
 		route.setDestination(dest);
 		route.setDeparture(depart);
-		assertEquals(route.getDistance(),43);
+		assertEquals(157,route.getDistance());
 	}
 	@Test
 	void longDistanceTest() {
-		Airport dest = new Airport("aaa", "aaa", 52.304775, 4.758313, "Netherlands", "Schiphol",new ArrayList<>(),new ArrayList<>());
-		Airport depart = new Airport("ccc", "ccc", -31.943630, 115.966773, "Australia", "Perth",new ArrayList<>(),new ArrayList<>());
+		Airport dest = repository.getOne("AMS");
+		Airport depart = repository.getOne("MEL");
 		FlightRoute route=new FlightRoute();
 		route.setDestination(dest);
 		route.setDeparture(depart);
-		assertEquals(route.getDistance(),14158);
+		assertEquals(16538,route.getDistance());
 	}
 }
