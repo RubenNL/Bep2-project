@@ -27,6 +27,7 @@ public class TravelClass {
 	@Positive
 	private int maxSeats;
 	@OneToMany(mappedBy="travelClass")
+	@JsonIgnore
 	private List<TravelClassFlight> travelClassFlightList;
 	@JsonIgnore //todo Geeft conflicten met plane/all
 	@ManyToOne
