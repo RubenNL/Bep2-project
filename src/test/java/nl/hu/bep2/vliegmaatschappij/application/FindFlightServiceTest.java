@@ -25,7 +25,7 @@ class FindFlightServiceTest {
 	@Autowired
 	private SpringFlightRepository repository;
 	@Autowired
-	private FindFlightService service;
+	private CustomerFlightService service;
 	@Autowired
 	private SpringAirportRepository airportRepository;
 	@Autowired
@@ -53,7 +53,7 @@ class FindFlightServiceTest {
 
 		Flight flight3 = new Flight(dateTime.minusDays(1), dateTime.minusDays(1).plusHours(1), route2, new ArrayList<>() ,plane);
 		repository.save(flight3);
-		assertEquals(Collections.singletonList(flight2), service.FindFlights("AMS", "BRU", dateTime.toLocalDate()));
+		assertEquals(Collections.singletonList(flight2), service.FindAvailableFlights("AMS", "BRU", dateTime.toLocalDate(),plane.getType().getTravelclasses().get(0).getId()));
 
 	}
 }

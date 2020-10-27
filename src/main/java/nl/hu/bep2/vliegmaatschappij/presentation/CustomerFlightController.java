@@ -1,6 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
-import nl.hu.bep2.vliegmaatschappij.application.FindFlightService;
+import nl.hu.bep2.vliegmaatschappij.application.CustomerFlightService;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.FindFlightDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
@@ -17,11 +17,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/customer")
-public class FindFlightController {
+public class CustomerFlightController {
 	private final FlightModelAssembler assembler;
-	private final FindFlightService service;
+	private final CustomerFlightService service;
 
-	public FindFlightController(FindFlightService service, FlightModelAssembler assembler) {
+	public CustomerFlightController(CustomerFlightService service, FlightModelAssembler assembler) {
 		this.service = service;
 		this.assembler = assembler;
 	}
@@ -29,7 +29,7 @@ public class FindFlightController {
 	@RolesAllowed("USER")
 	@PostMapping("/findflight")
 	public CollectionModel<EntityModel<Flight>> findFlights(@RequestBody FindFlightDTO findFlightDTO) {
-		List<Flight> flights = service.FindFlights(findFlightDTO.departureCode, findFlightDTO.arrivalCode, findFlightDTO.departureDate);
+		List<Flight> flights = service.FindAvailableFlights(findFlightDTO.departureCode, findFlightDTO.arrivalCode, findFlightDTO.departureDate, findFlightDTO.flightClass);
 		List<EntityModel<Flight>> flightEntitys = flights.stream()
 				.map(assembler::toModel)
 				.collect(Collectors.toList());

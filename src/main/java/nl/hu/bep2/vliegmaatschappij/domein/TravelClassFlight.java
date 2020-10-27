@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,10 +21,14 @@ public class TravelClassFlight {
 	@JsonIgnore
 	private Flight flight;
 	@ManyToMany(mappedBy="travelClassFlightList")
-	private List<Booking> bookingList;
+	private List<Booking> bookingList = new ArrayList<>();
 	@ManyToOne
 	private TravelClass travelClass;
 
+	public TravelClassFlight(Flight flight, TravelClass travelClass) {
+		this.flight = flight;
+		this.travelClass = travelClass;
+	}
 
 	public int getAvailableSeats() {
 		int count=travelClass.getMaxSeats();
