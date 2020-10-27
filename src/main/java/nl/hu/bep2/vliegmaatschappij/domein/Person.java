@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
@@ -18,15 +19,15 @@ public class Person {
 	protected int id;
 	protected String firstName;
 	protected String lastName;
-	protected int age;
+	protected LocalDate birthday;
 	protected String email;
-	protected int phone;
+	protected String phone;
 	protected String nationality;
 
-	public Person(String firstName, String lastName, int age, String email, int phone, String nationality) {
+	public Person(String firstName, String lastName, LocalDate birthday, String email, String phone, String nationality) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.age = age;
+		this.birthday = birthday;
 		this.email = email;
 		this.phone = phone;
 		this.nationality = nationality;

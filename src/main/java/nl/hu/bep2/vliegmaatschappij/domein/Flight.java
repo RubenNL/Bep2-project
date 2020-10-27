@@ -5,6 +5,7 @@ import nl.hu.bep2.vliegmaatschappij.exceptions.DateException;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,7 +29,7 @@ public class Flight {
 		if(departureTime.isAfter(arrivalTime)) throw new DateException("Invalid dates!");
 	}
 	@OneToMany(mappedBy="flight", cascade = CascadeType.ALL)
-	private List<TravelClassFlight> travelClassFlightList;
+	private List<TravelClassFlight> travelClassFlightList=new ArrayList<>();
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Plane plane;
 

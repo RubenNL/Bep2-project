@@ -15,7 +15,7 @@ public class Planetype {
     @GeneratedValue
     private int id;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy="planeType")
     private List<TravelClass> travelclasses;
     @OneToMany(mappedBy="type")
     private List<Plane> planes;

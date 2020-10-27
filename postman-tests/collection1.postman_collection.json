@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3aba0364-e806-49b3-93b4-ba9c1877aedd",
+		"_postman_id": "fcf3b3e9-1574-44c7-b74b-d2118eb6a2a1",
 		"name": "bep2-project",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "11335034-ec8d-41de-bb2b-0278262ba17e",
+								"id": "05a7a707-538c-449a-9493-8dd65ed57472",
 								"exec": [
 									"//Deze request mag falen, als de admin user niet bestaat. daarom geen tests."
 								],
@@ -47,7 +47,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4bfeb74c-5c19-409c-90a0-5a715e2b8aff",
+								"id": "a70b36fa-3672-4f95-bf0f-e7d0e05910f9",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -90,7 +90,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "dfb3085b-8b1c-426e-9798-005da9258321",
+								"id": "05523715-0d61-438c-a394-3ce85bee0491",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -147,7 +147,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0f3306b4-0648-4375-a632-43d719f74f4c",
+								"id": "62b159d9-a058-42f0-a110-2811cb83b3a0",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -188,7 +188,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9e26cf26-3acb-417a-9b28-a31fa0a07f2a",
+								"id": "c0bb5f8a-b673-4230-b2a9-9aadfa682e80",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -245,7 +245,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f634fe1c-28d0-4d1c-aac8-a36c02b4a0ec",
+								"id": "907114b8-6ee0-4f0d-8081-803000be8cc2",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -301,7 +301,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "459ded44-ea76-4ff5-bb41-996fffaa9815",
+								"id": "0eac3f47-6229-4283-bab6-e7e3ec82d47e",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -331,7 +331,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"departureTime\":\"2000-10-19T03:05:00\",\n    \"arrivalTime\":\"2000-10-19T06:30:00\"\n}",
+							"raw": "{\n    \"arrivalTime\":\"2000-10-19T03:05:00\",\n    \"departureTime\":\"2000-10-19T06:30:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -357,7 +357,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7248d88e-6146-4fa5-ace9-3c0333046a48",
+								"id": "f91d5d3f-0547-40d7-853c-515ed98dd1f5",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -398,7 +398,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "00fb58ef-4c1c-46a7-bbb1-c4e00b0ff216",
+								"id": "2bd1dc87-4692-4dda-8d4d-3ad6d99ebcc0",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -455,7 +455,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f8e28c4e-6f2c-4ada-8669-9683ede8369e",
+								"id": "67911e19-6d9a-4b3f-b485-73f7467b080e",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -511,7 +511,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3a542913-2c79-43dc-80f4-a1f357dd9316",
+								"id": "cee20cdd-bed3-46e7-a6b6-1cfa0eb2227f",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -552,7 +552,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7ea5cca5-4255-42c4-8a96-93cfa264645e",
+								"id": "197da63c-2c1c-4ae2-b7d6-5d3f47de83b6",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -611,7 +611,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ecb26c0a-3f6e-4007-a661-44abe3217dcc",
+								"id": "fef52694-a3f8-4905-b386-1d91f50e368f",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -671,7 +671,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "77c45a83-1407-4c2b-9ac6-9a6747f644c4",
+								"id": "fa39895b-7021-465a-ba51-9554c5b364cc",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -712,7 +712,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "35fc99e5-63e0-48ca-b945-280749d108ec",
+								"id": "509c29b8-4494-4962-ae79-1d17b641f14c",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -731,7 +731,6 @@
 									"        var requestData=JSON.parse(request.data);",
 									"        pm.expect(responseData.name).to.be.equals(requestData.name);",
 									"        pm.expect(responseData.maxSeats).to.be.equals(requestData.maxSeats);",
-									"        pm.expect(responseData.availableSeats).to.be.equals(requestData.availableSeats);",
 									"    })",
 									"});"
 								],
@@ -744,7 +743,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Economy\",\r\n    \"maxSeats\":30,\r\n    \"availableSeats\":30\r\n}",
+							"raw": "{\r\n    \"name\":\"Economy\",\r\n    \"maxSeats\":30\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -769,7 +768,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "aad03768-1dc1-467d-8cb6-45678a425ce9",
+								"id": "c5005c02-1493-4981-94f7-a8108c94f8b7",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -787,7 +786,6 @@
 									"        var requestData=JSON.parse(request.data);\r",
 									"        pm.expect(responseData.name).to.be.equals(requestData.name);\r",
 									"        pm.expect(responseData.maxSeats).to.be.equals(requestData.maxSeats);\r",
-									"        pm.expect(responseData.availableSeats).to.be.equals(requestData.availableSeats);\r",
 									"    })\r",
 									"});"
 								],
@@ -800,7 +798,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"First Class\",\r\n    \"maxSeats\":5,\r\n    \"availableSeats\":2\r\n}",
+							"raw": "{\r\n    \"name\":\"First Class\",\r\n    \"maxSeats\":5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -826,7 +824,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "87c2d931-0f37-4429-b0d6-8fbbe30a088d",
+								"id": "0d8fe852-0070-4f1b-bea0-d762686f5f31",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -879,7 +877,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "81dc64ca-877d-4509-8386-f97870bec837",
+				"id": "8cd4aaf9-f041-4c91-9c4d-16a8218b0e50",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -889,7 +887,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "4a272efd-9404-47e3-9009-4803f7ef362f",
+				"id": "6154271e-8733-48c8-ae9c-69d5be1bfffe",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -899,37 +897,37 @@
 	],
 	"variable": [
 		{
-			"id": "c374f4e4-ae75-4b7e-96b2-96c7bac175ea",
+			"id": "acf3bd1f-5990-43ab-a12e-6dc2cf28cc7c",
 			"key": "url",
 			"value": "https://bep2.herokuapp.com"
 		},
 		{
-			"id": "1d5457c3-6c86-40fe-b2d8-155e376b54cb",
+			"id": "80eee68d-a0f0-42ab-a342-2c2b9bd1acfd",
 			"key": "authToken",
 			"value": ""
 		},
 		{
-			"id": "3f71f1e8-1e6f-4de7-a64a-1049610985e7",
+			"id": "e8d7bd69-8f2c-4cff-bdbd-ec4ec02310e0",
 			"key": "flightId",
 			"value": ""
 		},
 		{
-			"id": "4445c3ca-d940-4a51-bb40-0c5c84840510",
+			"id": "fc8f53a3-5b0a-4b88-8741-d8704824c7fa",
 			"key": "planeID",
 			"value": ""
 		},
 		{
-			"id": "1dde7d2d-cb7d-45bf-bc06-7b78030f774b",
+			"id": "75d93a96-900f-4c87-a58f-4d48068f4053",
 			"key": "airportCode",
 			"value": ""
 		},
 		{
-			"id": "09c7b8b7-e549-451e-8aa9-b87ec0733711",
+			"id": "158eb6b3-b090-4810-8a60-1063ea1aeea7",
 			"key": "travelclassId",
 			"value": ""
 		},
 		{
-			"id": "2d6b2003-84eb-4087-8fb2-7a01969c4ca7",
+			"id": "a9df92cd-1254-4a76-99a4-82de4220a7ab",
 			"key": "bookingId",
 			"value": ""
 		}

@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -30,4 +27,6 @@ public class TravelClass {
 	private int maxSeats;
 	@OneToMany(mappedBy="travelClass")
 	private List<TravelClassFlight> travelClassFlightList;
+	@ManyToOne
+	private Planetype planeType;
 }
