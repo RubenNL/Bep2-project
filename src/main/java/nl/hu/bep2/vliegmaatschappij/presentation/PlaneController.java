@@ -79,7 +79,7 @@ public class PlaneController {
 			@ApiResponse(responseCode = "404", description = "Plane couldn't be build",
 					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
-	@PostMapping("/create") //TODO Why with/without the link?
+	@PostMapping("/create")
 	public ResponseEntity<?> newPlane(@RequestBody Plane plane){
 		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
 		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())

@@ -17,7 +17,6 @@ public class Flight {
 	@Id
 	@GeneratedValue
 	private int id;
-	//todo Constraint arrival mag niet voor departure zijn!!
 	private LocalDateTime departureTime;
 	private LocalDateTime arrivalTime;
 	@ManyToOne(cascade = CascadeType.ALL)
