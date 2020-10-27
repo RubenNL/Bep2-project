@@ -1,11 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.presentation;
 
 import nl.hu.bep2.vliegmaatschappij.application.FindFlightService;
-import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Booking;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
-import nl.hu.bep2.vliegmaatschappij.domein.Planetype;
-import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.FindFlightDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
 import org.springframework.hateoas.CollectionModel;
