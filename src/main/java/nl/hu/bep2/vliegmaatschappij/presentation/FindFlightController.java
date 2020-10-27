@@ -10,16 +10,17 @@ import nl.hu.bep2.vliegmaatschappij.presentation.DTO.FindFlightDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@RestController
+@RequestMapping("/customer")
 public class FindFlightController {
 	private final FlightModelAssembler assembler;
 	private final FindFlightService service;
@@ -29,7 +30,8 @@ public class FindFlightController {
 		this.assembler = assembler;
 	}
 
-	@GetMapping("/findflight")
+	@RolesAllowed("USER")
+	@PostMapping("/findflight")
 	public CollectionModel<EntityModel<Flight>> findFlights(@RequestBody FindFlightDTO findFlightDTO) {
 		List<Flight> flights = service.FindFlights(findFlightDTO.departureCode, findFlightDTO.arrivalCode, findFlightDTO.departureDate);
 		List<EntityModel<Flight>> flightEntitys = flights.stream()
@@ -37,5 +39,16 @@ public class FindFlightController {
 				.collect(Collectors.toList());
 		return CollectionModel.of(flightEntitys, linkTo(methodOn(BookingController.class).all()).withSelfRel());
 	}
+
+	@RolesAllowed("USER")
+	@GetMapping("/findflightbytime")
+	public CollectionModel<EntityModel<Flight>> findFlightsbytime() {
+		List<Flight> flights = service.FindAllAvailableFlights();
+		List<EntityModel<Flight>> flightEntitys = flights.stream()
+				.map(assembler::toModel)
+				.collect(Collectors.toList());
+		return CollectionModel.of(flightEntitys, linkTo(methodOn(BookingController.class).all()).withSelfRel());
+	}
+
 }
 
