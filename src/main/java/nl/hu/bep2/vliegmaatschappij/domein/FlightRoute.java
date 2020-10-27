@@ -19,7 +19,7 @@ public class FlightRoute {
 	private Airport departure;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Airport destination;
-	@OneToMany
+	@OneToMany(mappedBy="route")
 	private List<Flight> flights;
 	//https://stackoverflow.com/a/16794680
 	private static double distance(double lat1, double lat2, double lon1,

@@ -18,7 +18,7 @@ public class Customer extends Person {
     @Id
     @GeneratedValue
     private int id;
-    @OneToMany
+    @OneToMany(mappedBy="customer")
     List<Booking> bookings = new ArrayList<>();
 	
 	public void addBooking(Booking booking){

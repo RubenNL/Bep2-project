@@ -19,7 +19,7 @@ public class Booking {
 	private int id;
 	@ManyToMany
 	private List<Person> persons;
-	@OneToOne
+	@ManyToOne
 	private Customer customer;
 	@OneToOne
 	private Price price;
