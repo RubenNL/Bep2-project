@@ -586,7 +586,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"AMS\",\n    \"name\":\"Schiphol\",\n    \"lat\":30.49,\n    \"lng\":40.28,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
+							"raw": "{\n    \"code\":\"AAA\",\n    \"name\":\"Schiphol\",\n    \"lat\":30.49,\n    \"lng\":40.28,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -645,7 +645,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"AMS\",\n    \"name\":\"Schiphol\",\n    \"lat\":35.74857,\n    \"lng\":83.98690,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
+							"raw": "{\n    \"code\":\"AAA\",\n    \"name\":\"Schiphol\",\n    \"lat\":35.74857,\n    \"lng\":83.98690,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
