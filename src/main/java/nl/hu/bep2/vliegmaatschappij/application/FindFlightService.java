@@ -23,7 +23,7 @@ public class FindFlightService {
 		return flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
 	}
 
-	public List<Flight> FindAllAvailableFlights(){
+	public List<Flight> FindAllAvailableFlights(){ //todo TESTEN!!!
 		LocalDateTime dateTime = LocalDateTime.now();
 		List<Flight> flightlistall = flightRepository.findByTime(dateTime);
 		List<Flight> flightlistAvailable = new ArrayList<>();
