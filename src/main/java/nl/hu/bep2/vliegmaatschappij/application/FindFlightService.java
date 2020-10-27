@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,13 @@ public class FindFlightService {
 	public FindFlightService(SpringFlightRepository flightRepository) {
 		this.flightRepository = flightRepository;
 	}
-
 	//TODO filteren op klasse.
 	public List<Flight> FindFlights(String departCode, String arivalCode, LocalDate departDate){
 		return flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
+	}
+
+	public List<Flight> FindAllAvailableFlights(){
+		LocalDateTime dateTime = LocalDateTime.now();
+		return flightRepository.findByTime(dateTime);
 	}
 }
