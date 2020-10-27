@@ -20,7 +20,7 @@ public class TravelClassFlight {
 	@ManyToOne
 	@JsonIgnore
 	private Flight flight;
-	@OneToMany
+	@ManyToMany(mappedBy="travelClassFlightList")
 	private List<Booking> bookingList = new ArrayList<>();
 	@ManyToOne
 	private TravelClass travelClass;

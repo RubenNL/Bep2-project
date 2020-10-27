@@ -1,5 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,8 +17,10 @@ public class FlightRoute {
 	@GeneratedValue
 	private int id;
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Airport departure;
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Airport destination;
 	@OneToMany(mappedBy="route")
 	private List<Flight> flights;

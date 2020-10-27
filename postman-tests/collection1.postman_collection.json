@@ -276,7 +276,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"departureTime\":\"2020-10-19T03:05:00\",\n    \"arrivalTime\":\"2020-10-19T06:30:00\"\n}",
+							"raw": "{\n    \"departureTime\":\"2020-10-19T03:05:00\",\n    \"arrivalTime\":\"2020-10-19T06:30:00\",\n    \"route\":3,\n    \"plane\":\"PH-HSJ\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -586,7 +586,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"AMS\",\n    \"name\":\"Schiphol\",\n    \"lat\":30.49,\n    \"lng\":40.28,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
+							"raw": "{\n    \"code\":\"AAA\",\n    \"name\":\"Schiphol\",\n    \"lat\":30.49,\n    \"lng\":40.28,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -645,7 +645,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"AMS\",\n    \"name\":\"Schiphol\",\n    \"lat\":35.74857,\n    \"lng\":83.98690,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
+							"raw": "{\n    \"code\":\"AAA\",\n    \"name\":\"Schiphol\",\n    \"lat\":35.74857,\n    \"lng\":83.98690,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -897,37 +897,37 @@
 	],
 	"variable": [
 		{
-			"id": "acf3bd1f-5990-43ab-a12e-6dc2cf28cc7c",
+			"id": "1cf5b22f-ec9f-4ac2-891d-bce0e6b19244",
 			"key": "url",
 			"value": "https://bep2.herokuapp.com"
 		},
 		{
-			"id": "80eee68d-a0f0-42ab-a342-2c2b9bd1acfd",
+			"id": "a84471cf-1129-4bc4-aef8-32280f857775",
 			"key": "authToken",
 			"value": ""
 		},
 		{
-			"id": "e8d7bd69-8f2c-4cff-bdbd-ec4ec02310e0",
+			"id": "6afa6be8-347c-4517-a65f-c816cb61d142",
 			"key": "flightId",
 			"value": ""
 		},
 		{
-			"id": "fc8f53a3-5b0a-4b88-8741-d8704824c7fa",
+			"id": "553ae096-6e75-4b20-862f-624a934fdd9e",
 			"key": "planeID",
 			"value": ""
 		},
 		{
-			"id": "75d93a96-900f-4c87-a58f-4d48068f4053",
+			"id": "d1492b34-63d6-4ecf-bb42-32a3357a58ca",
 			"key": "airportCode",
 			"value": ""
 		},
 		{
-			"id": "158eb6b3-b090-4810-8a60-1063ea1aeea7",
+			"id": "804f3991-df3a-46c8-a2c9-6c1f9c187548",
 			"key": "travelclassId",
 			"value": ""
 		},
 		{
-			"id": "a9df92cd-1254-4a76-99a4-82de4220a7ab",
+			"id": "53dc0be5-3848-4ac9-97d5-a5f1bb0fd316",
 			"key": "bookingId",
 			"value": ""
 		}
