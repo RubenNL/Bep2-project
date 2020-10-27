@@ -24,6 +24,10 @@ public class TravelClassFlight {
 	@ManyToOne
 	private TravelClass travelClass;
 
+	public TravelClassFlight(Flight flight, TravelClass travelClass) {
+		this.flight = flight;
+		this.travelClass = travelClass;
+	}
 
 	public int getAvailableSeats() {
 		int count=travelClass.getMaxSeats();

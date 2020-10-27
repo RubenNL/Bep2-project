@@ -23,17 +23,23 @@ public class Flight {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JsonIgnore
 	private FlightRoute route;
-	@ManyToMany
-	private List<Booking> bookingList;
+
 	@PrePersist
-	private void checkDates() {
+	private void checkDatesAndMakeTCFlist() {
 		if(departureTime.isAfter(arrivalTime)) throw new DateException("Invalid dates!");
+		Planetype pt = plane.getType();
+		List<TravelClass> travelClassList = pt.getTravelclasses();
+		for (TravelClass travelclass : travelClassList){
+			this.travelClassFlightList.add(new TravelClassFlight(this, travelclass));
+		}
 	}
+
 	@OneToMany(mappedBy="flight", cascade = CascadeType.ALL)
 	private List<TravelClassFlight> travelClassFlightList=new ArrayList<>();
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JsonIgnore
 	private Plane plane;
+
 
 	public Flight(LocalDateTime departureTime, LocalDateTime arrivalTime, FlightRoute route, List<TravelClassFlight> travelClassFlightList, Plane plane) {
 		this.departureTime = departureTime;
@@ -48,4 +54,5 @@ public class Flight {
 		for(TravelClassFlight travelClassFlight:travelClassFlightList) count+= travelClassFlight.getAvailableSeats();
 		return count;
 	}
+
 }
