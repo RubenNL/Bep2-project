@@ -25,7 +25,7 @@ class FindFlightServiceTest {
 	@Autowired
 	private SpringFlightRepository repository;
 	@Autowired
-	private FindFlightService service;
+	private CustomerFlightService service;
 	@Autowired
 	private SpringAirportRepository airportRepository;
 	@Autowired

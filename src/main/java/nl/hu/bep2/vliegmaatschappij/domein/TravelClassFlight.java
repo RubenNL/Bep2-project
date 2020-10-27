@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class TravelClassFlight {
 	@JsonIgnore
 	private Flight flight;
 	@OneToMany
-	private List<Booking> bookingList;
+	private List<Booking> bookingList = new ArrayList<>();
 	@ManyToOne
 	private TravelClass travelClass;
 

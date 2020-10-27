@@ -12,15 +12,25 @@ import java.util.List;
 
 @Transactional
 @Service
-public class FindFlightService {
+public class CustomerFlightService {
 	private final SpringFlightRepository flightRepository;
 
-	public FindFlightService(SpringFlightRepository flightRepository) {
+	public CustomerFlightService(SpringFlightRepository flightRepository) {
 		this.flightRepository = flightRepository;
 	}
-	//TODO filteren op klasse.
-	public List<Flight> FindFlights(String departCode, String arivalCode, LocalDate departDate){
-		return flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
+	//TODO TESTEN!!!
+	public List<Flight> FindAvailableFlights(String departCode, String arivalCode, LocalDate departDate, int classID){
+		List<Flight> flightlistall = flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
+		List<Flight> flightlistAvailable = new ArrayList<>();
+		for (Flight flight : flightlistall){
+			for(TravelClass tc : flight.getPlane().getType().getTravelclasses()){
+				if(tc.getId() == classID){
+					flightlistAvailable.add(flight);
+				}
+			}
+		}
+		return flightlistAvailable;
+
 	}
 
 	public List<Flight> FindAllAvailableFlights(){ //todo TESTEN!!!

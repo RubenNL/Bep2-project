@@ -6,5 +6,5 @@ public class FindFlightDTO {
 	public String departureCode;
 	public String arrivalCode;
 	public LocalDate departureDate;
-	public String flightClass;
+	public int flightClass;
 }
