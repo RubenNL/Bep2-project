@@ -29,4 +29,5 @@ public class TravelClass {
 	private List<TravelClassFlight> travelClassFlightList;
 	@ManyToOne
 	private Planetype planeType;
+	private double pricePerKm;
 }

@@ -1,6 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
 import lombok.*;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,9 +21,16 @@ public class TravelClassFlight {
 	private List<Booking> bookingList;
 	@ManyToOne
 	private TravelClass travelClass;
+
+
 	public int getAvailableSeats() {
 		int count=travelClass.getMaxSeats();
 		for(Booking booking:bookingList) count-=booking.getPersons().size();
 		return count;
 	}
+
+	public double calculatePrice(){
+		return travelClass.getPricePerKm() * flight.getRoute().getDistance();
+	}
+
 }
