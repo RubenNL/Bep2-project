@@ -43,7 +43,7 @@ class FindFlightServiceTest {
 		route.setDeparture(depart);
 		FlightRoute route2 = new FlightRoute();
 		Flight flight1 = new Flight(dateTime, dateTime.plusHours(1), route, new ArrayList<>() ,plane);
-		flight1=repository.getOne(repository.save(flight1).getId());
+		flight1 = repository.getOne(repository.save(flight1).getId());
 		//plane=flight1.getPlane();
 		route2.setDestination(depart);
 		route2.setDeparture(dest);

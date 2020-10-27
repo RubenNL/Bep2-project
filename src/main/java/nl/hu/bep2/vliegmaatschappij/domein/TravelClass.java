@@ -1,5 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class TravelClass {
 	private int maxSeats;
 	@OneToMany(mappedBy="travelClass")
 	private List<TravelClassFlight> travelClassFlightList;
+	@JsonIgnore //todo Geeft conflicten met plane/all
 	@ManyToOne
 	private Planetype planeType;
 }
