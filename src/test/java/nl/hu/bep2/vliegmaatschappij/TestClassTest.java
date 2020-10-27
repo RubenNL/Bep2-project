@@ -22,6 +22,6 @@ class TestClassTest {
 	}
 	@Test
 	void testSql() {
-		assertTrue(flightRepository.findById(0).isPresent());
+		assertTrue(flightRepository.findById(23).isPresent());
 	}
 }
