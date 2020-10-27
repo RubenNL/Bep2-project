@@ -31,10 +31,11 @@ class FindFlightServiceTest {
 	@Autowired
 	private SpringPlaneRepository planeRepository;
 	@Test
-	void testFindRoute() {
+	void testFindFlight() {
 		String str = "2016-03-04 11:30";
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+
 		Airport dest = airportRepository.getOne("AMS");
 		Airport depart = airportRepository.getOne("BRU");
 		Plane plane = planeRepository.getOne("PH-BVC");

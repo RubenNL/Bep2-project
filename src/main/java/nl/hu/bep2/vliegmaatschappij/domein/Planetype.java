@@ -2,6 +2,7 @@ package nl.hu.bep2.vliegmaatschappij.domein;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.TravelClassDTO;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Planetype {
     @GeneratedValue
     private int id;
     private String name;
-    @OneToMany(mappedBy="planeType")
+    @OneToMany(mappedBy="planeType", cascade = CascadeType.PERSIST)
     private List<TravelClass> travelclasses;
     @OneToMany(mappedBy="type")
     @JsonIgnore //todo Geeft conflicten met plane/all
@@ -25,4 +26,5 @@ public class Planetype {
     public Planetype(String name) {
         this.name = name;
     }
+
 }

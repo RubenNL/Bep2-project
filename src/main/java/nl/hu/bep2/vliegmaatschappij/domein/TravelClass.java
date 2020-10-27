@@ -29,7 +29,7 @@ public class TravelClass {
 	@OneToMany(mappedBy="travelClass")
 	@JsonIgnore
 	private List<TravelClassFlight> travelClassFlightList;
-	@JsonIgnore //todo Geeft conflicten met plane/all
+	@JsonIgnore //todo geeft conflicten met /plane/all nakijken of efficienter kan.
 	@ManyToOne
 	private Planetype planeType;
 	private double pricePerKm;
