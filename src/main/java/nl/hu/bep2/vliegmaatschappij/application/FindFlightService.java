@@ -25,6 +25,13 @@ public class FindFlightService {
 
 	public List<Flight> FindAllAvailableFlights(){
 		LocalDateTime dateTime = LocalDateTime.now();
-		return flightRepository.findByTime(dateTime);
+		List<Flight> flightlistall = flightRepository.findByTime(dateTime);
+		List<Flight> flightlistAvailable = new ArrayList<>();
+		for (Flight flight : flightlistall){
+			if(flight.getAvailableSeats() > 0){
+				flightlistAvailable.add(flight);
+			}
+		}
+		return flightlistAvailable;
 	}
 }
