@@ -5,10 +5,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import nl.hu.bep2.vliegmaatschappij.data.SpringAirportRepository;
 import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRouteRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.domein.FlightRoute;
 import nl.hu.bep2.vliegmaatschappij.exceptions.FlightRouteNotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.FlightRouteDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightRouteAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -28,10 +29,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class FlightRouteController {
 	private final SpringFlightRouteRepository flightRouteRepo;
 	private final FlightRouteAssembler assembler;
+	private final SpringAirportRepository airportRepository;
 
-	public FlightRouteController(SpringFlightRouteRepository flightRouteRepo, FlightRouteAssembler assembler) {
+	public FlightRouteController(SpringFlightRouteRepository flightRouteRepo, FlightRouteAssembler assembler, SpringAirportRepository airportRepository) {
 		this.flightRouteRepo = flightRouteRepo;
 		this.assembler = assembler;
+		this.airportRepository = airportRepository;
 	}
 
 	@Operation(summary = "Create a new flightroute")
@@ -45,7 +48,10 @@ public class FlightRouteController {
 					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@PostMapping
-	public ResponseEntity<?> newFlightRoute(@RequestBody FlightRoute flightRoute) {
+	public ResponseEntity<?> newFlightRoute(@RequestBody FlightRouteDTO flightRouteDTO) {
+		FlightRoute flightRoute=new FlightRoute();
+		flightRoute.setDeparture(airportRepository.getOne(flightRouteDTO.departure));
+		flightRoute.setDestination(airportRepository.getOne(flightRouteDTO.destination));
 		EntityModel<FlightRoute> entityModel = assembler.toModel(flightRouteRepo.save(flightRoute));
 		return ResponseEntity
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
@@ -98,7 +104,10 @@ public class FlightRouteController {
 					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
-	public ResponseEntity<?> replaceFlightRoute(@RequestBody FlightRoute newFlightRoute, @PathVariable int id) {
+	public ResponseEntity<?> replaceFlightRoute(@RequestBody FlightRouteDTO flightRouteDTO, @PathVariable int id) {
+		FlightRoute newFlightRoute=new FlightRoute();
+		newFlightRoute.setDeparture(airportRepository.getOne(flightRouteDTO.departure));
+		newFlightRoute.setDestination(airportRepository.getOne(flightRouteDTO.destination));
 		FlightRoute updatedFlightRoute = flightRouteRepo.findById(id)
 				.map(flightroute -> {
 					flightroute.setDeparture(newFlightRoute.getDeparture());
