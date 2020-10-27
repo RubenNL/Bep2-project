@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -23,6 +25,8 @@ public class Person {
 	protected String email;
 	protected String phone;
 	protected String nationality;
+	@ManyToMany(mappedBy="persons")
+	protected List<Booking> bookingList;
 
 	public Person(String firstName, String lastName, LocalDate birthday, String email, String phone, String nationality) {
 		this.firstName = firstName;

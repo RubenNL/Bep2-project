@@ -23,8 +23,6 @@ public class Flight {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JsonIgnore
 	private FlightRoute route;
-	@ManyToMany
-	private List<Booking> bookingList;
 	@PrePersist
 	private void checkDates() {
 		if(departureTime.isAfter(arrivalTime)) throw new DateException("Invalid dates!");
