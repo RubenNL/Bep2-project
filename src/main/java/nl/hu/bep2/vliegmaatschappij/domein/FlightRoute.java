@@ -21,6 +21,7 @@ public class FlightRoute {
 	private Airport destination;
 	@OneToMany(mappedBy="route")
 	private List<Flight> flights;
+
 	//https://stackoverflow.com/a/16794680
 	private static double distance(double lat1, double lat2, double lon1,
 								  double lon2, double el1, double el2) {

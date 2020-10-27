@@ -31,4 +31,5 @@ public class TravelClass {
 	@JsonIgnore //todo Geeft conflicten met plane/all
 	@ManyToOne
 	private Planetype planeType;
+	private double pricePerKm;
 }
