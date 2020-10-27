@@ -1,5 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.context.annotation.Bean;
 
@@ -16,6 +17,7 @@ public class TravelClassFlight {
 	@GeneratedValue
 	private int id;
 	@ManyToOne
+	@JsonIgnore
 	private Flight flight;
 	@OneToMany
 	private List<Booking> bookingList;
