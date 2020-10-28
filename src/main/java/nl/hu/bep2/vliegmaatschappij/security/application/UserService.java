@@ -26,10 +26,10 @@ public class UserService implements UserDetailsService {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	public void register(String username, String password, String firstName, String lastName) {
+	public void register(String username, String password) {
 		String encodedPassword = this.passwordEncoder.encode(password);
 
-		User user = new User(username, encodedPassword, firstName, lastName);
+		User user = new User(username, encodedPassword);
 
 		this.userRepository.save(user);
 	}

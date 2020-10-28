@@ -6,10 +6,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Airport;
+import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRouteRepository;
+import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.FlightDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -29,10 +31,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class FlightController {
 	private final SpringFlightRepository repository;
 	private final FlightModelAssembler assembler;
+	private final SpringFlightRouteRepository routeRepository;
+	private final SpringPlaneRepository planeRepository;
 
-	public FlightController(SpringFlightRepository repository, FlightModelAssembler assembler) {
+	public FlightController(SpringFlightRepository repository, FlightModelAssembler assembler, SpringFlightRouteRepository routeRepository, SpringPlaneRepository planeRepository) {
 		this.repository = repository;
 		this.assembler = assembler;
+		this.routeRepository = routeRepository;
+		this.planeRepository = planeRepository;
 	}
 
 	@Operation(summary = "Create a new flight")
@@ -47,7 +53,12 @@ public class FlightController {
 
 	@RolesAllowed("EMPLOYEE")
 	@PostMapping
-	ResponseEntity<?> newFlight(@RequestBody Flight flight) {
+	ResponseEntity<?> newFlight(@RequestBody FlightDTO flightDTO) {
+		Flight flight=new Flight();
+		flight.setArrivalTime(flightDTO.arrivalTime);
+		flight.setDepartureTime(flightDTO.departureTime);
+		flight.setRoute(routeRepository.getOne(flightDTO.route));
+		flight.setPlane(planeRepository.getOne(flightDTO.plane));
 		EntityModel<Flight> entityModel = assembler.toModel(repository.save(flight));
 		return ResponseEntity
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
@@ -113,6 +124,27 @@ public class FlightController {
 					return repository.save(newFlight);
 				});
 		EntityModel<Flight> entityModel = assembler.toModel(updatedFlight);
+		return ResponseEntity
+				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+				.body(entityModel);
+	}
+
+	@Operation(summary = "Cancel a flight by its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Flight has been set to canceled",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Flight.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Flight couldn't be found",
+					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
+	@PatchMapping("/{id}")
+	ResponseEntity<?> cancelFlight(@PathVariable int id){
+		Flight flight = repository.getOne(id);
+		flight.cancel();
+		repository.save(flight);
+		EntityModel<Flight> entityModel = assembler.toModel(flight);
 		return ResponseEntity
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);

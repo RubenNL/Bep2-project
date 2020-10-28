@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fcf3b3e9-1574-44c7-b74b-d2118eb6a2a1",
+		"_postman_id": "0edd0724-8176-4e98-be14-6348b3d5ad61",
 		"name": "bep2-project",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "05a7a707-538c-449a-9493-8dd65ed57472",
+								"id": "c950e23c-a119-4cc1-a0bc-c01efed90ed8",
 								"exec": [
 									"//Deze request mag falen, als de admin user niet bestaat. daarom geen tests."
 								],
@@ -47,7 +47,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a70b36fa-3672-4f95-bf0f-e7d0e05910f9",
+								"id": "3d2a2254-1bfb-4921-8845-1b0c5e051ffe",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -65,7 +65,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\",\n    \"firstName\": \"Ad\",\n    \"lastName\": \"Min\"\n}",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,7 +90,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "05523715-0d61-438c-a394-3ce85bee0491",
+								"id": "52c82805-3a51-4ee1-97dd-882b4f95de70",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -147,7 +147,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "62b159d9-a058-42f0-a110-2811cb83b3a0",
+								"id": "53b07cf0-b84d-44c1-9162-1011ba1e6bf4",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -188,7 +188,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c0bb5f8a-b673-4230-b2a9-9aadfa682e80",
+								"id": "dff6f2db-531b-4d15-b020-4709d3681992",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -245,7 +245,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "907114b8-6ee0-4f0d-8081-803000be8cc2",
+								"id": "e2baf459-a9aa-41ec-adaa-cfe4a4b4cd72",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -276,7 +276,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"departureTime\":\"2020-10-19T03:05:00\",\n    \"arrivalTime\":\"2020-10-19T06:30:00\"\n}",
+							"raw": "{\n    \"departureTime\":\"2020-10-19T03:05:00\",\n    \"arrivalTime\":\"2020-10-19T06:30:00\",\n    \"route\":3,\n    \"plane\":\"PH-HSJ\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -301,7 +301,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0eac3f47-6229-4283-bab6-e7e3ec82d47e",
+								"id": "d897f4aa-1d7b-4d7c-8af0-9fc43bac7ff4",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -357,7 +357,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f91d5d3f-0547-40d7-853c-515ed98dd1f5",
+								"id": "9364ee85-44d9-4800-8b71-18cfe245e786",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -398,7 +398,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2bd1dc87-4692-4dda-8d4d-3ad6d99ebcc0",
+								"id": "c14df8c1-803e-4b2a-bbf4-943e5745ad9f",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -416,7 +416,7 @@
 									"        var responseData=response.json();",
 									"        var requestData=JSON.parse(request.data);",
 									"        pm.expect(responseData.code).to.be.equals(requestData.code);",
-									"        pm.expect(responseData.type).to.be.equals(requestData.type);",
+									"        pm.expect(responseData.type.id).to.be.equals(requestData.type);",
 									"    })",
 									"});"
 								],
@@ -429,7 +429,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"Boeing747\",\n    \"type\":null\n}",
+							"raw": "{\n    \"code\":\"boing\",\n    \"type\":2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -437,13 +437,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/plane/create",
+							"raw": "{{url}}/plane",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"plane",
-								"create"
+								"plane"
 							]
 						}
 					},
@@ -455,7 +454,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "67911e19-6d9a-4b3f-b485-73f7467b080e",
+								"id": "0e82902b-0ece-43bb-b93e-c060568cf0ff",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -471,8 +470,7 @@
 									"    pm.test(\"Plane is geupdated.\",()=>{",
 									"        var responseData=response.json();",
 									"        var requestData=JSON.parse(request.data);",
-									"        pm.expect(responseData.code).to.be.equals(requestData.code);",
-									"        pm.expect(responseData.type).to.be.equals(requestData.type);",
+									"        pm.expect(responseData.type.id).to.be.equals(requestData.type);",
 									"    })",
 									"});"
 								],
@@ -485,7 +483,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"Boeing747\",\n    \"type\":null\n}",
+							"raw": "{\n    \"type\":3\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -511,7 +509,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "cee20cdd-bed3-46e7-a6b6-1cfa0eb2227f",
+								"id": "303ac4c7-2e7c-4749-8b54-b865561741e3",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -552,7 +550,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "197da63c-2c1c-4ae2-b7d6-5d3f47de83b6",
+								"id": "b73905a0-5333-43be-b032-c0700a453574",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -586,7 +584,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"AMS\",\n    \"name\":\"Schiphol\",\n    \"lat\":30.49,\n    \"lng\":40.28,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
+							"raw": "{\n    \"code\":\"AAA\",\n    \"name\":\"Schiphol\",\n    \"lat\":30.49,\n    \"lng\":40.28,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -611,7 +609,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fef52694-a3f8-4905-b386-1d91f50e368f",
+								"id": "634d19b6-fe61-4521-9203-fccb96d6760c",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -645,7 +643,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"AMS\",\n    \"name\":\"Schiphol\",\n    \"lat\":35.74857,\n    \"lng\":83.98690,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
+							"raw": "{\n    \"code\":\"AAA\",\n    \"name\":\"Schiphol\",\n    \"lat\":35.74857,\n    \"lng\":83.98690,\n    \"country\":\"Netherlands\",\n    \"place\":\"Amsterdam\"\n\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -671,7 +669,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fa39895b-7021-465a-ba51-9554c5b364cc",
+								"id": "fdb1c3f5-7cbf-4135-aab6-4080fc49f684",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -705,159 +703,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "create TravelClass",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "509c29b8-4494-4962-ae79-1d17b641f14c",
-								"exec": [
-									"pm.test(\"Status test\", function () {",
-									"    pm.response.to.have.status(201);",
-									"});",
-									"pm.collectionVariables.set(\"travelclassId\", pm.response.json().id);",
-									"pm.sendRequest({",
-									"    url: pm.collectionVariables.get(\"url\")+\"/travelclass/\"+pm.collectionVariables.get(\"travelclassId\"),",
-									"    method:\"GET\",",
-									"    header: {",
-									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")",
-									"    }",
-									"},(err,response)=>{",
-									"    pm.test(\"getTravelClass zou 200 moeten geven\",()=>pm.expect(response.code).to.be.equals(200))",
-									"    pm.test(\"TravelClass is correct opgeslagen\",()=>{",
-									"        var responseData=response.json();",
-									"        var requestData=JSON.parse(request.data);",
-									"        pm.expect(responseData.name).to.be.equals(requestData.name);",
-									"        pm.expect(responseData.maxSeats).to.be.equals(requestData.maxSeats);",
-									"    })",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Economy\",\r\n    \"maxSeats\":30\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/travelclass",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"travelclass"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update TravelClass",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "c5005c02-1493-4981-94f7-a8108c94f8b7",
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"pm.sendRequest({\r",
-									"    url: pm.collectionVariables.get(\"url\")+\"/travelclass/\"+pm.collectionVariables.get(\"travelclassId\"),\r",
-									"    method:\"GET\",\r",
-									"    header: {\r",
-									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")\r",
-									"    }\r",
-									"},(err,response)=>{\r",
-									"    pm.test(\"getTravelClass zou 200 moeten geven\",()=>pm.expect(response.code).to.be.equals(200))\r",
-									"    pm.test(\"TravelClass is geupdated\",()=>{\r",
-									"        var responseData=response.json();\r",
-									"        var requestData=JSON.parse(request.data);\r",
-									"        pm.expect(responseData.name).to.be.equals(requestData.name);\r",
-									"        pm.expect(responseData.maxSeats).to.be.equals(requestData.maxSeats);\r",
-									"    })\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"First Class\",\r\n    \"maxSeats\":5\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/travelclass/{{travelclassId}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"travelclass",
-								"{{travelclassId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete TravelClass",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "0d8fe852-0070-4f1b-bea0-d762686f5f31",
-								"exec": [
-									"pm.test(\"Status test\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.sendRequest({\r",
-									"    url: pm.collectionVariables.get(\"url\")+\"/travelclass/\"+pm.collectionVariables.get(\"travelclassId\"),\r",
-									"    method:\"GET\",\r",
-									"    header: {\r",
-									"        \"authorization\": \"Bearer \"+pm.collectionVariables.get(\"authToken\")\r",
-									"    }\r",
-									"},(err,response)=>{\r",
-									"    pm.test(\"TravelClass zou nu weg moeten zijn\",()=>pm.expect(response.code).to.be.equals(404)) \r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/travelclass/{{travelclassId}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"travelclass",
-								"{{travelclassId}}"
-							]
-						}
-					},
-					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -877,7 +722,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "8cd4aaf9-f041-4c91-9c4d-16a8218b0e50",
+				"id": "e130fc06-8b18-4028-93eb-f5746fa94de7",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -887,7 +732,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "6154271e-8733-48c8-ae9c-69d5be1bfffe",
+				"id": "83f0733f-b7d4-485d-a4a5-b35c9136fde7",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -897,37 +742,37 @@
 	],
 	"variable": [
 		{
-			"id": "acf3bd1f-5990-43ab-a12e-6dc2cf28cc7c",
+			"id": "3cd460b1-cff2-488b-a7c8-7e2a3905a41a",
 			"key": "url",
 			"value": "https://bep2.herokuapp.com"
 		},
 		{
-			"id": "80eee68d-a0f0-42ab-a342-2c2b9bd1acfd",
+			"id": "a66098b2-f27c-47ca-b838-a61d1de13366",
 			"key": "authToken",
 			"value": ""
 		},
 		{
-			"id": "e8d7bd69-8f2c-4cff-bdbd-ec4ec02310e0",
+			"id": "3ca2e478-4e1e-43c7-b7cf-510e521ae84d",
 			"key": "flightId",
 			"value": ""
 		},
 		{
-			"id": "fc8f53a3-5b0a-4b88-8741-d8704824c7fa",
+			"id": "cb765c10-edc2-4ed5-805a-25c5d5814b32",
 			"key": "planeID",
 			"value": ""
 		},
 		{
-			"id": "75d93a96-900f-4c87-a58f-4d48068f4053",
+			"id": "f2096419-38ba-4a21-82db-131528f509bf",
 			"key": "airportCode",
 			"value": ""
 		},
 		{
-			"id": "158eb6b3-b090-4810-8a60-1063ea1aeea7",
+			"id": "e2f71a97-c52a-40c4-92de-9e2871ce76ed",
 			"key": "travelclassId",
 			"value": ""
 		},
 		{
-			"id": "a9df92cd-1254-4a76-99a4-82de4220a7ab",
+			"id": "fb8dfae9-e119-4532-a34d-c6f37ddd6b6f",
 			"key": "bookingId",
 			"value": ""
 		}

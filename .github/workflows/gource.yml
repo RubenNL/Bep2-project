@@ -16,10 +16,16 @@ jobs:
         run: |
           mkdir gource
           cat > ./gource/index.html <<EOL
-            <meta http-equiv="refresh" content="0; url=gource.mp4" />
-            <title>Gource V2B-5</title>
-            <b><a href="gource.mp4">video</a></b>
+            <title>V2B-5</title>
+            <b><a href="gource.mp4">video</a></b><br>
+            <b><a href="swagger-ui">swagger-ui</a></b>
           EOL
+          wget -O openapi.json https://bep2.herokuapp.com/v3/api-docs
+      - name: Generate Swagger UI
+        uses: Legion2/swagger-ui-action@v1
+        with:
+          output: gource/swagger-ui
+          spec-file: openapi.json
       - name: Gource-Action
         uses: NBprojekt/gource-action@v1.0.1
         with:

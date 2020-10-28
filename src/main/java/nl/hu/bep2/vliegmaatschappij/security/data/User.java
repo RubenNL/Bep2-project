@@ -34,15 +34,11 @@ public class User implements UserDetails {
 	@Column(nullable = false, unique = true)
 	private String username;
 	private String password;
-	private String firstName;
-	private String lastName;
 	private boolean isEmployee = false;
 
-	public User(String username, String password, String firstName, String lastName) {
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
 	}
 
 	public Long getId() {
@@ -56,14 +52,6 @@ public class User implements UserDetails {
 	@Override
 	public String getPassword() {
 		return password;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
 	}
 
 	@Override
