@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,11 @@ public class Customer extends Person {
     private int id;
     @OneToMany(mappedBy="customer")
     List<Booking> bookings = new ArrayList<>();
-	
+
+	public Customer(String firstName, String lastName, LocalDate birthday, String email, String phone, String nationality) {
+		super(firstName, lastName, birthday, email, phone, nationality);
+	}
+
 	public void addBooking(Booking booking){
 		bookings.add(booking);
 	}

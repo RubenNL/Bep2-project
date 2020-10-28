@@ -36,4 +36,7 @@ public class Person {
 		this.phone = phone;
 		this.nationality = nationality;
 	}
+
+	public Person(String firstName, String lastName, LocalDate birthday, String email, String phone, String nationality, List<Booking> bookingList) {
+	}
 }
