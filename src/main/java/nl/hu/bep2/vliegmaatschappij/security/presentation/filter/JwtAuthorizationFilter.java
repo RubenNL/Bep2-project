@@ -2,7 +2,6 @@ package nl.hu.bep2.vliegmaatschappij.security.presentation.filter;
 
 
 import io.jsonwebtoken.*;
-import nl.hu.bep2.vliegmaatschappij.security.data.UserProfile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -78,12 +77,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 			return null;
 		}
 
-		UserProfile principal = new UserProfile(
-				username,
-				(String) parsedToken.getBody().get("firstName"),
-				(String) parsedToken.getBody().get("lastName")
-		);
-
-		return new UsernamePasswordAuthenticationToken(principal, null, authorities);
+		return new UsernamePasswordAuthenticationToken(null, null, authorities);
 	}
 }
