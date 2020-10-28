@@ -30,4 +30,4 @@ jobs:
       - name: Dispatch activity_push event
         if: env.GHA_REPO_ALIVE == 'true'
         run: |
-            curl -X POST 'https://api.github.com/repos/$GITHUB_REPOSITORY/actions/workflows/gource.yml/dispatches' -H 'Authorization: token ${{ secrets.githubKey }}' -d '{"ref":"master"}'
+            curl -X POST 'https://api.github.com/repos/'$GITHUB_REPOSITORY'/actions/workflows/gource.yml/dispatches' -H 'Authorization: token ${{ secrets.githubKey }}' -d '{"ref":"master"}'
