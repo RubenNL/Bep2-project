@@ -23,6 +23,8 @@ public class Flight {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JsonIgnore
 	private FlightRoute route;
+	private boolean canceled = false;
+
 	@PrePersist
 	private void checkDatesAndMakeTCFlist() {
 		if(departureTime.isAfter(arrivalTime)) throw new DateException("Invalid dates!");
@@ -46,12 +48,17 @@ public class Flight {
 		this.route = route;
 		this.travelClassFlightList = travelClassFlightList;
 		this.plane = plane;
+		this.canceled = false;
 	}
 
 	public int getAvailableSeats() {
 		int count=0;
 		for(TravelClassFlight travelClassFlight:travelClassFlightList) count+= travelClassFlight.getAvailableSeats();
 		return count;
+	}
+
+	public void cancel(){
+		this.canceled = true;
 	}
 
 }
