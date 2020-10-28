@@ -86,9 +86,13 @@ public class PlaneController {
 	@PostMapping
 	public ResponseEntity<?> newPlane(@RequestBody PlaneDTO planeDTO){
 		Plane plane=new Plane();
+		System.out.println("1");
 		plane.setCode(planeDTO.code);
+		System.out.println("2");
 		plane.setType(planetypeRepository.getOne(planeDTO.type));
+		System.out.println("3");
 		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
+		System.out.println(entityModel);
 		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
 	}
