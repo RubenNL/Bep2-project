@@ -19,6 +19,7 @@ public class CustomerFlightService {
 		this.flightRepository = flightRepository;
 	}
 	//TODO TESTEN!!!
+	//TODO Canceled flights niet laten zien
 	public List<Flight> FindAvailableFlights(String departCode, String arivalCode, LocalDate departDate, int classID){
 		List<Flight> flightlistall = flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
 		List<Flight> flightlistAvailable = new ArrayList<>();

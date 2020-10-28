@@ -129,7 +129,26 @@ public class FlightController {
 				.body(entityModel);
 	}
 
-
+	@Operation(summary = "Cancel a flight by its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Flight has been set to canceled",
+					content = { @Content(mediaType = "application/json",
+							schema = @Schema(implementation = Flight.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid ID supplied",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Flight couldn't be found",
+					content = @Content) })
+	@RolesAllowed("EMPLOYEE")
+	@PatchMapping("/{id}")
+	ResponseEntity<?> cancelFlight(@PathVariable int id){
+		Flight flight = repository.getOne(id);
+		flight.cancel();
+		repository.save(flight);
+		EntityModel<Flight> entityModel = assembler.toModel(flight);
+		return ResponseEntity
+				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+				.body(entityModel);
+	}
 
 	@Operation(summary = "Delete a flight by its ID")
 	@ApiResponses(value = {
