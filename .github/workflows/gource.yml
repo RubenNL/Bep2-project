@@ -17,7 +17,7 @@ jobs:
           mkdir gource
           cat > ./gource/index.html <<EOL
             <title>V2B-5</title>
-            <b><a href="gource.mp4">video</a></b>
+            <b><a href="gource.mp4">video</a></b><br>
             <b><a href="swagger-ui">swagger-ui</a></b>
           EOL
           wget -O openapi.json https://bep2.herokuapp.com/v3/api-docs
@@ -31,13 +31,13 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: swagger-ui
-#      - name: Gource-Action
-#        uses: NBprojekt/gource-action@v1.0.1
-#        with:
-#          gource_title: 'V2B-5'
-#          gource_dir_depth: 5
-#          gource_seconds_per_day: 3
-#          gource_resolution: '1080p'
+      - name: Gource-Action
+        uses: NBprojekt/gource-action@v1.0.1
+        with:
+          gource_title: 'V2B-5'
+          gource_dir_depth: 5
+          gource_seconds_per_day: 3
+          gource_resolution: '1080p'
       - name: Deploy to pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
