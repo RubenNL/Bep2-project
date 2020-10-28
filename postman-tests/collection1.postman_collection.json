@@ -437,13 +437,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/plane/create",
+							"raw": "{{url}}/plane",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"plane",
-								"create"
+								"plane"
 							]
 						}
 					},
