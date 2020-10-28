@@ -6,9 +6,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
+import nl.hu.bep2.vliegmaatschappij.data.SpringPlanetypeRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.PlaneDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.PlaneModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -28,10 +30,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class PlaneController {
 	private final SpringPlaneRepository repository;
 	private final PlaneModelAssembler assembler;
+	private final SpringPlanetypeRepository planetypeRepository;
 
-	public PlaneController(SpringPlaneRepository repository, PlaneModelAssembler assembler) {
+	public PlaneController(SpringPlaneRepository repository, PlaneModelAssembler assembler, SpringPlanetypeRepository planetypeRepository) {
 		this.repository = repository;
 		this.assembler = assembler;
+		this.planetypeRepository = planetypeRepository;
 	}
 
 	@Operation(summary = "Get a plane by its code")
@@ -80,7 +84,10 @@ public class PlaneController {
 					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@PostMapping
-	public ResponseEntity<?> newPlane(@RequestBody Plane plane){
+	public ResponseEntity<?> newPlane(@RequestBody PlaneDTO planeDTO){
+		Plane plane=new Plane();
+		plane.setCode(planeDTO.code);
+		plane.setType(planetypeRepository.getOne(planeDTO.type));
 		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
 		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
@@ -97,10 +104,11 @@ public class PlaneController {
 					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{code}")
-	ResponseEntity<?> replacePlane(@RequestBody Plane newPlane, @PathVariable String code) {
+	ResponseEntity<?> replacePlane(@RequestBody PlaneDTO newPlaneDTO, @PathVariable String code) {
+		Plane newPlane=new Plane();
+		newPlane.setType(planetypeRepository.getOne(newPlaneDTO.type));
 		Plane updatedPlane = repository.findById(code)
 				.map(plane -> {
-					plane.setCode(newPlane.getCode());
 					plane.setType(newPlane.getType());
 					return repository.save(plane);
 				})

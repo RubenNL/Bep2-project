@@ -398,7 +398,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d00d2935-81d0-4bb0-8896-a74d28fee7b9",
+								"id": "c14df8c1-803e-4b2a-bbf4-943e5745ad9f",
 								"exec": [
 									"pm.test(\"Status test\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -416,7 +416,7 @@
 									"        var responseData=response.json();",
 									"        var requestData=JSON.parse(request.data);",
 									"        pm.expect(responseData.code).to.be.equals(requestData.code);",
-									"        pm.expect(responseData.type).to.be.equals(requestData.type);",
+									"        pm.expect(responseData.type.id).to.be.equals(requestData.type);",
 									"    })",
 									"});"
 								],
@@ -429,7 +429,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"Boeing747\",\n    \"type\":null\n}",
+							"raw": "{\n    \"code\":\"boing\",\n    \"type\":2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -470,8 +470,7 @@
 									"    pm.test(\"Plane is geupdated.\",()=>{",
 									"        var responseData=response.json();",
 									"        var requestData=JSON.parse(request.data);",
-									"        pm.expect(responseData.code).to.be.equals(requestData.code);",
-									"        pm.expect(responseData.type).to.be.equals(requestData.type);",
+									"        pm.expect(responseData.type.id).to.be.equals(requestData.type);",
 									"    })",
 									"});"
 								],
@@ -484,7 +483,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"code\":\"Boeing747\",\n    \"type\":null\n}",
+							"raw": "{\n    \"type\":3\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -743,37 +742,37 @@
 	],
 	"variable": [
 		{
-			"id": "1cf5b22f-ec9f-4ac2-891d-bce0e6b19244",
+			"id": "3cd460b1-cff2-488b-a7c8-7e2a3905a41a",
 			"key": "url",
 			"value": "https://bep2.herokuapp.com"
 		},
 		{
-			"id": "a84471cf-1129-4bc4-aef8-32280f857775",
+			"id": "a66098b2-f27c-47ca-b838-a61d1de13366",
 			"key": "authToken",
 			"value": ""
 		},
 		{
-			"id": "6afa6be8-347c-4517-a65f-c816cb61d142",
+			"id": "3ca2e478-4e1e-43c7-b7cf-510e521ae84d",
 			"key": "flightId",
 			"value": ""
 		},
 		{
-			"id": "553ae096-6e75-4b20-862f-624a934fdd9e",
+			"id": "cb765c10-edc2-4ed5-805a-25c5d5814b32",
 			"key": "planeID",
 			"value": ""
 		},
 		{
-			"id": "d1492b34-63d6-4ecf-bb42-32a3357a58ca",
+			"id": "f2096419-38ba-4a21-82db-131528f509bf",
 			"key": "airportCode",
 			"value": ""
 		},
 		{
-			"id": "804f3991-df3a-46c8-a2c9-6c1f9c187548",
+			"id": "e2f71a97-c52a-40c4-92de-9e2871ce76ed",
 			"key": "travelclassId",
 			"value": ""
 		},
 		{
-			"id": "53dc0be5-3848-4ac9-97d5-a5f1bb0fd316",
+			"id": "fb8dfae9-e119-4532-a34d-c6f37ddd6b6f",
 			"key": "bookingId",
 			"value": ""
 		}
