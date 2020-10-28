@@ -7,12 +7,12 @@ import org.springframework.context.annotation.Bean;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class TravelClassFlight {
 	@Id
 	@GeneratedValue
@@ -39,5 +39,4 @@ public class TravelClassFlight {
 	public double calculatePrice(){
 		return travelClass.getPricePerKm() * flight.getRoute().getDistance();
 	}
-
 }

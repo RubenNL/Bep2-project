@@ -19,6 +19,7 @@ public class Plane {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Planetype type;
 	@OneToMany(mappedBy="plane")
+	@ToString.Exclude
 	private List<Flight> flights;
 
 	public Plane(String code, Planetype type) {

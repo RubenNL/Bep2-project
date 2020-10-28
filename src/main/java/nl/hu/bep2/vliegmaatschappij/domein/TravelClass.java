@@ -28,6 +28,7 @@ public class TravelClass {
 	private int maxSeats;
 	@OneToMany(mappedBy="travelClass")
 	@JsonIgnore
+	@ToString.Exclude
 	private List<TravelClassFlight> travelClassFlightList;
 	@JsonIgnore //todo geeft conflicten met /plane/all nakijken of efficienter kan.
 	@ManyToOne
