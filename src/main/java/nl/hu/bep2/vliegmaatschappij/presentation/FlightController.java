@@ -129,6 +129,8 @@ public class FlightController {
 				.body(entityModel);
 	}
 
+
+
 	@Operation(summary = "Delete a flight by its ID")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Flight has been deleted",
