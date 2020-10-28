@@ -3,4 +3,4 @@ data=require('fs').readFileSync('travel_class_flight.raw','utf8').split('\n').ma
 	parts=line.split('\t')
 	return '('+id+','+parts[0]+','+parts[1]+')'
 }).join(',')
-console.log('INSERT INTO travel_class_flight(data,id,travel_class_id) VALUES '+data+';')
+console.log('INSERT INTO travel_class_flight(id,travel_class_id,flight_id) VALUES '+data+';')
