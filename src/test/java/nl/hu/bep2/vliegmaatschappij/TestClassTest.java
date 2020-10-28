@@ -18,3 +18,4 @@ class TestClassTest {
 		assertTrue(testClass.returnTrue());
 	}
 }
+
