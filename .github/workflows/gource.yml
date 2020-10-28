@@ -16,17 +16,28 @@ jobs:
         run: |
           mkdir gource
           cat > ./gource/index.html <<EOL
-            <meta http-equiv="refresh" content="0; url=gource.mp4" />
-            <title>Gource V2B-5</title>
+            <title>V2B-5</title>
             <b><a href="gource.mp4">video</a></b>
+            <b><a href="swagger-ui">swagger-ui</a></b>
           EOL
-      - name: Gource-Action
-        uses: NBprojekt/gource-action@v1.0.1
+          wget -O openapi.json https://bep2.herokuapp.com/v3/api-docs
+      - name: Generate Swagger UI
+        uses: Legion2/swagger-ui-action@v1
         with:
-          gource_title: 'V2B-5'
-          gource_dir_depth: 5
-          gource_seconds_per_day: 3
-          gource_resolution: '1080p'
+          output: gource/swagger-ui
+          spec-file: openapi.json
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: swagger-ui
+#      - name: Gource-Action
+#        uses: NBprojekt/gource-action@v1.0.1
+#        with:
+#          gource_title: 'V2B-5'
+#          gource_dir_depth: 5
+#          gource_seconds_per_day: 3
+#          gource_resolution: '1080p'
       - name: Deploy to pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
