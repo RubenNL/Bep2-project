@@ -9,6 +9,7 @@ import nl.hu.bep2.vliegmaatschappij.data.SpringCustomerRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Customer;
 import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.CustomerDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.CustomerModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -24,7 +25,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@RequestMapping("/Customer")
+@RequestMapping("/customer")
 public class CustomerController {
     private final SpringCustomerRepository repository;
     private final CustomerModelAssembler assembler;
@@ -79,9 +80,10 @@ public class CustomerController {
             @ApiResponse(responseCode = "404", description = "Customer data can't be submitted",
                     content = @Content) })
     @RolesAllowed("EMPLOYEE")
-    @PostMapping("/create")
-    public ResponseEntity<?> newCustomer(@RequestBody Customer customer){
-        EntityModel<Customer> entityModel = assembler.toModel(repository.save(customer));
+    @PostMapping
+    public ResponseEntity<?> newCustomer(@RequestBody CustomerDTO customerDTO){
+        EntityModel<Customer> entityModel = assembler.toModel(repository.save(new Customer(customerDTO.firstName,
+                customerDTO.lastName, customerDTO.birthday, customerDTO.email, customerDTO.nationality,customerDTO.phone )));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entityModel);
     }
