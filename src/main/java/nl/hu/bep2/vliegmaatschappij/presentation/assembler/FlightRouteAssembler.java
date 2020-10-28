@@ -3,8 +3,6 @@ package nl.hu.bep2.vliegmaatschappij.presentation.assembler;
 import nl.hu.bep2.vliegmaatschappij.domein.FlightRoute;
 import nl.hu.bep2.vliegmaatschappij.presentation.AirportController;
 import nl.hu.bep2.vliegmaatschappij.presentation.FlightRouteController;
-import nl.hu.bep2.vliegmaatschappij.presentation.PlaneController;
-import nl.hu.bep2.vliegmaatschappij.presentation.TravelClassController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -20,7 +18,6 @@ public class FlightRouteAssembler implements RepresentationModelAssembler<Flight
 		return EntityModel.of(flightroute,
 				WebMvcLinkBuilder.linkTo(methodOn(FlightRouteController.class).one(flightroute.getId())).withSelfRel(),
 				linkTo(methodOn(AirportController.class).one(flightroute.getDeparture().getCode())).withRel("departure"),
-				linkTo(methodOn(AirportController.class).one(flightroute.getDestination().getCode())).withRel("destination"),
-				linkTo(methodOn(TravelClassController.class).all()).withRel("flightRoutes"));
+				linkTo(methodOn(AirportController.class).one(flightroute.getDestination().getCode())).withRel("destination"));
 	}
 }
