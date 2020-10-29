@@ -33,7 +33,7 @@ public class CustomerFlightController {
 
 	@Operation(summary = "Find a flight")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Flights couldn't be found",
+			@ApiResponse(responseCode = "200", description = "Flights were found",
 					content = { @Content(mediaType = "application/json",
 							schema = @Schema(implementation = Flight.class)) }),
 			@ApiResponse(responseCode = "400", description = "Invalid information supplied",
