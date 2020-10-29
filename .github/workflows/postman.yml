@@ -19,16 +19,16 @@ jobs:
         reporters: cli
         folder: done
 
-    - name: Output summary to console
-      run: echo ${{ steps.run-api-tests.outputs.summary }}
-    - name: Checkout
-      uses: actions/checkout@v1
+#    - name: Output summary to console
+#      run: echo ${{ steps.run-api-tests.outputs.summary }}
+#    - name: Checkout
+#      uses: actions/checkout@v1
 
-    - name: Run API Tests
-      uses: anthonyvscode/newman-action@v1
-      with:
-        collection: postman-tests/collection1.postman_collection.json
-        reporters: cli
+#    - name: Run API Tests
+#      uses: anthonyvscode/newman-action@v1
+#      with:
+#        collection: postman-tests/collection1.postman_collection.json
+#        reporters: cli
 
-    - name: Output summary to console
-      run: echo ${{ steps.run-api-tests.outputs.summary }}
+#    - name: Output summary to console
+#      run: echo ${{ steps.run-api-tests.outputs.summary }}
