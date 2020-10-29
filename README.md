@@ -9,4 +9,5 @@ https://bep2project.myjetbrains.com/
 ![domeinmodel](https://github.com/huict/prbed-2021-v2b-v/blob/master/class-diagram-iteratie2.jpg "domeinmodel")
 
 swagger-ui+gource(gehost op github pages): https://huict.github.io/prbed-2021-v2b-v
+
 swagger-ui op heroku: https://bep2.herokuapp.com/swagger-ui.html
