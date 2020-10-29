@@ -6,8 +6,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.data.SpringPlanetypeRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Flight;
-import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.domein.Planetype;
 import nl.hu.bep2.vliegmaatschappij.domein.TravelClass;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
@@ -73,7 +71,7 @@ public class PlanetypeController {
 				.collect(Collectors.toList());
 		return CollectionModel.of(planetypes, linkTo(methodOn(PlanetypeController.class).all()).withSelfRel());
 	}
-	//todo hateoas!!
+
 	@Operation(summary = "Create a Planetype")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Planetype created",
@@ -81,7 +79,7 @@ public class PlanetypeController {
 							schema = @Schema(implementation = Planetype.class)) }),
 			@ApiResponse(responseCode = "400", description = "Invalid information supplied",
 					content = @Content),
-			@ApiResponse(responseCode = "404", description = "Planetype couldn't be created",
+			@ApiResponse(responseCode = "404", description = "Planetype couldn't be created, possibly a TravelClass error",
 					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@PostMapping
