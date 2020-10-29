@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -16,6 +18,7 @@ public class EmployeeController {
 		this.userService = userService;
 	}
 	@PostMapping("/setEmployee")
+	@RolesAllowed("EMPLOYEE")
 	public void setEmployee(@Validated @RequestBody SetEmployee setEmployee) {
 		userService.setEmployee(setEmployee.username,setEmployee.employee);
 	}
