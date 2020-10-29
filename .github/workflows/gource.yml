@@ -25,7 +25,7 @@ jobs:
         uses: Legion2/swagger-ui-action@v1
         with:
           output: gource/swagger-ui
-          spec-file: openapi.json
+          spec-file: config.json
       - name: Gource-Action
         uses: NBprojekt/gource-action@v1.0.1
         with:
