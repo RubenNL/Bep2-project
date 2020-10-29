@@ -19,19 +19,19 @@ public class CustomerFlightService {
 		this.flightRepository = flightRepository;
 	}
 	//TODO TESTEN!!!
-	//TODO Canceled flights niet laten zien
 	public List<Flight> FindAvailableFlights(String departCode, String arivalCode, LocalDate departDate, int classID){
 		List<Flight> flightlistall = flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
 		List<Flight> flightlistAvailable = new ArrayList<>();
 		for (Flight flight : flightlistall){
-			for(TravelClass tc : flight.getPlane().getType().getTravelclasses()){
-				if(tc.getId() == classID){
-					flightlistAvailable.add(flight);
+			if(!flight.isCanceled()){
+				for(TravelClass tc : flight.getPlane().getType().getTravelclasses()){
+					if(tc.getId() == classID){
+						flightlistAvailable.add(flight);
+					}
 				}
 			}
 		}
 		return flightlistAvailable;
-
 	}
 
 	public List<Flight> FindAllAvailableFlights(){ //todo TESTEN!!!
@@ -39,11 +39,10 @@ public class CustomerFlightService {
 		List<Flight> flightlistall = flightRepository.findByTime(dateTime);
 		List<Flight> flightlistAvailable = new ArrayList<>();
 		for (Flight flight : flightlistall){
-			if(flight.getAvailableSeats() > 0){
+			if( (!flight.isCanceled()) && (flight.getAvailableSeats() > 0) ){
 				flightlistAvailable.add(flight);
 			}
 		}
 		return flightlistAvailable;
-
 	}
 }
