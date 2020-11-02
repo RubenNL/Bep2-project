@@ -46,6 +46,7 @@ public class BookingController {
     @RolesAllowed("EMPLOYEE")
     @PostMapping
     ResponseEntity<?> newBooking(@RequestBody Booking booking) {
+        System.out.println(booking);
         EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())

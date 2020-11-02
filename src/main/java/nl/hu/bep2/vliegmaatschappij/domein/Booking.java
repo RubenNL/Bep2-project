@@ -17,9 +17,9 @@ public class Booking {
 	@Id
 	@GeneratedValue
 	private int id;
-	@ManyToMany
+	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Person> persons;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	@ManyToMany
 	private List<TravelClassFlight> travelClassFlightList;

@@ -2,11 +2,9 @@ package nl.hu.bep2.vliegmaatschappij.domein;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +23,8 @@ public class Person {
 	protected String email;
 	protected String phone;
 	protected String nationality;
-	@ManyToMany(mappedBy="persons")
-	protected List<Booking> bookingList;
+	@ManyToMany(mappedBy="persons",cascade= CascadeType.ALL)
+	protected List<Booking> bookingList = new ArrayList<>();
 
 	public Person(String firstName, String lastName, LocalDate birthday, String email, String phone, String nationality) {
 		this.firstName = firstName;
