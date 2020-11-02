@@ -5,10 +5,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import nl.hu.bep2.vliegmaatschappij.data.SpringEmployeeController;
-import nl.hu.bep2.vliegmaatschappij.domein.Customer;
+import nl.hu.bep2.vliegmaatschappij.data.SpringEmployeeRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Employee;
-import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.EmployeeDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.EmployeeModelAssembler;
@@ -33,10 +31,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class EmployeeController {
 
 	private final UserService userService;
-	private final SpringEmployeeController repository;
+	private final SpringEmployeeRepository repository;
 	private final EmployeeModelAssembler assembler;
 
-	public EmployeeController(UserService userService, SpringEmployeeController repository, EmployeeModelAssembler assembler) {
+	public EmployeeController(UserService userService, SpringEmployeeRepository repository, EmployeeModelAssembler assembler) {
 		this.userService = userService;
 		this.repository = repository;
 		this.assembler = assembler;
