@@ -22,7 +22,6 @@ public class Booking {
 	private Customer customer;
 	@ManyToOne
 	private TravelClassFlight travelClassFlight;
-
 	private double price;
 	private boolean confirmed;
 

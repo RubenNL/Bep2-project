@@ -1,11 +1,23 @@
 package nl.hu.bep2.vliegmaatschappij.application;
 
+import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassFlightRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Booking;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
+import nl.hu.bep2.vliegmaatschappij.domein.TravelClassFlight;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookingService {
+	private SpringTravelClassFlightRepository tcfRepos;
+	public BookingService() {
+	}
+
+	public Booking createByDTO(BookingDTO bookingDTO){ //todo klant, tcf en personen toevoegen.
+		TravelClassFlight tcf = tcfRepos.findByFlightAndClass(bookingDTO.FlightID, bookingDTO.travelClassID).get(0); //Iknow dit kan netter maar boieieeee
+		Booking booking = new Booking();
+		return booking;
+	}
 	public Booking confirmBooking(Booking booking) {
 		booking.setConfirmed(true);
 		Flight flight = booking.getTravelClassFlight().getFlight();

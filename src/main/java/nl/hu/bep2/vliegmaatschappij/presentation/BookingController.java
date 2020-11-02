@@ -9,7 +9,9 @@ import nl.hu.bep2.vliegmaatschappij.application.BookingService;
 import nl.hu.bep2.vliegmaatschappij.data.SpringBookingRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Airport;
 import nl.hu.bep2.vliegmaatschappij.domein.Booking;
+import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.BookingModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -48,9 +50,9 @@ public class BookingController {
                     content = @Content) })
     @RolesAllowed("EMPLOYEE")
     @PostMapping
-    ResponseEntity<?> newBooking(@RequestBody Booking booking) {
-        System.out.println(booking);
-        EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
+    ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO) {
+    	Booking booking = service.createByDTO(bookingDTO);
+    	EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entityModel);
