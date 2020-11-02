@@ -1,5 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class Customer extends Person {
     @Id
     @GeneratedValue
     private int id;
+    @JsonIgnore
     @OneToMany(mappedBy="customer")
     List<Booking> bookings = new ArrayList<>();
 
