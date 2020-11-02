@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-//todo Swagger UI annotations
 @RestController
 @RequestMapping("/customer")
 public class CustomerFlightController {

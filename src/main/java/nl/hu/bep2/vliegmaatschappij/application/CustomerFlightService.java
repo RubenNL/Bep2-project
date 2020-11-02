@@ -18,7 +18,6 @@ public class CustomerFlightService {
 	public CustomerFlightService(SpringFlightRepository flightRepository) {
 		this.flightRepository = flightRepository;
 	}
-	//TODO TESTEN!!!
 	public List<Flight> FindAvailableFlights(String departCode, String arivalCode, LocalDate departDate, int classID){
 		List<Flight> flightlistall = flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
 		List<Flight> flightlistAvailable = new ArrayList<>();
@@ -34,7 +33,7 @@ public class CustomerFlightService {
 		return flightlistAvailable;
 	}
 
-	public List<Flight> FindAllAvailableFlights(){ //todo TESTEN!!!
+	public List<Flight> FindAllAvailableFlights(){
 		LocalDateTime dateTime = LocalDateTime.now();
 		List<Flight> flightlistall = flightRepository.findByTime(dateTime);
 		List<Flight> flightlistAvailable = new ArrayList<>();

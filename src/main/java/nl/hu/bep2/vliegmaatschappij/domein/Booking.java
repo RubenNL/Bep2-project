@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -21,7 +20,13 @@ public class Booking {
 	private List<Person> persons;
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Customer customer;
-	@ManyToMany
-	private List<TravelClassFlight> travelClassFlightList;
+	@ManyToOne
+	private TravelClassFlight travelClassFlight;
+
 	private double price;
+	private boolean confirmed;
+
+	public Booking() {
+		confirmed = false;
+	}
 }

@@ -112,7 +112,7 @@ public class FlightController {
 
 	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{id}")
-	ResponseEntity<?> replaceFlight(@RequestBody Flight newFlight, @PathVariable int id) {
+	EntityModel<Flight> replaceFlight(@RequestBody Flight newFlight, @PathVariable int id) {
 		Flight updatedFlight = repository.findById(id)
 				.map(flight -> {
 					flight.setArrivalTime(newFlight.getArrivalTime());
@@ -123,10 +123,7 @@ public class FlightController {
 					newFlight.setId(id);
 					return repository.save(newFlight);
 				});
-		EntityModel<Flight> entityModel = assembler.toModel(updatedFlight);
-		return ResponseEntity
-				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
-				.body(entityModel);
+		return assembler.toModel(updatedFlight);
 	}
 
 	@Operation(summary = "Cancel a flight by its ID")

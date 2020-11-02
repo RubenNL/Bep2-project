@@ -101,7 +101,6 @@ public class PlanetypeController {
 				.body(entityModel);
 	}
 
-	//todo compatible maken met PlaneDTO
 	@Operation(summary = "Replace a planetype by its ID")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Planetype found",
