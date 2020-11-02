@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import nl.hu.bep2.vliegmaatschappij.application.BookingService;
 import nl.hu.bep2.vliegmaatschappij.data.SpringBookingRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Airport;
 import nl.hu.bep2.vliegmaatschappij.domein.Booking;
@@ -28,11 +29,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class BookingController {
     private final SpringBookingRepository repository;
     private final BookingModelAssembler assembler;
+    private final BookingService service;
 
-    public BookingController(SpringBookingRepository repository, BookingModelAssembler assembler){
+    public BookingController(SpringBookingRepository repository, BookingModelAssembler assembler, BookingService service){
         this.repository = repository;
         this.assembler = assembler;
-    }
+		this.service = service;
+	}
 
     @Operation(summary = "Create a booking")
     @ApiResponses(value = {
@@ -128,4 +131,12 @@ public class BookingController {
     public void deleteBooking(@PathVariable int id) {
         repository.deleteById(id);
     }
+
+    @PatchMapping("/confirm/{id}")
+    public void confirmBooking(@PathVariable int id) {
+		Booking booking = repository.findById(id).orElseThrow(() -> new NotFoundException("Booking not found"));;
+    	Booking confirmedBooking = service.confirmBooking(booking);
+
+		EntityModel<Booking> entityModel = assembler.toModel(confirmedBooking);
+	}
 }
