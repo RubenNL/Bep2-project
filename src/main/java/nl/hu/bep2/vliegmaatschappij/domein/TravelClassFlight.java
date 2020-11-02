@@ -21,6 +21,7 @@ public class TravelClassFlight {
 	@JsonIgnore
 	private Flight flight;
 
+	@JsonIgnore
 	@OneToMany(mappedBy="travelClassFlight")
 	private List<Booking> bookingList = new ArrayList<>();
 
