@@ -5,6 +5,7 @@ import nl.hu.bep2.vliegmaatschappij.security.presentation.dto.Registration;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.websocket.server.PathParam;
 
 @RestController
@@ -23,7 +24,7 @@ public class RegistrationController {
 				registration.password
 		);
 	}
-	//TODO verwijderen voor opleveren.
+	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{username}")
 	public void register(@PathVariable("username") String username) {
 		try {

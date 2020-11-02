@@ -13,7 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>vliegmaatschappij</name>
     <description>vliegmaatschappij project</description>
-
     <properties>
         <java.version>13</java.version>
         <jdbc.url>jdbc:postgresql://127.0.0.1:5432/vliegmaatschappij
