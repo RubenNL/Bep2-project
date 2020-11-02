@@ -104,7 +104,7 @@ public class PlaneController {
 					content = @Content) })
 	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{code}")
-	ResponseEntity<?> replacePlane(@RequestBody PlaneDTO newPlaneDTO, @PathVariable String code) {
+	EntityModel<Plane> replacePlane(@RequestBody PlaneDTO newPlaneDTO, @PathVariable String code) {
 		Plane newPlane=new Plane();
 		newPlane.setType(planetypeRepository.getOne(newPlaneDTO.type));
 		Plane updatedPlane = repository.findById(code)
@@ -116,10 +116,7 @@ public class PlaneController {
 					newPlane.setCode(code);
 					return repository.save(newPlane);
 				});
-		EntityModel<Plane> entityModel = assembler.toModel(updatedPlane);
-		return ResponseEntity
-				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
-				.body(entityModel);
+		return assembler.toModel(updatedPlane);
 	}
 
 	@Operation(summary = "Delete a plane by its code")

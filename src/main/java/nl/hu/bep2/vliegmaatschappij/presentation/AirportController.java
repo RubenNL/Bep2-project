@@ -99,7 +99,7 @@ public class AirportController {
 
 	@RolesAllowed("EMPLOYEE")
 	@PutMapping("/{code}")
-	ResponseEntity<?> replaceAirport(@RequestBody Airport newAirport, @PathVariable String code) {
+	EntityModel<Airport> replaceAirport(@RequestBody Airport newAirport, @PathVariable String code) {
 		Airport updatedAirport = repository.findById(code)
 				.map(airport -> {
 					airport.setName(newAirport.getName());
@@ -113,10 +113,7 @@ public class AirportController {
 					newAirport.setCode(code);
 					return repository.save(newAirport);
 				});
-		EntityModel<Airport> entityModel = assembler.toModel(updatedAirport);
-		return ResponseEntity
-				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
-				.body(entityModel);
+		return assembler.toModel(updatedAirport);
 	}
 
 	@Operation(summary = "Delete an airport")
