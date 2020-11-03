@@ -80,7 +80,7 @@ class FindPeopleServiceTest {
 						"Smit", LocalDate.now().minusMonths(3),
 						"example@gmail.com", "5678",
 						"0676462648", "Italiaans"),
-				"Code zou niet opnieuw gebruikt moeten kunnen worden"
+				"Email zou niet opnieuw geregistreerd moeten kunnen worden"
 		);
 	}
 }
