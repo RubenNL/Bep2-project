@@ -7,9 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.application.BookingService;
 import nl.hu.bep2.vliegmaatschappij.data.SpringBookingRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Airport;
-import nl.hu.bep2.vliegmaatschappij.domein.Booking;
-import nl.hu.bep2.vliegmaatschappij.domein.Flight;
+import nl.hu.bep2.vliegmaatschappij.domein.*;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.BookingModelAssembler;
@@ -17,6 +15,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
@@ -48,10 +47,10 @@ public class BookingController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Booking was not created",
                     content = @Content) })
-    @RolesAllowed("EMPLOYEE")
+    @RolesAllowed("USER")
     @PostMapping
-    ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO) {
-    	Booking booking = service.createByDTO(bookingDTO);
+    ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal Person person) {
+    	Booking booking = service.createByDTO(bookingDTO, person);
     	EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())

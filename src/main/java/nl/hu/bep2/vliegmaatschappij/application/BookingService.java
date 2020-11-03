@@ -1,10 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.application;
 
 import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassFlightRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Booking;
-import nl.hu.bep2.vliegmaatschappij.domein.Flight;
-import nl.hu.bep2.vliegmaatschappij.domein.Person;
-import nl.hu.bep2.vliegmaatschappij.domein.TravelClassFlight;
+import nl.hu.bep2.vliegmaatschappij.domein.*;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.PersonDTO;
 import org.springframework.stereotype.Service;
@@ -18,9 +15,10 @@ public class BookingService {
 		this.tcfRepos = tcfRepos;
 	}
 
-	public Booking createByDTO(BookingDTO bookingDTO){ //todo klant, tcf en personen toevoegen.
+	public Booking createByDTO(BookingDTO bookingDTO, Person person){ //todo klant, tcf en personen toevoegen.
 		TravelClassFlight tcf = tcfRepos.findByFlightAndClass(bookingDTO.FlightID, bookingDTO.travelClassID).get(0); //Iknow dit kan netter maar boieieeee
 		System.out.println(tcf);
+		System.out.println(person.getFirstName());
 		List<Person> persons = new ArrayList<>();
 		for(PersonDTO personDTO : bookingDTO.personDTOS){ //if-null exception
 			persons.add(new Person(personDTO.firstName, personDTO.lastName, personDTO.birthday, personDTO.email, personDTO.phone, personDTO.nationality));
@@ -28,6 +26,7 @@ public class BookingService {
 		Booking booking = new Booking();
 		booking.setTravelClassFlight(tcf);
 		booking.setPersons(persons);
+		booking.setCustomer((Customer) person);
 		return booking;
 	}
 
