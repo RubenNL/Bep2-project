@@ -24,6 +24,10 @@ public class Booking {
 	private TravelClassFlight travelClassFlight;
 	private double price;
 	private boolean confirmed;
+	@PrePersist
+	private void calculatePrice(){
+		price = travelClassFlight.calculatePrice() * persons.size();
+	}
 
 	public Booking() {
 		confirmed = false;
