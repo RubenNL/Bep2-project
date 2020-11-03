@@ -30,8 +30,8 @@ jobs:
         uses: NBprojekt/gource-action@v1.0.1
         with:
           gource_title: 'V2B-5'
-          gource_dir_depth: 5
-          gource_seconds_per_day: 3
+          gource_dir_depth: 10
+          gource_seconds_per_day: 6
           gource_resolution: '1080p'
       - name: Deploy to pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
