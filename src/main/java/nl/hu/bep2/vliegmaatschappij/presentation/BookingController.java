@@ -140,7 +140,7 @@ public class BookingController {
 
     @PatchMapping("/confirm/{id}")
     public EntityModel<Booking> confirmBooking(@PathVariable int id) {
-		Booking booking = repository.findById(id).orElseThrow(() -> new NotFoundException("Booking not found"));;
+		Booking booking = repository.findById(id).orElseThrow(() -> new NotFoundException("Booking not found"));
     	Booking confirmedBooking = service.confirmBooking(booking);
 		repository.save(confirmedBooking);
 		return assembler.toModel(confirmedBooking);
