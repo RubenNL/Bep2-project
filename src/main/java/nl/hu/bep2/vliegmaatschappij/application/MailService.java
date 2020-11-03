@@ -39,6 +39,7 @@ public class MailService {
 
 		try {
 			MimeMessage message = new MimeMessage(session);
+
 			message.setFrom(new InternetAddress(user));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject(subject);
