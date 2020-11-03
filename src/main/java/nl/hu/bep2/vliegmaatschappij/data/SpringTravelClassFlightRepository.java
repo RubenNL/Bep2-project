@@ -10,6 +10,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface SpringTravelClassFlightRepository extends JpaRepository<TravelClassFlight, Integer> {
-	@Query("SELECT travelclassflight FROM TravelClassFlight travelclassflight WHERE travelclassflight.flight.id= :flightID AND travelclassflight.travelClass.id= :tcID")
-	List<TravelClassFlight> findByFlightAndClass(@Param("flightID")int flightID, @Param("tcID")int tcID);
+
 }

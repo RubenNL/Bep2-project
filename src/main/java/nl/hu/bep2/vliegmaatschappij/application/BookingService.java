@@ -15,8 +15,8 @@ public class BookingService {
 		this.tcfRepos = tcfRepos;
 	}
 
-	public Booking createByDTO(BookingDTO bookingDTO, Person currentUser){ //todo klant, tcf en personen toevoegen.
-		TravelClassFlight tcf = tcfRepos.findByFlightAndClass(bookingDTO.FlightID, bookingDTO.travelClassID).get(0); //Iknow dit kan netter maar boieieeee
+	public Booking createByDTO(BookingDTO bookingDTO, Person currentUser){ 
+		TravelClassFlight tcf = tcfRepos.getOne(bookingDTO.travelClassFlightID);
 		List<Person> persons = new ArrayList<>();
 		for(PersonDTO personDTO : bookingDTO.personDTOS){ //if-null exception
 			persons.add(new Person(personDTO.firstName, personDTO.lastName, personDTO.birthday, personDTO.email, personDTO.phone, personDTO.nationality));
