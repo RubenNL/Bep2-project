@@ -98,6 +98,6 @@ INSERT INTO flight (id, arrival_time, departure_time, plane_code, route_id, canc
 
 INSERT INTO travel_class_flight(id,travel_class_id,flight_id) VALUES (0,21,0),(1,20,0),(2,6,1),(3,5,1),(4,4,2),(5,3,2),(6,2,2),(7,6,3),(8,5,3),(9,17,4),(10,16,4),(11,27,5),(12,26,5),(13,6,6),(14,5,6),(15,1,7),(16,0,7),(17,6,8),(18,5,8),(19,29,9),(20,28,9),(21,10,10),(22,9,10),(23,8,11),(24,7,11),(25,17,12),(26,16,12),(27,6,13),(28,5,13),(29,1,14),(30,0,14),(31,17,15),(32,16,15),(33,6,16),(34,5,16),(35,10,17),(36,9,17),(37,10,18),(38,9,18),(39,6,19),(40,5,19),(41,6,20),(42,5,20),(43,10,21),(44,9,21),(45,10,22),(46,9,22),(47,8,23),(48,7,23),(49,4,24),(50,3,24),(51,2,24),(52,17,25),(53,16,25),(54,8,26),(55,7,26),(56,13,27),(57,12,27),(58,11,27),(59,17,28),(60,16,28),(61,10,29),(62,9,29);
 
---INSERT INTO Person(id,is_employee,password,username) VALUES (0,true,'$2a$10$.nxNMxstRufJ9bfqabWnX.6hVB67xdJw0U.toGJg8CPLhGcSLxwgy','admin');
+INSERT INTO Person(dtype,id,birthday,email,first_name,last_name,nationality,password,phone) VALUES ('Employee',0,'1980-1-6','admin@example.com','admin','admin','Dutch','$2a$10$.nxNMxstRufJ9bfqabWnX.6hVB67xdJw0U.toGJg8CPLhGcSLxwgy','123456789000');
 
 SELECT setval('hibernate_sequence', 1000, true);

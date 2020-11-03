@@ -10,7 +10,6 @@ public class Registration {
 	public String firstName;
 	@NotBlank
 	public String lastName;
-	@NotBlank
 	public LocalDate birthday;
 	@NotBlank
 	@Email
