@@ -21,7 +21,7 @@ public class Employee extends Person {
 	@GeneratedValue
 	private int id;
 
-	public Employee(String firstName, String lastName, LocalDate birthday, String email, String phone, String nationality) {
-		super(firstName, lastName, birthday, email, phone, nationality);
+	public Employee(String firstName, String lastName, LocalDate birthday, String email, String password, String phone, String nationality) {
+		super(firstName, lastName, birthday, email, password, phone, nationality);
 	}
 }

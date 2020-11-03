@@ -9,7 +9,7 @@ import nl.hu.bep2.vliegmaatschappij.data.SpringCustomerRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Customer;
 import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
-import nl.hu.bep2.vliegmaatschappij.presentation.DTO.CustomerDTO;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.PersonDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.CustomerModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -81,7 +81,7 @@ public class CustomerController {
                     content = @Content) })
     @RolesAllowed("EMPLOYEE")
     @PostMapping
-    public ResponseEntity<?> newCustomer(@RequestBody CustomerDTO customerDTO){
+    public ResponseEntity<?> newCustomer(@RequestBody PersonDTO customerDTO){
         EntityModel<Customer> entityModel = assembler.toModel(repository.save(new Customer(customerDTO.firstName,
                 customerDTO.lastName, customerDTO.birthday, customerDTO.email, customerDTO.nationality,customerDTO.phone )));
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())

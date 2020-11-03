@@ -7,14 +7,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.application.BookingService;
 import nl.hu.bep2.vliegmaatschappij.data.SpringBookingRepository;
-import nl.hu.bep2.vliegmaatschappij.domein.Airport;
-import nl.hu.bep2.vliegmaatschappij.domein.Booking;
+import nl.hu.bep2.vliegmaatschappij.domein.*;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.BookingModelAssembler;
+import nl.hu.bep2.vliegmaatschappij.security.data.SpringPersonRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
@@ -30,12 +32,14 @@ public class BookingController {
     private final SpringBookingRepository repository;
     private final BookingModelAssembler assembler;
     private final BookingService service;
+    private final SpringPersonRepository personRepository;
 
-    public BookingController(SpringBookingRepository repository, BookingModelAssembler assembler, BookingService service){
+    public BookingController(SpringBookingRepository repository, BookingModelAssembler assembler, BookingService service, SpringPersonRepository personRepository){
         this.repository = repository;
         this.assembler = assembler;
 		this.service = service;
-	}
+        this.personRepository = personRepository;
+    }
 
     @Operation(summary = "Create a booking")
     @ApiResponses(value = {
@@ -46,10 +50,12 @@ public class BookingController {
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "Booking was not created",
                     content = @Content) })
-    @RolesAllowed("EMPLOYEE")
+    @RolesAllowed("USER")
     @PostMapping
-    ResponseEntity<?> newBooking(@RequestBody Booking booking) {
-        EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
+    ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal String email) {
+        Person person=personRepository.findByEmail(email).get();
+    	Booking booking = service.createByDTO(bookingDTO, person);
+    	EntityModel<Booking> entityModel = assembler.toModel(repository.getOne(repository.save(booking).getId()));
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entityModel);

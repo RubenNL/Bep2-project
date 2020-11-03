@@ -1,11 +1,34 @@
 package nl.hu.bep2.vliegmaatschappij.application;
 
-import nl.hu.bep2.vliegmaatschappij.domein.Booking;
-import nl.hu.bep2.vliegmaatschappij.domein.Flight;
+import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassFlightRepository;
+import nl.hu.bep2.vliegmaatschappij.domein.*;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
+import nl.hu.bep2.vliegmaatschappij.presentation.DTO.PersonDTO;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BookingService {
+	private final SpringTravelClassFlightRepository tcfRepos;
+	public BookingService(SpringTravelClassFlightRepository tcfRepos) {
+		this.tcfRepos = tcfRepos;
+	}
+
+	public Booking createByDTO(BookingDTO bookingDTO, Person currentUser){ //todo klant, tcf en personen toevoegen.
+		TravelClassFlight tcf = tcfRepos.findByFlightAndClass(bookingDTO.FlightID, bookingDTO.travelClassID).get(0); //Iknow dit kan netter maar boieieeee
+		List<Person> persons = new ArrayList<>();
+		for(PersonDTO personDTO : bookingDTO.personDTOS){ //if-null exception
+			persons.add(new Person(personDTO.firstName, personDTO.lastName, personDTO.birthday, personDTO.email, personDTO.phone, personDTO.nationality));
+		}
+		persons.add(currentUser);
+		Booking booking = new Booking();
+		booking.setTravelClassFlight(tcf);
+		booking.setPersons(persons);
+		booking.setCustomer((Customer) currentUser);
+		return booking;
+	}
+
 	public Booking confirmBooking(Booking booking) {
 		booking.setConfirmed(true);
 		Flight flight = booking.getTravelClassFlight().getFlight();

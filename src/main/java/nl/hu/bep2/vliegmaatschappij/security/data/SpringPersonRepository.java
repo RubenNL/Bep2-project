@@ -1,5 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.security.data;
 
+import nl.hu.bep2.vliegmaatschappij.domein.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -12,6 +13,6 @@ import java.util.Optional;
  * In more loosely coupled components, you would add an intermediary abstraction
  * like an abstract repository or a DAO!
  */
-public interface SpringUserRepository extends JpaRepository<User, Long> {
-	Optional<User> findByUsername(String username);
+public interface SpringPersonRepository extends JpaRepository<Person, Long> {
+	Optional<Person> findByEmail(String email);
 }
