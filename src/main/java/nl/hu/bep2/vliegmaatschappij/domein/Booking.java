@@ -35,7 +35,7 @@ public class Booking {
 	private void sendCreationmail(){
 		Flight flight = travelClassFlight.getFlight();
 		//original image: https://www.flaticon.com/free-icon/worlwide_655789
-		StringBuilder mailBody = new StringBuilder("<html><img src=\"/mailbanner.png\"");
+		StringBuilder mailBody = new StringBuilder("<html><img src=\"https://bep2.herokuapp.com/mailbanner.png\"");
 		mailBody.append(String.format("<h3>Booking %s has been created!</h3>", id));
 		mailBody.append("<h4>Thank you for flying with V2B Flightservice.</h4>");
 		mailBody.append("<h5>Flight details: </h5>");
