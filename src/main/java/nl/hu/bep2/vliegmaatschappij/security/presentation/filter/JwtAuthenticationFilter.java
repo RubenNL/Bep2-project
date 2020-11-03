@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import nl.hu.bep2.vliegmaatschappij.security.data.User;
+import nl.hu.bep2.vliegmaatschappij.domein.Person;
 import nl.hu.bep2.vliegmaatschappij.security.presentation.dto.Login;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -58,14 +58,14 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 				.readValue(request.getInputStream(), Login.class);
 
 		return authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(login.username, login.password)
+				new UsernamePasswordAuthenticationToken(login.email, login.password)
 		);
 	}
 
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 											FilterChain filterChain, Authentication authentication) {
-		User user = (User) authentication.getPrincipal();
+		Person user = (Person) authentication.getPrincipal();
 
 		List<String> roles = user.getAuthorities()
 				.stream()

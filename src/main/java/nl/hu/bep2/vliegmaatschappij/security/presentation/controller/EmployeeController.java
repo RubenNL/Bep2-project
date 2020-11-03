@@ -43,7 +43,7 @@ public class EmployeeController {
 	@PostMapping("/setEmployee")
 	@RolesAllowed("EMPLOYEE")
 	public void setEmployee(@Validated @RequestBody SetEmployee setEmployee) {
-		userService.setEmployee(setEmployee.username,setEmployee.employee);
+		userService.setEmployee(setEmployee.email);
 	}
 
 		@Operation(summary = "Get an Employee by its id")
@@ -79,24 +79,6 @@ public class EmployeeController {
 					.map(assembler::toModel)
 					.collect(Collectors.toList());
 			return CollectionModel.of(employees, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
-		}
-
-		@Operation(summary = "Create an Employee")
-		@ApiResponses(value = {
-				@ApiResponse(responseCode = "200", description = "Employee data saved",
-						content = { @Content(mediaType = "application/json",
-								schema = @Schema(implementation = Employee.class)) }),
-				@ApiResponse(responseCode = "400", description = "Invalid information supplied",
-						content = @Content),
-				@ApiResponse(responseCode = "404", description = "Employee data can't be submitted",
-						content = @Content) })
-		@RolesAllowed("EMPLOYEE")
-		@PostMapping
-		public ResponseEntity<?> newEmployee(@RequestBody EmployeeDTO employeeDTO){
-			EntityModel<Employee> entityModel = assembler.toModel(repository.save(new Employee(employeeDTO.firstName,
-					employeeDTO.lastName, employeeDTO.birthday, employeeDTO.email, employeeDTO.nationality,employeeDTO.phone )));
-			return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
-					.body(entityModel);
 		}
 
 		@Operation(summary = "Update an Employee")

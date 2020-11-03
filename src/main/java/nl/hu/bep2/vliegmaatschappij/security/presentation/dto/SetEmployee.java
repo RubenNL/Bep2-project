@@ -1,6 +1,8 @@
 package nl.hu.bep2.vliegmaatschappij.security.presentation.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class SetEmployee {
-	public boolean employee;
-	public String username;
+	@NotBlank
+	public String email;
 }

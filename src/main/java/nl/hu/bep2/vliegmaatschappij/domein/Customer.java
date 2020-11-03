@@ -24,7 +24,11 @@ public class Customer extends Person {
     @OneToMany(mappedBy="customer")
     List<Booking> bookings = new ArrayList<>();
 
-	public Customer(String firstName, String lastName, LocalDate birthday, String email, String phone, String nationality) {
+	public Customer(String firstName, String lastName, LocalDate birthday, String email, String password, String phone, String nationality) {
+		super(firstName, lastName, birthday, email, password, phone, nationality);
+	}
+
+	public Customer(String firstName, String lastName, LocalDate birthday, String email, String nationality, String phone) {
 		super(firstName, lastName, birthday, email, phone, nationality);
 	}
 
