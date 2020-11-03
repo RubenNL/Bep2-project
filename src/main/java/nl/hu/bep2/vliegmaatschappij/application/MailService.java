@@ -1,19 +1,32 @@
 package nl.hu.bep2.vliegmaatschappij.application;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
+
 import java.util.*;
+import javax.annotation.PostConstruct;
 import javax.mail.*;
 import javax.mail.internet.*;
-
+@Configuration
 public class MailService {
-	public static void sendMail(String to, String subject, String body) {
-		String host = "smtp.gmail.com";
-		final String user = "v2bflightservice@gmail.com";
-		final String password = "Vl1egtuig.";
+	@Value("${email.user}")
+	private String user;
+	@Value("${email.password}")
+	private String password;
+	@Value("${email.host}")
+	private String host;
 
-		Properties props = new Properties();
+	private final Properties props = new Properties();
+
+	@PostConstruct
+	public void doSomethingAfterStartup() {
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", true);
+	}
+	public void sendMail(String to, String subject, String body) {
 
 		Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
