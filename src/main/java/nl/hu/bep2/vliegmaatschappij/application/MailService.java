@@ -11,6 +11,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 @Configuration
 public class MailService {
+	public static MailService mailService;
 	@Value("${email.user}")
 	private String user;
 	@Value("${email.password}")
@@ -25,6 +26,7 @@ public class MailService {
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", true);
+		mailService=this;
 	}
 	public void sendMail(String to, String subject, String body) {
 
