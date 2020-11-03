@@ -7,7 +7,9 @@ import lombok.ToString;
 import nl.hu.bep2.vliegmaatschappij.application.MailService;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -32,7 +34,9 @@ public class Booking {
 	@PostPersist
 	private void sendCreationmail(){
 		Flight flight = travelClassFlight.getFlight();
-		StringBuilder mailBody = new StringBuilder(String.format("<h3>Booking %s has been created!</h3>", id));
+		//original image: https://www.flaticon.com/free-icon/worlwide_655789
+		StringBuilder mailBody = new StringBuilder("<html><img src=\"/mailbanner.png\"");
+		mailBody.append(String.format("<h3>Booking %s has been created!</h3>", id));
 		mailBody.append("<h4>Thank you for flying with V2B Flightservice.</h4>");
 		mailBody.append("<h5>Flight details: </h5>");
 		mailBody.append(String.format("Departure Airport: %s <br> Board till %s <br>", flight.getRoute().getDeparture().getName(), flight.getDepartureTime()));
@@ -46,8 +50,9 @@ public class Booking {
 		}
 
 		mailBody.append("<h5>Confirming your information: </h5><br>");
-		mailBody.append(String.format("https://https://bep2.herokuapp.com/booking/confirm/%s", id));
-
+		mailBody.append(String.format("https://https://bep2.herokuapp.com/booking/confirm/%s</html>", id));
+		Map<String, String> inlineImages = new HashMap<String, String>();
+		inlineImages.put("image1", "E:/Test/chart.png"); //https://www.codejava.net/java-ee/javamail/embedding-images-into-e-mail-with-javamail
 		MailService.mailService.sendMail(customer.getEmail(), "{V2B Flightservice} Booking created: " + id, mailBody.toString());
 	}
 
