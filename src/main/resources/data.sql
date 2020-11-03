@@ -100,4 +100,37 @@ INSERT INTO travel_class_flight(id,travel_class_id,flight_id) VALUES (0,21,0),(1
 
 INSERT INTO Person(dtype,id,birthday,email,first_name,last_name,nationality,password,phone) VALUES ('Employee',0,'1980-1-6','admin@example.com','admin','admin','Dutch','$2a$10$IX1OCP0fNNWLZkB6T3cIeOuGAm1DDtJzjcbMpJVaQtXwOv/l9CB6u','123456789000');
 
+INSERT INTO person (id, dtype, birthday, email, first_name, last_name, nationality, phone) VALUES
+(1, 'Person','1/11/1969', 'JiangZhuangZhou@dayrep.com', '莊周', '江', 'Chinese (Traditional)', '(95) 434-861'), 
+(2, 'Person','3/1/1992', 'Corguive@einrot.com', 'Роксана', 'Фокина', 'Russian (Cyrillic)', '22 636762'), 
+(3, 'Person','7/18/1963', 'OsonduagwuikeMadukaego@teleworm.us', 'Osonduagwuike', 'Madukaego', 'Igbo', '87 78 20'), 
+(4, 'Person','8/23/1939', 'QuangGravemaker@gustr.com', 'Quang', 'Gravemaker', 'Dutch', '046 845 9656'), 
+(5, 'Person','8/29/1952', 'FlavioMunguiaOrtiz@rhyta.com', 'Flavio', 'Munguia', 'Hispanic', '04.71.41.90.74'), 
+(6, 'Person','5/19/1947', 'Chikushikuarika@rhyta.com', 'Chikushikuarika', 'Gebebe', 'Ninja', '95 646911'), 
+(7, 'Person','10/19/1962', 'SorenKristiansen@cuvox.de', 'Søren', 'Kristiansen', 'Greenland', '0976-3512678'), 
+(8, 'Person','7/23/1944', 'TanaGhelama@armyspy.com', 'تینا', 'غلامی', 'Persian', '519-993-4005'), 
+(9, 'Person','11/28/1951', 'HazukiSusui@rhyta.com', 'Hazuki', 'Susui', 'Japanese (Anglicized)', '465 0191'), 
+(10,'Person', '5/30/1936', 'CheneyMichel@rhyta.com', 'Cheney', 'Michel', 'French', '0485 55 07 49'), 
+(11,'Person', '11/13/1973', 'TobySanderson@jourrapide.com', 'Toby', 'Sanderson', 'England/Wales', '085 775 1491'), 
+(12,'Person', '7/24/1956', 'ZlataVarga@cuvox.de', 'Zlata', 'Varga', 'Croatian', '760-869-5719'), 
+(13,'Person', '4/10/1957', 'bertje@pampus.nl', 'คฐาวุฒน์', 'สายน้ำผึ้ง', 'Thai', '(98) 4134-4146'), 
+(14,'Person', '9/18/1966', 'TobiasZeeb@jourrapide.com', 'Tobias', 'Zeeb', 'Greenland', '24 826222'), 
+(15,'Person', '6/15/1977', 'KozoFukushima@gustr.com', 'Kozo', 'Fukushima', 'Japanese (Anglicized)', '602 336 470'), 
+(16,'Person', '1/3/1935', 'CalebShea@teleworm.us', 'Caleb', 'Shea', 'Australian', '0681 630 16 36'), 
+(17,'Person', '5/29/1941', 'FlorjanPresl@fleckens.hu', 'Florjan', 'Presl', 'Slovenian', '88 103 96 25'), 
+(18,'Person', '6/25/1987', 'XiuJuanYao@fleckens.hu', 'Xiu Juan', 'Yao', 'Chinese', '88 259 66 18'), 
+(19,'Person', '11/5/1944', 'KaariPihlava@gustr.com', 'Kaari', 'Pihlava', 'Finnish', '0499 28 23 19'), 
+(20,'Person', '3/17/1980', 'ElianaRusso@armyspy.com', 'Eliana', 'Russo', 'Italian', '082 149 8911'), 
+(21,'Person', '9/24/1995', 'SzollosiDaniel@jourrapide.com', 'Dániel', 'Szôllösi', 'Hungarian', '60-98-68-86'), 
+(22,'Person', '3/24/1945', 'MaisieRoberts@superrito.com', 'Maisie', 'Roberts', 'England/Wales', '9649 0788'), 
+(23,'Person', '2/8/1974', 'FifiLaux@rhyta.com', 'Fifi', 'Laux', 'French', '73 952 401'), 
+(24,'Person', '1/31/1972', 'Whatumbigh@dayrep.com', 'Юрий', 'Самойлов', 'Russian (Cyrillic)', '924 66 476'), 
+(25,'Person', '9/7/1981', 'WaycaSaucedaZelaya@gustr.com', 'Wayca', 'Sauceda', 'Hispanic', '21 225 116 0095'), 
+(26,'Person', '7/13/1997', 'ZoeRocheleau@fleckens.hu', 'Zoé', 'Rocheleau', 'French', '0699 145 67 04'), 
+(27,'Person', '2/1/1982', 'AuneSalonen@gustr.com', 'Aune', 'Salonen', 'Finnish', '0388 6224677'), 
+(28,'Person', '4/13/1941', 'MariaLuisaFallaci@cuvox.de', 'Maria Luisa', 'Fallaci', 'Italian', '0388 5555694'), 
+(29,'Person', '4/1/1941', 'LauritsAAndersen@rhyta.com', 'Laurits', 'Andersen', 'Danish', '333 8111'),
+(30, 'Person','6/8/1960', 'HajdinVaresko@gustr.com', 'Hajdin', 'Vareško', 'Slovenian', '61 46 68');
+
+
 SELECT setval('hibernate_sequence', 1000, true);
