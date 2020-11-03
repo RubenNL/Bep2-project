@@ -2,6 +2,7 @@ package nl.hu.bep2.vliegmaatschappij.security.presentation.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -10,6 +11,7 @@ public class Registration {
 	public String firstName;
 	@NotBlank
 	public String lastName;
+	@NotNull
 	public LocalDate birthday;
 	@NotBlank
 	@Email
