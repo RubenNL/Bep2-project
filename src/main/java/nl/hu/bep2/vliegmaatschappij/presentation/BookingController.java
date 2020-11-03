@@ -11,6 +11,7 @@ import nl.hu.bep2.vliegmaatschappij.domein.*;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.BookingModelAssembler;
+import nl.hu.bep2.vliegmaatschappij.security.data.SpringPersonRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -31,12 +32,14 @@ public class BookingController {
     private final SpringBookingRepository repository;
     private final BookingModelAssembler assembler;
     private final BookingService service;
+    private final SpringPersonRepository personRepository;
 
-    public BookingController(SpringBookingRepository repository, BookingModelAssembler assembler, BookingService service){
+    public BookingController(SpringBookingRepository repository, BookingModelAssembler assembler, BookingService service, SpringPersonRepository personRepository){
         this.repository = repository;
         this.assembler = assembler;
 		this.service = service;
-	}
+        this.personRepository = personRepository;
+    }
 
     @Operation(summary = "Create a booking")
     @ApiResponses(value = {
@@ -49,7 +52,8 @@ public class BookingController {
                     content = @Content) })
     @RolesAllowed("USER")
     @PostMapping
-    ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal Person person) {
+    ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal String email) {
+        Person person=personRepository.findByEmail(email).get();
     	Booking booking = service.createByDTO(bookingDTO, person);
     	EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
         return ResponseEntity
