@@ -55,7 +55,7 @@ public class BookingController {
     ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal String email) {
         Person person=personRepository.findByEmail(email).get();
     	Booking booking = service.createByDTO(bookingDTO, person);
-    	EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
+    	EntityModel<Booking> entityModel = assembler.toModel(repository.getOne(repository.save(booking).getId()));
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entityModel);
