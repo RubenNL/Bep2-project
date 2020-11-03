@@ -29,8 +29,6 @@ public class Person implements UserDetails {
 	protected String password;
 	protected String phone;
 	protected String nationality;
-	@ManyToMany(mappedBy = "persons", cascade = CascadeType.ALL)
-	protected List<Booking> bookingList = new ArrayList<>();
 
 	public Person(String firstName, String lastName, LocalDate birthday, String email, String password, String phone, String nationality) {
 		this.firstName = firstName;

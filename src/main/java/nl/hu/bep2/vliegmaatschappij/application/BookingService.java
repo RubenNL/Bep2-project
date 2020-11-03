@@ -15,18 +15,17 @@ public class BookingService {
 		this.tcfRepos = tcfRepos;
 	}
 
-	public Booking createByDTO(BookingDTO bookingDTO, Person person){ //todo klant, tcf en personen toevoegen.
+	public Booking createByDTO(BookingDTO bookingDTO, Person currentUser){ //todo klant, tcf en personen toevoegen.
 		TravelClassFlight tcf = tcfRepos.findByFlightAndClass(bookingDTO.FlightID, bookingDTO.travelClassID).get(0); //Iknow dit kan netter maar boieieeee
-		System.out.println(tcf);
-		System.out.println(person.getFirstName());
 		List<Person> persons = new ArrayList<>();
 		for(PersonDTO personDTO : bookingDTO.personDTOS){ //if-null exception
 			persons.add(new Person(personDTO.firstName, personDTO.lastName, personDTO.birthday, personDTO.email, personDTO.phone, personDTO.nationality));
 		}
+		persons.add(currentUser);
 		Booking booking = new Booking();
 		booking.setTravelClassFlight(tcf);
 		booking.setPersons(persons);
-		booking.setCustomer((Customer) person);
+		booking.setCustomer((Customer) currentUser);
 		return booking;
 	}
 

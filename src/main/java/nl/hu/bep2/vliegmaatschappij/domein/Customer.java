@@ -39,4 +39,12 @@ public class Customer extends Person {
 	public void removeBooking(Booking booking){
 		bookings.remove(booking);
 	}
+
+	public List<Integer> getBookingIDs(){
+		List<Integer> bookingIDs = new ArrayList<>();
+		for(Booking booking : bookings){
+			bookingIDs.add(booking.getId());
+		}
+		return bookingIDs;
+	}
 }
