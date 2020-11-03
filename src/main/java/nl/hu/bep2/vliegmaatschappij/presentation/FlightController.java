@@ -16,10 +16,12 @@ import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,7 +59,12 @@ public class FlightController {
 		Flight flight=new Flight();
 		flight.setArrivalTime(flightDTO.arrivalTime);
 		flight.setDepartureTime(flightDTO.departureTime);
-		flight.setRoute(routeRepository.getOne(flightDTO.route));
+
+		try{
+			flight.setRoute(routeRepository.getOne(flightDTO.route));
+		}catch(EntityNotFoundException entityNotFoundException){
+			return new ResponseEntity<>(entityNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+		}
 		flight.setPlane(planeRepository.getOne(flightDTO.plane));
 		EntityModel<Flight> entityModel = assembler.toModel(repository.save(flight));
 		return ResponseEntity
