@@ -11,8 +11,10 @@ import java.util.List;
 @Service
 public class BookingService {
 	private final SpringTravelClassFlightRepository tcfRepos;
-	public BookingService(SpringTravelClassFlightRepository tcfRepos) {
+	private final MailService mailService;
+	public BookingService(SpringTravelClassFlightRepository tcfRepos, MailService mailService) {
 		this.tcfRepos = tcfRepos;
+		this.mailService = mailService;
 	}
 
 	public Booking createByDTO(BookingDTO bookingDTO, Person currentUser){ 
@@ -39,7 +41,7 @@ public class BookingService {
 				flight.getRoute().getDestination().getName(),
 				flight.getArrivalTime());
 
-		MailService.sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Confirmation of booking: " + booking.getId(), confirmationBody);
+		mailService.sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Confirmation of booking: " + booking.getId(), confirmationBody);
 		return booking;
 	}
 }
