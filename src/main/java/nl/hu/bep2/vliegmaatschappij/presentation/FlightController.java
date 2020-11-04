@@ -10,9 +10,12 @@ import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRouteRepository;
 import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 
+import nl.hu.bep2.vliegmaatschappij.domein.FlightRoute;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.FlightDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityNotFoundException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,12 +64,10 @@ public class FlightController {
 		flight.setArrivalTime(flightDTO.arrivalTime);
 		flight.setDepartureTime(flightDTO.departureTime);
 
-		try{
-			flight.setRoute(routeRepository.getOne(flightDTO.route));
-		}catch(EntityNotFoundException entityNotFoundException){
-			return new ResponseEntity<>(entityNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
-		}
-		flight.setPlane(planeRepository.getOne(flightDTO.plane));
+		flight.setRoute(routeRepository.findById(flightDTO.route)
+				.orElseThrow(() -> new NotFoundException(String.format("Route %d not found",flightDTO.route))));
+		flight.setPlane(planeRepository.findById(flightDTO.plane)
+				.orElseThrow(() -> new NotFoundException(String.format("Plane %d not found",flightDTO.plane))));
 		EntityModel<Flight> entityModel = assembler.toModel(repository.save(flight));
 		return ResponseEntity
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
@@ -85,7 +87,7 @@ public class FlightController {
 	@GetMapping("/{id}")
 	public EntityModel<Flight> one(@PathVariable int id) {
 		Flight flight = repository.findById(id)
-				.orElseThrow(() -> new NotFoundException("flight not found"));
+				.orElseThrow(() -> new NotFoundException(String.format("Flight %d not found",id)));
 		return assembler.toModel(flight);
 	}
 	@Operation(summary = "Get all flights")
