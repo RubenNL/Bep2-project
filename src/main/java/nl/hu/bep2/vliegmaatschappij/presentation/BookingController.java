@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.application.BookingService;
+import nl.hu.bep2.vliegmaatschappij.application.MailService;
 import nl.hu.bep2.vliegmaatschappij.data.SpringBookingRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.*;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
@@ -55,7 +56,9 @@ public class BookingController {
     ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal String email) {
         Person person=personRepository.findByEmail(email).get();
     	Booking booking = service.createByDTO(bookingDTO, person);
-    	EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
+        Booking savedBooking = repository.save(booking);
+        MailService.mailService.sendCreationmail(savedBooking);
+    	EntityModel<Booking> entityModel = assembler.toModel(savedBooking);
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entityModel);
