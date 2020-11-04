@@ -79,7 +79,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 				.setHeaderParam("typ", "JWT")
 				.setIssuer("hu-bep2-vliegmaatschappij-api")
 				.setAudience("hu-bep2-vliegmaatschappij")
-				.setSubject(user.getUsername())
+				.setSubject(String.valueOf(user.getId()))
 				.setExpiration(new Date(System.currentTimeMillis() + this.expirationInMs))
 				.claim("rol", roles)
 				.compact();
