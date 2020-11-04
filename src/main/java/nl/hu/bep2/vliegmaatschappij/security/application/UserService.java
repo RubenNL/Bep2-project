@@ -3,6 +3,7 @@ package nl.hu.bep2.vliegmaatschappij.security.application;
 import nl.hu.bep2.vliegmaatschappij.domein.Customer;
 import nl.hu.bep2.vliegmaatschappij.domein.Employee;
 import nl.hu.bep2.vliegmaatschappij.domein.Person;
+import nl.hu.bep2.vliegmaatschappij.exceptions.DuplicateException;
 import nl.hu.bep2.vliegmaatschappij.security.data.SpringPersonRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,10 +33,13 @@ public class UserService implements UserDetailsService {
 	public void register(String firstName, String lastName, LocalDate birthday, String email, String password, String phone, String nationality) {
 		String encodedPassword = this.passwordEncoder.encode(password);
 		Customer user = new Customer(firstName, lastName, birthday, email, encodedPassword, phone, nationality);
-		this.personRepository.save(user);
+		if(this.personRepository.findByEmail(email).isEmpty()){
+			this.personRepository.save(user);
+		}
+		else throw new DuplicateException("duplicate e-mail");
 	}
 
-	public void delete(long id) {
+	public void delete(int id) {
 		this.personRepository.deleteById(id);
 	}
 
