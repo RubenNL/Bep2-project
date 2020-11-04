@@ -98,7 +98,8 @@ INSERT INTO flight (id, arrival_time, departure_time, plane_code, route_id, canc
 
 INSERT INTO travel_class_flight(id,travel_class_id,flight_id) VALUES (0,21,0),(1,20,0),(2,6,1),(3,5,1),(4,4,2),(5,3,2),(6,2,2),(7,6,3),(8,5,3),(9,17,4),(10,16,4),(11,27,5),(12,26,5),(13,6,6),(14,5,6),(15,1,7),(16,0,7),(17,6,8),(18,5,8),(19,29,9),(20,28,9),(21,10,10),(22,9,10),(23,8,11),(24,7,11),(25,17,12),(26,16,12),(27,6,13),(28,5,13),(29,1,14),(30,0,14),(31,17,15),(32,16,15),(33,6,16),(34,5,16),(35,10,17),(36,9,17),(37,10,18),(38,9,18),(39,6,19),(40,5,19),(41,6,20),(42,5,20),(43,10,21),(44,9,21),(45,10,22),(46,9,22),(47,8,23),(48,7,23),(49,4,24),(50,3,24),(51,2,24),(52,17,25),(53,16,25),(54,8,26),(55,7,26),(56,13,27),(57,12,27),(58,11,27),(59,17,28),(60,16,28),(61,10,29),(62,9,29);
 
-INSERT INTO Person(dtype,id,birthday,email,first_name,last_name,nationality,password,phone) VALUES ('Employee',0,'1980-1-6','admin@example.com','admin','admin','Dutch','$2a$10$IX1OCP0fNNWLZkB6T3cIeOuGAm1DDtJzjcbMpJVaQtXwOv/l9CB6u','123456789000');
+INSERT INTO Person(dtype,id,birthday,email,first_name,last_name,nationality,password,phone)
+VALUES ('Employee',1,'1980-1-6','admin@example.com','admin','admin','Dutch','$2a$10$IX1OCP0fNNWLZkB6T3cIeOuGAm1DDtJzjcbMpJVaQtXwOv/l9CB6u','123456789000');
 
 INSERT INTO person (dtype, id, birthday, email, first_name, last_name, nationality, phone, password)
 VALUES ('Employee', 2, '1967-03-17', 'Employee1@gmail.com', 'Mohammed', 'Himizi', 'Marokkaans', 0687654321, 'wachtwoord3');
@@ -110,11 +111,7 @@ INSERT INTO person (dtype, id, birthday, email, first_name, last_name, nationali
 VALUES ('Customer', 4, '1989-07-4', 'Customer2@gmail.com', 'Holly', 'HoogenStra', 'Amerikaans', 0676383991, 'doei543');
 
 INSERT INTO person (id, dtype, birthday, email, first_name, last_name, nationality, phone) VALUES
-(1, 'Person','1/11/1969', 'JiangZhuangZhou@dayrep.com', '莊周', '江', 'Chinese (Traditional)', '(95) 434-861'), 
-(2, 'Person','3/1/1992', 'Corguive@einrot.com', 'Роксана', 'Фокина', 'Russian (Cyrillic)', '22 636762'), 
-(3, 'Person','7/18/1963', 'OsonduagwuikeMadukaego@teleworm.us', 'Osonduagwuike', 'Madukaego', 'Igbo', '87 78 20'), 
-(4, 'Person','8/23/1939', 'QuangGravemaker@gustr.com', 'Quang', 'Gravemaker', 'Dutch', '046 845 9656'), 
-(5, 'Person','8/29/1952', 'FlavioMunguiaOrtiz@rhyta.com', 'Flavio', 'Munguia', 'Hispanic', '04.71.41.90.74'), 
+(5, 'Person','8/29/1952', 'FlavioMunguiaOrtiz@rhyta.com', 'Flavio', 'Munguia', 'Hispanic', '04.71.41.90.74'),
 (6, 'Person','5/19/1947', 'Chikushikuarika@rhyta.com', 'Chikushikuarika', 'Gebebe', 'Ninja', '95 646911'), 
 (7, 'Person','10/19/1962', 'SorenKristiansen@cuvox.de', 'Søren', 'Kristiansen', 'Greenland', '0976-3512678'), 
 (8, 'Person','7/23/1944', 'TanaGhelama@armyspy.com', 'تینا', 'غلامی', 'Persian', '519-993-4005'), 

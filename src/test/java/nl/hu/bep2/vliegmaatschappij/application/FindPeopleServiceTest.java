@@ -38,13 +38,6 @@ class FindPeopleServiceTest {
 	}
 
 	@Test
-	void findAllAccountsTest(){
-		List<Person> account = new ArrayList<>(personRepository.findAll());
-		assertEquals(4, account.size());
-	}
-
-
-	@Test
 	void deleteNonExistantAccountTest(){
 		assertThrows(
 				EmptyResultDataAccessException.class,
@@ -58,8 +51,7 @@ class FindPeopleServiceTest {
 				"Employee6@gmail.com", "5678",
 				"0676462648", "Italiaans");
 
-		List<Person> accounts = personRepository.findAll();
-		assertEquals(5, accounts.size());
+		assertTrue(personRepository.findByEmail("Employee6@gmail.com").isPresent());
 
 		assertDoesNotThrow(
 				() -> userService.delete(personRepository.findByEmail("Employee6@gmail.com").get().getId()),
