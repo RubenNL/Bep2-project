@@ -67,7 +67,7 @@ public class FlightController {
 		flight.setRoute(routeRepository.findById(flightDTO.route)
 				.orElseThrow(() -> new NotFoundException(String.format("Route %d not found",flightDTO.route))));
 		flight.setPlane(planeRepository.findById(flightDTO.plane)
-				.orElseThrow(() -> new NotFoundException(String.format("Plane %d not found",flightDTO.plane))));
+				.orElseThrow(() -> new NotFoundException(String.format("Plane %s not found",flightDTO.plane))));
 		EntityModel<Flight> entityModel = assembler.toModel(repository.save(flight));
 		return ResponseEntity
 				.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
