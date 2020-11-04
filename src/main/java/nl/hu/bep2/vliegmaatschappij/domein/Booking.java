@@ -1,5 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class Booking {
 	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Person> persons;
 	@ManyToOne(cascade=CascadeType.ALL)
+	@JsonIgnore
 	private Customer customer;
 	@ManyToOne
 	private TravelClassFlight travelClassFlight;
