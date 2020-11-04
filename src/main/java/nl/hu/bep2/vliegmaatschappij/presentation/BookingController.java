@@ -55,7 +55,7 @@ public class BookingController {
     ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal String email) {
         Person person=personRepository.findByEmail(email).get();
     	Booking booking = service.createByDTO(bookingDTO, person);
-    	EntityModel<Booking> entityModel = assembler.toModel(repository.getOne(repository.save(booking).getId()));
+    	EntityModel<Booking> entityModel = assembler.toModel(repository.save(booking));
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
                 .body(entityModel);
@@ -71,7 +71,7 @@ public class BookingController {
             @ApiResponse(responseCode = "404", description = "Booking not found",
                     content = @Content) })
     @GetMapping("/{id}")
-    public EntityModel<Booking> one(@PathVariable int id){
+    public EntityModel<Booking> one(@PathVariable String id){
         Booking booking = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Booking not found"));
         return assembler.toModel(booking);
@@ -106,7 +106,7 @@ public class BookingController {
                     content = @Content) })
     @RolesAllowed("EMPLOYEE")
     @PutMapping("/{id}")
-    ResponseEntity<?> replaceBooking(@RequestBody Booking newBooking, @PathVariable int id){
+    ResponseEntity<?> replaceBooking(@RequestBody Booking newBooking, @PathVariable String id){
         Booking updatedBooking = repository.findById(id)
                 .map(booking -> {
                     booking.setPersons(newBooking.getPersons());
@@ -134,12 +134,12 @@ public class BookingController {
                     content = @Content) })
     @RolesAllowed("EMPLOYEE")
     @DeleteMapping("/{id}")
-    public void deleteBooking(@PathVariable int id) {
+    public void deleteBooking(@PathVariable String id) {
         repository.deleteById(id);
     }
 
     @PatchMapping("/confirm/{id}")
-    public EntityModel<Booking> confirmBooking(@PathVariable int id) {
+    public EntityModel<Booking> confirmBooking(@PathVariable String id) {
 		Booking booking = repository.findById(id).orElseThrow(() -> new NotFoundException("Booking not found"));
     	Booking confirmedBooking = service.confirmBooking(booking);
 		repository.save(confirmedBooking);

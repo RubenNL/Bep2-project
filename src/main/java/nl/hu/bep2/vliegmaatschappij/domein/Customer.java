@@ -40,8 +40,8 @@ public class Customer extends Person {
 		bookings.remove(booking);
 	}
 
-	public List<Integer> getBookingIDs(){
-		List<Integer> bookingIDs = new ArrayList<>();
+	public List<String> getBookingIDs(){
+		List<String> bookingIDs = new ArrayList<>();
 		for(Booking booking : bookings){
 			bookingIDs.add(booking.getId());
 		}
