@@ -138,7 +138,7 @@ public class BookingController {
         repository.deleteById(id);
     }
 
-    @PatchMapping("/confirm/{id}")
+    @GetMapping("/confirm/{id}")
     public EntityModel<Booking> confirmBooking(@PathVariable String id) {
 		Booking booking = repository.findById(id).orElseThrow(() -> new NotFoundException("Booking not found"));
     	Booking confirmedBooking = service.confirmBooking(booking);
