@@ -73,7 +73,9 @@ public class MailService {
 		}
 
 		mailBody.append("<h5>Confirming your information: </h5><br>");
-		mailBody.append(String.format("https://https://bep2.herokuapp.com/booking/confirm/%s</html>", booking.getId()));
+		String url=String.format("https://bep2.herokuapp.com/booking/confirm/%s", booking.getId());
+		String link=String.format("<a href=\"%s\">%s</a>",url,url);
+		mailBody.append(link+"</html>");
 		sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Booking created with destination: " + flight.getRoute().getDestination(), mailBody.toString());
 	}
 }
