@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET,"/v3/**").permitAll()
 				.antMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
 				.antMatchers(HttpMethod.GET,"/booking/confirm/*").permitAll()
+				.antMatchers(HttpMethod.GET,"/redirect.html").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.addFilterBefore(
