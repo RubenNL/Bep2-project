@@ -72,13 +72,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 				.get("rol")).stream()
 				.map(authority -> new SimpleGrantedAuthority((String) authority))
 				.collect(Collectors.toList());
-		System.out.println(75);
-		System.out.println(userid);
 		if (userid.isEmpty()) {
 			return null;
 		}
-		System.out.println(79);
-		System.out.println(Integer.parseInt(userid));
 		return new UsernamePasswordAuthenticationToken(Integer.parseInt(userid), null, authorities);
 	}
 }

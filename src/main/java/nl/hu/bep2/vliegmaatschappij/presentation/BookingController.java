@@ -54,8 +54,6 @@ public class BookingController {
     @RolesAllowed("USER")
     @PostMapping
     ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal Integer id) {
-        System.out.println(57);
-        System.out.println(id);
         Person person=personRepository.findById(id).get();
     	Booking booking = service.createByDTO(bookingDTO, person);
         Booking savedBooking = repository.save(booking);
