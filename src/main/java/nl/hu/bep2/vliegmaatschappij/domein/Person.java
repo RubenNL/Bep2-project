@@ -14,10 +14,7 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class Person implements UserDetails {
 	@Id
 	@GeneratedValue

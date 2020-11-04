@@ -11,8 +11,7 @@ import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class TravelClassFlight {
 	@Id
 	@GeneratedValue
