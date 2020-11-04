@@ -13,6 +13,6 @@ import java.util.Optional;
  * In more loosely coupled components, you would add an intermediary abstraction
  * like an abstract repository or a DAO!
  */
-public interface SpringPersonRepository extends JpaRepository<Person, Long> {
+public interface SpringPersonRepository extends JpaRepository<Person, Integer> {
 	Optional<Person> findByEmail(String email);
 }
