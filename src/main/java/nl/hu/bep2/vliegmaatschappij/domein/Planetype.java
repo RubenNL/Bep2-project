@@ -9,9 +9,7 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class Planetype {
     @Id
     @GeneratedValue

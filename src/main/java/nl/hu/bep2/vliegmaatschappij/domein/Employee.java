@@ -1,9 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
 public class Employee extends Person {
 	@Id
 	@GeneratedValue

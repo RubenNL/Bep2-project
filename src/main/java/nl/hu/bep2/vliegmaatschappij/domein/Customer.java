@@ -1,10 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,10 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
 public class Customer extends Person {
     @Id
     @GeneratedValue

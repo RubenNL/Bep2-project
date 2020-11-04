@@ -1,10 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.domein;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import nl.hu.bep2.vliegmaatschappij.application.MailService;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,10 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Data
 @Entity
-@Getter
-@Setter
-@ToString
 public class Booking {
 	@Id
 	@GeneratedValue(generator= UUIDGenerator.generatorName)

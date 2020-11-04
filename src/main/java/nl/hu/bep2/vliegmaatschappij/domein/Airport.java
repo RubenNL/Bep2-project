@@ -9,11 +9,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
+@Data
 public class Airport {
 	@Id
 	private String code;
