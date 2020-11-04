@@ -21,7 +21,7 @@ public class Customer extends Person {
     @GeneratedValue
     private int id;
     @JsonIgnore
-    @OneToMany(mappedBy="customer")
+    @OneToMany(mappedBy="customer",cascade=CascadeType.REMOVE)
     List<Booking> bookings = new ArrayList<>();
 
 	public Customer(String firstName, String lastName, LocalDate birthday, String email, String password, String phone, String nationality) {
