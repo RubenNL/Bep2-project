@@ -58,7 +58,7 @@ public class MailService {
 		Flight flight = booking.getTravelClassFlight().getFlight();
 		//original image: https://www.flaticon.com/free-icon/worlwide_655789
 		StringBuilder mailBody = new StringBuilder("<html><img src=\"https://bep2.herokuapp.com/mailbanner.png\"<br>");
-		mailBody.append(String.format("<h3>Booking %s has been created!</h3>", booking.getId()));
+		mailBody.append(String.format("<h3>Booking to airport %s has been created!</h3>", flight.getRoute().getDestination().getName()));
 		mailBody.append("<h4>Thank you for flying with V2B Flightservice.</h4>");
 		mailBody.append("<h5>Flight details: </h5>");
 		mailBody.append(String.format("Departure Airport: %s <br> Board till %s <br>", flight.getRoute().getDeparture().getName(), flight.getDepartureTime()));
@@ -76,20 +76,20 @@ public class MailService {
 		String url=String.format("https://bep2.herokuapp.com/booking/confirm/%s", booking.getId());
 		String link=String.format("<a href=\"%s\">%s</a>",url,url);
 		mailBody.append(link+"</html>");
-		sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Booking created with destination: " + flight.getRoute().getDestination(), mailBody.toString());
+		sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Booking created with destination: " + flight.getRoute().getDestination().getName(), mailBody.toString());
 	}
 
 	public void sendConfirmationmail(Booking booking){
 		Flight flight = booking.getTravelClassFlight().getFlight();
 		StringBuilder mailBody = new StringBuilder("<html><img src=\"https://bep2.herokuapp.com/mailbanner.png\"<br>");
-		mailBody.append(String.format("<h3>Booking with destination %s has been confirmed.</h3>" + "Departure: %s at %s <br> Arrival: %s at %s <br>", flight.getRoute().getDestination(),
+		mailBody.append(String.format("<h3>Booking with destination %s has been confirmed.</h3>" + "Departure: %s at %s <br> Arrival: %s at %s <br>", flight.getRoute().getDestination().getName(),
 				flight.getRoute().getDeparture().getName(),
 				flight.getDepartureTime(),
 				flight.getRoute().getDestination().getName(),
 				flight.getArrivalTime()));
 		mailBody.append("<h4>Thank you for flying with V2B Flightservice.</h4>");
 
-		mailService.sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Confirmation of booking: " + booking.getId(), mailBody.toString());
+		mailService.sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Confirmation of booking: " + flight.getRoute().getDestination().getName(), mailBody.toString());
 	}
 
 }
