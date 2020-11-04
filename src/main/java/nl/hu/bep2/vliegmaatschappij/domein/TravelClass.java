@@ -30,7 +30,7 @@ public class TravelClass {
 	@JsonIgnore
 	@ToString.Exclude
 	private List<TravelClassFlight> travelClassFlightList;
-	@JsonIgnore //todo geeft conflicten met /plane/all nakijken of efficienter kan.
+	@JsonIgnore
 	@ManyToOne
 	private Planetype planeType;
 	private double pricePerKm;
