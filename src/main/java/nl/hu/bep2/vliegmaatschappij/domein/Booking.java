@@ -4,9 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import nl.hu.bep2.vliegmaatschappij.application.MailService;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -14,8 +18,9 @@ import java.util.List;
 @ToString
 public class Booking {
 	@Id
-	@GeneratedValue
-	private int id;
+	@GeneratedValue(generator= UUIDGenerator.generatorName)
+	@GenericGenerator(name = UUIDGenerator.generatorName, strategy = "nl.hu.bep2.vliegmaatschappij.domein.UUIDGenerator")
+	private String id;
 	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Person> persons;
 	@ManyToOne(cascade=CascadeType.ALL)
