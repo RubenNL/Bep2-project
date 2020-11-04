@@ -11,6 +11,7 @@ https://bep2project.myjetbrains.com/
 swagger-ui+gource(gehost op github pages): https://huict.github.io/prbed-2021-v2b-v
 
 swagger-ui op heroku: https://bep2.herokuapp.com/swagger-ui.html
+Redirect-page for mailstuff: https://bep2.herokuapp.com/redirect.html
 
 # Tests op postman:
 
