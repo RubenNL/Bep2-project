@@ -56,9 +56,4 @@ public class Flight {
 		for(TravelClassFlight travelClassFlight:travelClassFlightList) count+= travelClassFlight.getAvailableSeats();
 		return count;
 	}
-
-	public void cancel(){
-		this.canceled = true;
-	}
-
 }

@@ -139,7 +139,7 @@ public class FlightController {
 	@PatchMapping("/{id}")
 	ResponseEntity<?> cancelFlight(@PathVariable int id){
 		Flight flight = repository.getOne(id);
-		flight.cancel();
+		flight.setCanceled(true);
 		repository.save(flight);
 		EntityModel<Flight> entityModel = assembler.toModel(flight);
 		return ResponseEntity
