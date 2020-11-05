@@ -9,6 +9,7 @@ import nl.hu.bep2.vliegmaatschappij.application.BookingService;
 import nl.hu.bep2.vliegmaatschappij.application.MailService;
 import nl.hu.bep2.vliegmaatschappij.data.SpringBookingRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.*;
+import nl.hu.bep2.vliegmaatschappij.exceptions.NotEnoughSeatsException;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.BookingModelAssembler;
@@ -56,6 +57,9 @@ public class BookingController {
     ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal Integer id) {
         Person person=personRepository.getOne(id);
     	Booking booking = service.createByDTO(bookingDTO, person);
+        if( (booking.getPersons().size() + 1) > booking.getTravelClassFlight().getAvailableSeats() ){
+            throw new NotEnoughSeatsException("There are not enough seats for the amount of people in your booking");
+        }
         Booking savedBooking = repository.save(booking);
         MailService.mailService.sendCreationmail(savedBooking);
     	EntityModel<Booking> entityModel = assembler.toModel(savedBooking);
