@@ -2,13 +2,10 @@ package nl.hu.bep2.vliegmaatschappij.domein;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import nl.hu.bep2.vliegmaatschappij.application.MailService;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Entity

@@ -10,22 +10,16 @@ import nl.hu.bep2.vliegmaatschappij.data.SpringFlightRouteRepository;
 import nl.hu.bep2.vliegmaatschappij.data.SpringPlaneRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 
-import nl.hu.bep2.vliegmaatschappij.domein.FlightRoute;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.FlightDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.FlightModelAssembler;
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
-import javax.persistence.EntityNotFoundException;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 

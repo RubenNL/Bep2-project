@@ -4,9 +4,7 @@ import nl.hu.bep2.vliegmaatschappij.domein.Booking;
 import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.domein.Person;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 import javax.annotation.PostConstruct;
@@ -32,7 +30,7 @@ public class MailService {
 		mailService=this;
 	}
 	public void sendMail(String to, String subject, String body) {
-
+		System.out.println(7);
 		Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
@@ -47,7 +45,9 @@ public class MailService {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject(subject);
 			message.setContent(body, "text/html");
+			System.out.println(8);
 			Transport.send(message);
+			System.out.println(9);
 
 		} catch (MessagingException e) {
 			e.printStackTrace();
@@ -75,22 +75,23 @@ public class MailService {
 		mailBody.append("<h5>Confirming your information: </h5><br>");
 		String url=String.format("https://bep2.herokuapp.com/booking/confirm/%s", booking.getId());
 		String link=String.format("<a href=\"%s\">%s</a>",url,url);
-		mailBody.append(link+"</html>");
+		mailBody.append(link).append("</html>");
 		mailBody.append("<a href=\"https://bep2.herokuapp.com/redirect.html\">Confirm!</a>");
+		System.out.println(5);
 		sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Booking created with destination: " + flight.getRoute().getDestination().getName(), mailBody.toString());
+		System.out.println(6);
 	}
 
 	public void sendConfirmationmail(Booking booking){
 		Flight flight = booking.getTravelClassFlight().getFlight();
-		StringBuilder mailBody = new StringBuilder("<html><img src=\"https://bep2.herokuapp.com/mailbanner.png\"<br>");
-		mailBody.append(String.format("<h3>Booking with destination %s has been confirmed.</h3>" + "Departure: %s at %s <br> Arrival: %s at %s <br>", flight.getRoute().getDestination().getName(),
+
+		String mailBody = "<html><img src=\"https://bep2.herokuapp.com/mailbanner.png\"<br>" + String.format("<h3>Booking with destination %s has been confirmed.</h3>" + "Departure: %s at %s <br> Arrival: %s at %s <br>", flight.getRoute().getDestination().getName(),
 				flight.getRoute().getDeparture().getName(),
 				flight.getDepartureTime(),
 				flight.getRoute().getDestination().getName(),
-				flight.getArrivalTime()));
-		mailBody.append("<h4>Thank you for flying with V2B Flightservice.</h4>");
-
-		mailService.sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Confirmation of booking: " + flight.getRoute().getDestination().getName(), mailBody.toString());
+				flight.getArrivalTime()) +
+				"<h4>Thank you for flying with V2B Flightservice.</h4>";
+		mailService.sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Confirmation of booking: " + flight.getRoute().getDestination().getName(), mailBody);
 	}
 
 }

@@ -54,10 +54,12 @@ public class BookingController {
     @RolesAllowed("USER")
     @PostMapping
     ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal Integer id) {
-        Person person=personRepository.findById(id).get();
+        Person person=personRepository.getOne(id);
     	Booking booking = service.createByDTO(bookingDTO, person);
         Booking savedBooking = repository.save(booking);
+        System.out.println(3);
         MailService.mailService.sendCreationmail(savedBooking);
+        System.out.println(4);
     	EntityModel<Booking> entityModel = assembler.toModel(savedBooking);
         return ResponseEntity
                 .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())

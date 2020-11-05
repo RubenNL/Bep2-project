@@ -2,12 +2,10 @@ package nl.hu.bep2.vliegmaatschappij.domein;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @NoArgsConstructor

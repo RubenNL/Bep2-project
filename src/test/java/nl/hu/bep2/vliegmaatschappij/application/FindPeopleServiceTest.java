@@ -1,6 +1,5 @@
 package nl.hu.bep2.vliegmaatschappij.application;
 
-import nl.hu.bep2.vliegmaatschappij.domein.Person;
 import nl.hu.bep2.vliegmaatschappij.exceptions.DuplicateException;
 import nl.hu.bep2.vliegmaatschappij.security.application.UserService;
 import nl.hu.bep2.vliegmaatschappij.security.data.SpringPersonRepository;
@@ -13,8 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

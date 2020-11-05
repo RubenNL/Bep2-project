@@ -1,8 +1,6 @@
 package nl.hu.bep2.vliegmaatschappij.presentation.assembler;
 
-import nl.hu.bep2.vliegmaatschappij.domein.Customer;
 import nl.hu.bep2.vliegmaatschappij.domein.Employee;
-import nl.hu.bep2.vliegmaatschappij.presentation.CustomerController;
 import nl.hu.bep2.vliegmaatschappij.security.presentation.controller.EmployeeController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
