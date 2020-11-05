@@ -1,6 +1,5 @@
 package nl.hu.bep2.vliegmaatschappij.presentation.assembler;
 
-import nl.hu.bep2.vliegmaatschappij.domein.Plane;
 import nl.hu.bep2.vliegmaatschappij.domein.Planetype;
 import nl.hu.bep2.vliegmaatschappij.presentation.PlanetypeController;
 import org.springframework.hateoas.EntityModel;

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @NoArgsConstructor
@@ -25,14 +26,6 @@ public class Customer extends Person {
 
 	public Customer(String firstName, String lastName, LocalDate birthday, String email, String nationality, String phone) {
 		super(firstName, lastName, birthday, email, phone, nationality);
-	}
-
-	public void addBooking(Booking booking){
-		bookings.add(booking);
-	}
-
-	public void removeBooking(Booking booking){
-		bookings.remove(booking);
 	}
 
 	public List<String> getBookingIDs(){

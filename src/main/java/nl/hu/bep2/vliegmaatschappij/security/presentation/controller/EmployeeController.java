@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import nl.hu.bep2.vliegmaatschappij.data.SpringEmployeeRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.Employee;
 import nl.hu.bep2.vliegmaatschappij.exceptions.NotFoundException;
-import nl.hu.bep2.vliegmaatschappij.presentation.DTO.EmployeeDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.assembler.EmployeeModelAssembler;
 import nl.hu.bep2.vliegmaatschappij.security.application.UserService;
 import nl.hu.bep2.vliegmaatschappij.security.presentation.dto.SetEmployee;

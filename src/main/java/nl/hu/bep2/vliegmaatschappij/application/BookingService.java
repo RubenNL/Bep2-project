@@ -4,6 +4,7 @@ import nl.hu.bep2.vliegmaatschappij.data.SpringTravelClassFlightRepository;
 import nl.hu.bep2.vliegmaatschappij.domein.*;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.BookingDTO;
 import nl.hu.bep2.vliegmaatschappij.presentation.DTO.PersonDTO;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class BookingService {
 		Booking booking = new Booking();
 		booking.setTravelClassFlight(tcf);
 		booking.setPersons(persons);
-		booking.setCustomer((Customer) currentUser);
+		booking.setCustomer((Customer) Hibernate.unproxy(currentUser));
 		return booking;
 	}
 
