@@ -37,6 +37,6 @@ public class TravelClassFlight {
 	}
 
 	public double calculatePrice(){
-		return travelClass.getPricePerKm() * flight.getRoute().getDistance();
+		return Math.round((travelClass.getPricePerKm() * flight.getRoute().getDistance()) * 100.0) / 100.0;
 	}
 }
