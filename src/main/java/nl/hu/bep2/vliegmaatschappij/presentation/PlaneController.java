@@ -87,7 +87,8 @@ public class PlaneController {
 	public ResponseEntity<?> newPlane(@RequestBody PlaneDTO planeDTO){
 		Plane plane=new Plane();
 		plane.setCode(planeDTO.code);
-		plane.setType(planetypeRepository.getOne(planeDTO.type));
+		plane.setType(planetypeRepository.findById(planeDTO.type)
+				.orElseThrow(() -> new NotFoundException(String.format("Plane type %s not found",planeDTO.type))));
 		EntityModel<Plane> entityModel = assembler.toModel(repository.save(plane));
 		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
 				.body(entityModel);
