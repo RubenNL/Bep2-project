@@ -26,12 +26,12 @@ class FindPeopleServiceTest {
 
 	@Test
 	void findNonExistentAccountTest(){
-		assertTrue(personRepository.findByEmail("UnavailableEmail@gmail.com").isEmpty());
+		assertTrue(personRepository.findByEmail("UnavailableEmail@example.com").isEmpty());
 	}
 
 	@Test
 	void findAccountTest(){
-		assertTrue(personRepository.findByEmail("Employee1@gmail.com").isPresent());
+		assertTrue(personRepository.findByEmail("Employee1@example.com").isPresent());
 	}
 
 	@Test
@@ -45,13 +45,13 @@ class FindPeopleServiceTest {
 	void createAccountAndDeleteTest(){
 		userService.register("Lisa",
 				"Smit", LocalDate.now().minusMonths(3),
-				"Employee6@gmail.com", "5678",
+				"Employee6@example.com", "5678",
 				"0676462648", "Italiaans");
 
-		assertTrue(personRepository.findByEmail("Employee6@gmail.com").isPresent());
+		assertTrue(personRepository.findByEmail("Employee6@example.com").isPresent());
 
 		assertDoesNotThrow(
-				() -> userService.delete(personRepository.findByEmail("Employee6@gmail.com").get().getId()),
+				() -> userService.delete(personRepository.findByEmail("Employee6@example.com").get().getId()),
 				"Dit account zou moeten bestaan!");
 	}
 
@@ -60,14 +60,14 @@ class FindPeopleServiceTest {
 
 		userService.register("John",
 				"Smit", LocalDate.now(),
-				"example@gmail.com", "1234",
+				"example@example.com", "1234",
 				"0612345678", "Amerikaans");
 
 		assertThrows(
 				DuplicateException.class,
 				() -> userService.register("Lisa",
 						"Smit", LocalDate.now().minusMonths(3),
-						"example@gmail.com", "5678",
+						"example@example.com", "5678",
 						"0676462648", "Italiaans"),
 				"Email zou niet opnieuw geregistreerd moeten kunnen worden"
 		);

@@ -102,13 +102,13 @@ INSERT INTO Person(dtype,id,birthday,email,first_name,last_name,nationality,pass
 VALUES ('Employee',1,'1980-1-6','admin@example.com','admin','admin','Dutch','$2a$10$IX1OCP0fNNWLZkB6T3cIeOuGAm1DDtJzjcbMpJVaQtXwOv/l9CB6u','123456789000');
 
 INSERT INTO person (dtype, id, birthday, email, first_name, last_name, nationality, phone, password)
-VALUES ('Employee', 2, '1967-03-17', 'Employee1@gmail.com', 'Mohammed', 'Himizi', 'Marokkaans', 0687654321, 'wachtwoord3');
+VALUES ('Employee', 2, '1967-03-17', 'Employee1@example.com', 'Mohammed', 'Himizi', 'Marokkaans', 0687654321, 'wachtwoord3');
 
 INSERT INTO person (dtype, id, birthday, email, first_name, last_name, nationality, phone, password)
-VALUES ('Customer', 3, '2003-12-27', 'Customer1@gmail.com', 'Jack', 'Jansen', 'Nederlands', 0612345678, 'Lekkel');
+VALUES ('Customer', 3, '2003-12-27', 'Customer1@example.com', 'Jack', 'Jansen', 'Nederlands', 0612345678, 'Lekkel');
 
 INSERT INTO person (dtype, id, birthday, email, first_name, last_name, nationality, phone, password)
-VALUES ('Customer', 4, '1989-07-4', 'Customer2@gmail.com', 'Holly', 'HoogenStra', 'Amerikaans', 0676383991, 'doei543');
+VALUES ('Customer', 4, '1989-07-4', 'Customer2@example.com', 'Holly', 'HoogenStra', 'Amerikaans', 0676383991, 'doei543');
 
 INSERT INTO person (id, dtype, birthday, email, first_name, last_name, nationality, phone) VALUES
 (5, 'Person','8/29/1952', 'FlavioMunguiaOrtiz@rhyta.com', 'Flavio', 'Munguia', 'Hispanic', '04.71.41.90.74'),
