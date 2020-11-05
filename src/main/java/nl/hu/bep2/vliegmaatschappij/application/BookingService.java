@@ -21,8 +21,10 @@ public class BookingService {
 	public Booking createByDTO(BookingDTO bookingDTO, Person currentUser){ 
 		TravelClassFlight tcf = tcfRepos.getOne(bookingDTO.travelClassFlightID);
 		List<Person> persons = new ArrayList<>();
-		for(PersonDTO personDTO : bookingDTO.personDTOS){ //todo if-null exception
-			persons.add(new Person(personDTO.firstName, personDTO.lastName, personDTO.birthday, personDTO.email, personDTO.phone, personDTO.nationality));
+		if(bookingDTO.personDTOS!=null) {
+			for (PersonDTO personDTO : bookingDTO.personDTOS) {
+				if(personDTO!=null) persons.add(new Person(personDTO.firstName, personDTO.lastName, personDTO.birthday, personDTO.email, personDTO.phone, personDTO.nationality));
+			}
 		}
 		persons.add(currentUser);
 		Booking booking = new Booking();

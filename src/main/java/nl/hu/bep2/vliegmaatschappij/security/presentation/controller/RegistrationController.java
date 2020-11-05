@@ -31,6 +31,6 @@ public class RegistrationController {
 	@RolesAllowed("EMPLOYEE")
 	@DeleteMapping("/{username}")
 	public void register(@PathVariable("username") String username) {
-		this.userService.delete(username);//TODO not found exception
+		this.userService.delete(username);
 	}
 }
