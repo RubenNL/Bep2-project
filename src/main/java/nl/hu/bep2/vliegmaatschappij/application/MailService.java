@@ -30,7 +30,6 @@ public class MailService {
 		mailService=this;
 	}
 	public void sendMail(String to, String subject, String body) {
-		System.out.println(7);
 		Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
@@ -45,9 +44,7 @@ public class MailService {
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			message.setSubject(subject);
 			message.setContent(body, "text/html");
-			System.out.println(8);
 			Transport.send(message);
-			System.out.println(9);
 
 		} catch (MessagingException e) {
 			e.printStackTrace();
@@ -77,9 +74,7 @@ public class MailService {
 		String link=String.format("<a href=\"%s\">%s</a>",url,url);
 		mailBody.append(link).append("</html>");
 		mailBody.append("<a href=\"https://bep2.herokuapp.com/redirect.html\">Confirm!</a>");
-		System.out.println(5);
 		sendMail(booking.getCustomer().getEmail(), "{V2B Flightservice} Booking created with destination: " + flight.getRoute().getDestination().getName(), mailBody.toString());
-		System.out.println(6);
 	}
 
 	public void sendConfirmationmail(Booking booking){

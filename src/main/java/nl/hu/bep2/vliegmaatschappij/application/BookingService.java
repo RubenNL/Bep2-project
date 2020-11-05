@@ -28,9 +28,7 @@ public class BookingService {
 		Booking booking = new Booking();
 		booking.setTravelClassFlight(tcf);
 		booking.setPersons(persons);
-		System.out.println(1);
 		booking.setCustomer((Customer) Hibernate.unproxy(currentUser));
-		System.out.println(booking.getCustomer().getId());
 		return booking;
 	}
 
