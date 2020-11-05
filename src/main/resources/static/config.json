@@ -1,14 +1,14 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI definition",
+    "title": "Vliegtuigmaatschappij V2B-5",
     "version": "v3",
     "description": "Welkom bij de documentatie van groep V2B-5"
   },
   "servers": [
     {
       "url": "https://bep2.herokuapp.com",
-      "description": "Generated server url"
+      "description": "Heroku server"
     }
   ],
   "paths": {
