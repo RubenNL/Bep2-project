@@ -2,7 +2,6 @@ package nl.hu.bep2.vliegmaatschappij.domein;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import nl.hu.bep2.vliegmaatschappij.presentation.DTO.TravelClassDTO;
 
 import javax.persistence.*;
 import java.util.List;

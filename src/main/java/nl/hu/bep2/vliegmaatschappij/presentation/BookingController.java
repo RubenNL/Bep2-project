@@ -54,7 +54,7 @@ public class BookingController {
     @RolesAllowed("USER")
     @PostMapping
     ResponseEntity<?> newBooking(@RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal Integer id) {
-        Person person=personRepository.findById(id).get();
+        Person person=personRepository.getOne(id);
     	Booking booking = service.createByDTO(bookingDTO, person);
         Booking savedBooking = repository.save(booking);
         MailService.mailService.sendCreationmail(savedBooking);

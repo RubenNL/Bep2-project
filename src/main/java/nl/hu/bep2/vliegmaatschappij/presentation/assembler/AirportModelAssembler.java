@@ -1,9 +1,7 @@
 package nl.hu.bep2.vliegmaatschappij.presentation.assembler;
 
 import nl.hu.bep2.vliegmaatschappij.domein.Airport;
-import nl.hu.bep2.vliegmaatschappij.domein.Flight;
 import nl.hu.bep2.vliegmaatschappij.presentation.AirportController;
-import nl.hu.bep2.vliegmaatschappij.presentation.FlightController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
