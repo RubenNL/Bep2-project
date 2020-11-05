@@ -83,7 +83,7 @@ class FindFlightServiceTest {
 	void testFindAllFlight(){
 		//Tested for 28/10/2021
 		List<Flight> flights = service.FindAllAvailableFlights();
-		assertEquals(6, flights.size());
+		assertEquals(7, flights.size());//reset database als dit niet werkt
 	}
 
 }
