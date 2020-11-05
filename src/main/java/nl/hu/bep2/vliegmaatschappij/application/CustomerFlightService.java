@@ -22,7 +22,7 @@ public class CustomerFlightService {
 		List<Flight> flightlistall = flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
 		List<Flight> flightlistAvailable = new ArrayList<>();
 		for (Flight flight : flightlistall){
-			if(!flight.isCanceled()) flightlistAvailable.add(flight);
+			if(flight.getAvailableSeats()>0 && !flight.isCanceled()) flightlistAvailable.add(flight);
 		}
 		return flightlistAvailable;
 	}
