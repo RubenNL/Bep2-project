@@ -76,14 +76,14 @@ class FindFlightServiceTest {
 		Flight flight2 = new Flight(dateTime, dateTime.plusHours(1), route, new ArrayList<>() ,plane);
 		repository.save(flight2);
 
-		assertEquals(Collections.singletonList(flight2), service.FindAvailableFlights("AMS", "BRU", dateTime.toLocalDate(),plane.getType().getTravelclasses().get(0).getId()));
+		assertEquals(Collections.singletonList(flight2), service.FindAvailableFlights("AMS", "BRU", dateTime.toLocalDate()));
 	}
 
 	@Test
 	void testFindAllFlight(){
 		//Tested for 28/10/2021
 		List<Flight> flights = service.FindAllAvailableFlights();
-		assertEquals(7, flights.size());
+		assertEquals(7, flights.size());//reset database als dit niet werkt
 	}
 
 }
