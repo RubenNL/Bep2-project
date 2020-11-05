@@ -14,6 +14,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,13 +42,14 @@ public class CustomerFlightController {
 					content = @Content) })
 
 	@RolesAllowed({"USER"})
-	@PostMapping("/findflight")
-	public CollectionModel<EntityModel<Flight>> findFlights(@RequestBody FindFlightDTO findFlightDTO) {
-		List<Flight> flights = service.FindAvailableFlights(findFlightDTO.departureCode, findFlightDTO.arrivalCode, findFlightDTO.departureDate, findFlightDTO.flightClass);
+	@GetMapping("/findflight")
+	public CollectionModel<EntityModel<Flight>> findFlights(@RequestParam String departureCode, @RequestParam String arrivalCode, @RequestParam String departureDate) {
+		LocalDate departureDateFormatted=LocalDate.parse(departureDate);
+		List<Flight> flights = service.FindAvailableFlights(departureCode, arrivalCode, departureDateFormatted);
 		List<EntityModel<Flight>> flightEntitys = flights.stream()
 				.map(assembler::toModel)
 				.collect(Collectors.toList());
-		return CollectionModel.of(flightEntitys, linkTo(methodOn(BookingController.class).all()).withSelfRel());
+		return CollectionModel.of(flightEntitys, linkTo(methodOn(FlightController.class).all()).withSelfRel());
 	}
 
 	@Operation(summary = "Find a flight by time")

@@ -18,17 +18,11 @@ public class CustomerFlightService {
 	public CustomerFlightService(SpringFlightRepository flightRepository) {
 		this.flightRepository = flightRepository;
 	}
-	public List<Flight> FindAvailableFlights(String departCode, String arivalCode, LocalDate departDate, int classID){
+	public List<Flight> FindAvailableFlights(String departCode, String arivalCode, LocalDate departDate){
 		List<Flight> flightlistall = flightRepository.findByFlight(departCode, arivalCode, departDate.atStartOfDay(),departDate.atTime(23,59));
 		List<Flight> flightlistAvailable = new ArrayList<>();
 		for (Flight flight : flightlistall){
-			if(!flight.isCanceled()){
-				for(TravelClass tc : flight.getPlane().getType().getTravelclasses()){
-					if(tc.getId() == classID){
-						flightlistAvailable.add(flight);
-					}
-				}
-			}
+			if(!flight.isCanceled()) flightlistAvailable.add(flight);
 		}
 		return flightlistAvailable;
 	}
