@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://bep2.herokuapp.com",
+      "url": "https://bep2-ruben.herokuapp.com",
       "description": "Heroku server"
     }
   ],
