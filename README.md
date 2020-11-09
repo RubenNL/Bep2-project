@@ -3,6 +3,7 @@
 https://bep2project.myjetbrains.com/
 
 ![Java CI with Maven](https://github.com/RubenNL/Bep2-project/workflows/Java%20CI%20with%20Maven/badge.svg)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f985aa30cf4b4986bf750b0008e7d8d3)](https://app.codacy.com/gh/RubenNL/Bep2-project?utm_source=github.com&utm_medium=referral&utm_content=RubenNL/Bep2-project&utm_campaign=Badge_Grade)
 [![heroku](http://heroku-shields.herokuapp.com/bep2-ruben)](https://bep2-ruben.herokuapp.com)
 ![postman](https://github.com/RubenNL/Bep2-project/workflows/postman/badge.svg)
 
