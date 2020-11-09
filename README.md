@@ -9,7 +9,8 @@ https://bep2project.myjetbrains.com/
 
 ![domeinmodel](https://github.com/RubenNL/Bep2-project/blob/master/class-diagram-iteratie3.jpg "domeinmodel")
 
-swagger-ui+gource(gehost op github pages): https://RubenNL.github.io/Bep2-project
+swagger-ui+gource(gehost op github pages):
+https://RubenNL.github.io/Bep2-project
 
 swagger-ui op heroku: https://bep2-ruben.herokuapp.com/swagger-ui.html
 
